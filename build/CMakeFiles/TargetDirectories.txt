@@ -1,0 +1,3 @@
+C:/C++ Development/C++ Projects/Aggy/build/CMakeFiles/project_aggy.dir
+C:/C++ Development/C++ Projects/Aggy/build/CMakeFiles/edit_cache.dir
+C:/C++ Development/C++ Projects/Aggy/build/CMakeFiles/rebuild_cache.dir
