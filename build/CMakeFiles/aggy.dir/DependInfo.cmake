@@ -1,22 +1,14 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/C++ Development/C++ Projects/Aggy/src/main.cpp" "C:/C++ Development/C++ Projects/Aggy/build/CMakeFiles/aggy.dir/src/main.cpp.obj"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "SDL_MAIN_HANDLED"
   )
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "C:/C++ Development/Libs/SDL2-2.0.14/x86_64-w64-mingw32/include"
-  "../src"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "C:/C++ Development/C++ Projects/Aggy/src/main.cpp" "CMakeFiles/aggy.dir/src/main.cpp.obj" "gcc" "CMakeFiles/aggy.dir/src/main.cpp.obj.d"
   )
 
 # Targets to which this target links.

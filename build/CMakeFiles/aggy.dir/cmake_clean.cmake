@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/aggy.dir/src/main.cpp.obj"
+  "CMakeFiles/aggy.dir/src/main.cpp.obj.d"
   "aggy.exe"
   "aggy.exe.manifest"
   "aggy.pdb"
