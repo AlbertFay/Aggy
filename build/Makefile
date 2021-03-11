@@ -14,10 +14,10 @@ default_target: all
 # Disable implicit rules so canonical targets will work.
 .SUFFIXES:
 
-# Disable VCS-based implicit rules.
+# Disable VCS-based implicit rules.  
 % : %,v
 
-# Disable VCS-based implicit rules.
+# Disable VCS-based implicit rules.  
 % : RCS/%
 
 # Disable VCS-based implicit rules.
