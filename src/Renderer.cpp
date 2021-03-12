@@ -1,4 +1,4 @@
-#include "Renderer.h"
+#include "renderer.h"
 #include <iostream>
 
 Renderer::Renderer(const int screen_height, const int screen_width, const int grid_height, const int grid_width)
