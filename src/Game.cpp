@@ -14,11 +14,27 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS){
         frame_start = SDL_GetTicks();
 
         //Input, Update, Render()
+        renderer.Render();
 
         frame_end = SDL_GetTicks();
 
+        // Keep track of how long each loop through Input/Update/Render cycles takes.
         frame_count++;
         frame_duration = frame_end - frame_start;
+
+        // After every second, update title screen
+        if(frame_end - title_timestamp >= 1000) {
+            renderer.UpdateWindowTitle();
+            frame_count = 0;
+            title_timestamp = frame_end;
+        }
+
+        // If the time for the frame is too small, delay loop until
+        // frame will achieve correct frame duration.
+        if (frame_duration < FPS) {
+            SDL_Delay(FPS - frame_duration);
+        }
+
         running = false;
     }
 }

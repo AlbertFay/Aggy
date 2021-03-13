@@ -4,12 +4,12 @@
 #include "controller.h" 
 #include <iostream>
 
-constexpr float DesiredFramePerSecond = 60;
-constexpr float FramePerSecond = 1000/DesiredFramePerSecond;
-constexpr int kScreenHeight = 600;
-constexpr int kScreenWidth = 600;
-constexpr int kgridHeight = 10;
-constexpr int kgridWidth = 10; 
+constexpr std::size_t DesiredFramePerSecond = 60;
+constexpr std::size_t FramePerSecond = 1000/DesiredFramePerSecond;
+constexpr std::size_t kScreenHeight = 600;
+constexpr std::size_t kScreenWidth = 600;
+constexpr std::size_t kgridHeight = 10;
+constexpr std::size_t kgridWidth = 10; 
 
 int main()
 {
@@ -22,5 +22,4 @@ int main()
     //Terminate game, Then run 
     std::cout << "The object has been terminated, closing Application" << std::endl;
     return 0;
-    
 } 

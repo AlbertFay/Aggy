@@ -7,7 +7,7 @@
 class Renderer {
   public:
 
-    Renderer(const int screen_height, const int screen_width, const int grid_height, const int grid_width);
+    Renderer(const std::size_t screen_height, const std::size_t screen_width, const std::size_t grid_height, const std::size_t grid_width);
     ~Renderer();
 
     void Render();
@@ -17,10 +17,10 @@ class Renderer {
     SDL_Window *sdl_window;
     SDL_Renderer *sdl_renderer;
     
-    const int _screen_width;
-    const int _screen_height;
-    const int _grid_width;
-    const int _grid_height;
+    const std::size_t _screen_width;
+    const std::size_t _screen_height;
+    const std::size_t _grid_width;
+    const std::size_t _grid_height;
 
 
 };
