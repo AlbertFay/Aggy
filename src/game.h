@@ -4,6 +4,7 @@
 #include "controller.h"
 #include "Renderer.h"
 #include "SDL2/SDL.h"
+#include "character.h"
 
 class Game {
   public:

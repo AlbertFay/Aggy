@@ -1,7 +1,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-
+#include "character.h"
 #include "SDL2/SDL.h"
 
 class Renderer {
@@ -10,7 +10,7 @@ class Renderer {
     Renderer(const std::size_t screen_height, const std::size_t screen_width, const std::size_t grid_height, const std::size_t grid_width);
     ~Renderer();
 
-    void Render();
+    void Render(Character const character);
     void UpdateWindowTitle();
 
   private:
