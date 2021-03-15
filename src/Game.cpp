@@ -15,6 +15,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS){
 
         Character character;
         //Input, Update, Render()
+        controller.HandleInput(running);
         character.Update();
         renderer.Render(character);
 
@@ -37,6 +38,6 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS){
             SDL_Delay(FPS - frame_duration);
         }
 
-        running = false;
+        //running = false;
     }
 }

@@ -45,7 +45,12 @@ void Renderer::Render(Character const character) {
   SDL_SetRenderDrawColor(sdl_renderer, 70, 215, 50, 255);
   SDL_RenderFillRect(sdl_renderer, &block);
   SDL_RenderPresent(sdl_renderer);
-  SDL_Delay(10000);
+
+
+  //To be dealt with later.
+  //SDL_RenderCopyEx(sdl_renderer, sdl)
+
+  //SDL_Delay(10000);
 }
 
 // Updates the Window title to show updated score and fps
