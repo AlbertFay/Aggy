@@ -2,45 +2,50 @@
 
 #include <iostream>
 
-void Controller::ChangeDirection(){
-
+void Controller::ChangeDirection()
+{
 }
 
-void Controller::HandleInput(bool &running){
-    SDL_Event e;
-    while (SDL_PollEvent(&e)){
-        if(e.type == SDL_QUIT){
+void Controller::HandleInput(Character &character, bool &running)
+{
+    SDL_Event sdlEvent;
+    while (SDL_PollEvent(&sdlEvent)) {
+        if (sdlEvent.type == SDL_QUIT) {
             running = false;
         }
-        else if (e.type == SDL_KEYDOWN){
-            //this is key being pressed down
-            switch (e.key.keysym.sym) {
-                case SDLK_UP:
-                //change direction or do something
-                std::cout << "Up Key is pressed" << "\n";
-                break;
+    }
 
-                case SDLK_DOWN:
-                //Change direction or do something
-                std::cout << "Down Key is pressed" << "\n";
-                break;
-
-                case SDLK_LEFT:
-                //Change direction or do something
-                std::cout << "Left Key is pressed" << "\n";
-                break;
-
-                case SDLK_RIGHT:
-                //Change direction or do something
-                std::cout << "Right Key is pressed" << "\n";
-                break;
-
-                case SDLK_ESCAPE:
-                std::cout << "Escape key is pressed" << "\n";
-                running = false;
-                break;
-            }
-            
+    if (SDL_WasInit(SDL_INIT_VIDEO) != 0)
+    {
+        keystate = SDL_GetKeyboardState(NULL);
+        //continuous-response keys
+        if (keystate[SDL_SCANCODE_LEFT])
+        {
+            std::cout << "Left Key is pressed"
+                      << "\n";
+            character.Update(Character::Direction::kLeft);
+        }
+        if (keystate[SDL_SCANCODE_RIGHT])
+        {
+            std::cout << "Right Key is pressed"
+                      << "\n";
+            character.Update(Character::Direction::kRight);
+        }
+        if (keystate[SDL_SCANCODE_UP])
+        {
+            std::cout << "Up Key is pressed"
+                      << "\n";
+            character.Update(Character::Direction::kUp);
+        }
+        if (keystate[SDL_SCANCODE_DOWN])
+        {
+            std::cout << "Down Key is pressed"
+                      << "\n";
+            character.Update(Character::Direction::kDown);
+        }
+        if (keystate[SDL_SCANCODE_ESCAPE]){
+            std::cout << "Escape key is pressed" << "\n";
+            running = false;
         }
     }
 }

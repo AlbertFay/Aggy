@@ -17,6 +17,7 @@ Renderer::Renderer(const std::size_t screen_height, const std::size_t screen_wid
     std::cerr << "Window could not be created.\n";
     std::cerr << " SDL_Error: " << SDL_GetError() << "\n";
   }
+  std::cout << "SDL is initialized" << "\n";
 
   // Initialize SDL Renderer
   sdl_renderer = SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_ACCELERATED);
@@ -31,16 +32,18 @@ Renderer::~Renderer() {
 }
 
 // Draw the objects to the window
-void Renderer::Render(Character const character) {
+void Renderer::Render(Character const &character) {
   //Render Character
   SDL_Rect block;
   block.w = 20;
   block.h = 20;
-  block.x = 100;
-  block.y = 100;
+  block.x = character.pos_x;
+  block.y = character. pos_y;
 
   SDL_SetRenderDrawColor(sdl_renderer, 90, 90, 90, 255);
   SDL_RenderClear(sdl_renderer);
+
+
 
   SDL_SetRenderDrawColor(sdl_renderer, 70, 215, 50, 255);
   SDL_RenderFillRect(sdl_renderer, &block);

@@ -10,13 +10,13 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS){
     int frame_count = 0;
     bool running = true;
 
+    Character character;
+    
     while (running) {
         frame_start = SDL_GetTicks();
 
-        Character character;
         //Input, Update, Render()
-        controller.HandleInput(running);
-        character.Update();
+        controller.HandleInput(character, running);
         renderer.Render(character);
 
         frame_end = SDL_GetTicks();

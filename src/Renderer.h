@@ -10,7 +10,7 @@ class Renderer {
     Renderer(const std::size_t screen_height, const std::size_t screen_width, const std::size_t grid_height, const std::size_t grid_width);
     ~Renderer();
 
-    void Render(Character const character);
+    void Render(Character const &character);
     void UpdateWindowTitle();
 
   private:

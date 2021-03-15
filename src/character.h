@@ -4,15 +4,15 @@
 class Character {
   public:
     enum class Direction {kUp, kDown, kLeft, kRight};
+    float pos_x = 0, pos_y = 0;
   
     Character();
-    void Update();
+    void Update(Direction direction);
 
   private:
     bool isAlive_;
     Direction direction = Direction::kUp;
-    float head_x, head_y;
-    float speed;
+    float speed = 2;
 
 };
 
