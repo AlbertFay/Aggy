@@ -6,7 +6,7 @@ void Controller::ChangeDirection()
 {
 }
 
-void Controller::HandleInput(Character &character, bool &running)
+void Controller::HandleInput(Character &character, bool &running, std::vector<Renderable*> &renderables)
 {
     SDL_Event sdlEvent;
     while (SDL_PollEvent(&sdlEvent)) {
@@ -14,6 +14,7 @@ void Controller::HandleInput(Character &character, bool &running)
             running = false;
         }
     }
+
 
     if (SDL_WasInit(SDL_INIT_VIDEO) != 0)
     {
@@ -56,6 +57,11 @@ void Controller::HandleInput(Character &character, bool &running)
         if (keystate[SDL_SCANCODE_E]){
             std::cout << "E key is pressed" << "\n";
             character.Update(Character::Direction::kRotateRight);
+        }
+
+        if (keystate [SDL_SCANCODE_SPACE]) {
+            std::cout << "Space key is pressed" << "\n";
+            character.Shoot(renderables);
         }
     }
 }

@@ -57,6 +57,11 @@ void Renderer::Render(Character &character) {
 
 }
 
+
+SDL_Renderer* Renderer::GetRenderer() {
+  return sdl_renderer;
+}
+
 // Updates the Window title to show updated score and fps
 void Renderer::UpdateWindowTitle() {
 }

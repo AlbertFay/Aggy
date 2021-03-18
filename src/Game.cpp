@@ -1,5 +1,4 @@
 #include "game.h"
-#include <iostream>
 
 Game::Game(int number):_number(number){
     std::cout << "The game object has been constructed" << std::endl;}
@@ -11,13 +10,27 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS){
     bool running = true;
 
     Character character;
+    std::vector<Renderable*> renderables;
+    SDL_Renderer* pointToRenderer = renderer.GetRenderer();
+    
     
     while (running) {
         frame_start = SDL_GetTicks();
 
         //Input and Update
-        controller.HandleInput(character, running);
-        
+        controller.HandleInput(character, running, renderables);
+
+    //    for (int i = 0; i < renderables.size();) {
+    //        if (renderables[i].Exists()){
+    //           renderables[i].Update();
+    //        }
+    //        else {
+    //            renderables.erase(renderables.begin() + i); 
+    //        }
+    //    }
+        //for (auto renderable: renderables) {
+        //    renderable.RenderRenderable(pointToRenderer);
+        //}
         //Render
         renderer.Render(character);
 

@@ -13,8 +13,8 @@ class Renderer {
 
     void Render(Character &character);
     void UpdateWindowTitle();
-    //SDL_Texture* LoadTexture(std::string path);
-    //void Renderer::DrawTexture(SDL_Texture* texture);
+    SDL_Renderer* GetRenderer();
+
 
   private:
     SDL_Window *sdl_window;

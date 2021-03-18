@@ -5,6 +5,10 @@
 #include "Renderer.h"
 #include "SDL2/SDL.h"
 #include "character.h"
+#include "renderable.h"
+
+#include <iostream>
+#include <vector>
 
 class Game {
   public:
