@@ -7,21 +7,24 @@
 class Character {
   public:
     enum class Direction {kUp, kDown, kLeft, kRight, kRotateRight, kRotateLeft};
-    float pos_x = 0, pos_y = 0;
-    float width = 200, height = 200;
-    float angle = 0, rotationSpeed = 10;
-    //SDL_Texture *texture;
-   // SDL_Surface *surface;
-
   
     Character();
     void Update(Direction direction);
     void SetTexture(SDL_Renderer* renderer);
+    void Render(SDL_Renderer* renderer);
+
+    // Getters/Setters
+    float GetAngle() {
+      return angle;
+    }
 
   private:
     bool isAlive_;
     Direction direction = Direction::kUp;
     float speed = 2;
+    float angle = 0, rotationSpeed = 3;
+    float width = 200, height = 200;
+    float pos_x = 0, pos_y = 0;
 
 };
 
