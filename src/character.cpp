@@ -2,7 +2,12 @@
 #include <iostream>
 
 Character::Character(){
-    //std::cout << "The character has been created" << std::endl;
+    std::cout << "The character has been created" << std::endl;
+    //surface = IMG_Load("Resources/images/wizard_shooting.png");
+}
+
+void Character::SetTexture(SDL_Renderer* renderer){
+   // texture = SDL_CreateTextureFromSurface(renderer, surface);
 }
 
 void Character::Update(Direction direction){
@@ -22,6 +27,14 @@ void Character::Update(Direction direction){
 
         case Direction::kRight:
         pos_x = pos_x + speed;
+        break;
+
+        case Direction::kRotateLeft:
+        angle = angle + speed;
+        break;
+
+        case Direction::kRotateRight:
+        angle = angle - speed;
         break;
 
     }

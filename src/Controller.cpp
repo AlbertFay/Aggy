@@ -47,5 +47,15 @@ void Controller::HandleInput(Character &character, bool &running)
             std::cout << "Escape key is pressed" << "\n";
             running = false;
         }
+
+        if (keystate[SDL_SCANCODE_Q]){
+            std::cout << "Q key is pressed" << "\n";
+            character.Update(Character::Direction::kRotateLeft);
+        }
+
+        if (keystate[SDL_SCANCODE_E]){
+            std::cout << "E key is pressed" << "\n";
+            character.Update(Character::Direction::kRotateRight);
+        }
     }
 }
