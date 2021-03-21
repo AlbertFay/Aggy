@@ -9,6 +9,7 @@
 class Character {
   public:
     enum class Direction {kUp, kDown, kLeft, kRight, kRotateRight, kRotateLeft};
+    std::vector<ShotFired> vecShotFired;
   
     Character();
     void Shoot(std::vector<Renderable*> &renderables);

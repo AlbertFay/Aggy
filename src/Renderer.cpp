@@ -42,7 +42,7 @@ Renderer::~Renderer() {
 }
 
 // Draw the objects to the window
-void Renderer::Render(Character &character) {
+void Renderer::Render(Character &character, std::vector<Renderable*> renderables) {
 
   // Clear the Render and change color of background
   SDL_SetRenderDrawColor(sdl_renderer, 90, 90, 90, 255);
@@ -50,6 +50,10 @@ void Renderer::Render(Character &character) {
 
   //Render the character
   character.Render(sdl_renderer);
+
+  for (auto renderable: renderables) {
+    renderable->RenderRenderable(sdl_renderer);
+  }
   
 
   // Display the Render onto the screen; Update Frame

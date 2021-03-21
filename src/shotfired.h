@@ -8,9 +8,10 @@
 #include <iostream>
 #include "renderable.h"
 
-class ShotFired{
+class ShotFired : public Renderable{
   public:
     ShotFired(float start_x, float start_y, float angle, std::string filePath);
+    ~ShotFired();
     void RenderRenderable(SDL_Renderer* renderer) ;
     void Update() ;
     bool Exists() ;
@@ -19,13 +20,13 @@ class ShotFired{
     SDL_Surface *surface_;
 
     float exists_ = true;
-    float velocity_ = 3;
+    float velocity_ = 1;
     float angle_;
     float x_velocity_ = 0;
     float y_velocity_ = 0;
     float x_pos_;
     float y_pos_;
-    float width = 10, height = 10;
+    float width = 50, height = 50;
     std::string filepath_;
 };
 

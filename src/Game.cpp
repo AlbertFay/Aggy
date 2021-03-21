@@ -20,19 +20,22 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS){
         //Input and Update
         controller.HandleInput(character, running, renderables);
 
-    //    for (int i = 0; i < renderables.size();) {
-    //        if (renderables[i].Exists()){
-    //           renderables[i].Update();
-    //        }
-    //        else {
-    //            renderables.erase(renderables.begin() + i); 
-    //        }
-    //    }
-        //for (auto renderable: renderables) {
-        //    renderable.RenderRenderable(pointToRenderer);
-        //}
+        for (int i = 0; i < renderables.size();) {
+            std::cout << "std::vector<Renderable*> is being traversed" << std::endl;
+            if (renderables[i]->Exists()){
+               renderables[i]->Update();
+               i++;
+            }
+            else {
+                delete renderables[i];
+                renderables.erase(renderables.begin()+i); 
+            }
+        }
+
+        
         //Render
-        renderer.Render(character);
+        std::cout << "Render being called" << std::endl;
+        renderer.Render(character, renderables);
 
         frame_end = SDL_GetTicks();
 
@@ -55,4 +58,12 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS){
 
         //running = false;
     }
+    std::cout << "std::vector<Renderable>.size() == " << renderables.size() << std::endl;
+    for (int i = 0; i < renderables.size();) {
+        std::cout << "Deleting renderable" << std::endl;
+        delete renderables[i];
+        std::cout << "Removing renderable from vector" << std::endl;
+        renderables.erase(renderables.begin()+i); 
+    }
+
 }

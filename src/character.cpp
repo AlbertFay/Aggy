@@ -7,12 +7,14 @@ Character::Character(){
 }
 
 void Character::Shoot(std::vector<Renderable*> &renderables){
-    if (shoot_timer_ > 1000) {
-    ShotFired firedShot(1, 3, angle, "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
-    ShotFired *ptr = &firedShot;
-
-    renderables.push_back(&firedShot);
-    shoot_timer_ = SDL_GetTicks();
+    uint32_t current_shoot_timer_ = SDL_GetTicks();
+    if (current_shoot_timer_ > (shoot_timer_ + 1000)) {
+        std::cout << "ShotFired object being created" << std::endl;
+        ShotFired *firedShot = new ShotFired(1, 3, angle, "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
+        //ShotFired *ptr = &firedShot;
+        renderables.emplace_back(firedShot);
+        shoot_timer_ = SDL_GetTicks();
+        std::cout << "ShotFired object created" << std::endl;
     }
 }
 

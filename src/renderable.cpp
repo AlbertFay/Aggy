@@ -2,7 +2,7 @@
 #include <iostream>
 
 bool Renderable::Exists(){
-    return true;
+    std::cout << "This needs to be implemented" << std::endl;
 };
 
 void Renderable::RenderRenderable(SDL_Renderer* renderer){
