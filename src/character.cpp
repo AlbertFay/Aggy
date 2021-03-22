@@ -19,7 +19,6 @@ void Character::Shoot(std::vector<Renderable*> &renderables){
 }
 
 void Character::Render(SDL_Renderer* renderer) {
-    std::cout << "Character Angle: "<<angle << std::endl;
 
     // Create the block that is the character
     SDL_Rect block;

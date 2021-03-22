@@ -1,15 +1,10 @@
 #include "shotfired.h"
 
 ShotFired::ShotFired(float start_x, float start_y, float angle, std::string filePath): x_pos_(start_x), y_pos_(start_y), angle_(angle), filepath_(filePath)  {
-    std::cout << "character angle: " << angle_<< std::endl;
-    std::cout << "velocity_ : " << velocity_ << std::endl;
     float radians;
     radians = ( (angle_ - 90) * 3.1415926535) / 180.0;
     x_velocity_ = (velocity_)*(cos(radians) );
     y_velocity_ = (velocity_)* ( (-1)*sin(radians) );
-    std::cout << "degrees: " << radians << std::endl;
-    std::cout << "x_velocity: " << x_velocity_<< std::endl;
-    std::cout << "y_velocity: " << y_velocity_ << std::endl;
 }
 
 ShotFired::~ShotFired() {
@@ -47,5 +42,5 @@ void ShotFired::RenderRenderable(SDL_Renderer* renderer) {
     // Free the surface
     SDL_FreeSurface(surface); 
     // Add character to the Render
-    SDL_RenderCopyEx(renderer, tex, NULL, &block, angle_, NULL, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(renderer, tex, NULL, &block, (angle_ + 90), NULL, SDL_FLIP_NONE);
 }
