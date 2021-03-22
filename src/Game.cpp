@@ -21,7 +21,6 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS){
         controller.HandleInput(character, running, renderables);
 
         for (int i = 0; i < renderables.size();) {
-            std::cout << "std::vector<Renderable*> is being traversed" << std::endl;
             if (renderables[i]->Exists()){
                renderables[i]->Update();
                i++;
@@ -34,7 +33,6 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS){
 
         
         //Render
-        std::cout << "Render being called" << std::endl;
         renderer.Render(character, renderables);
 
         frame_end = SDL_GetTicks();

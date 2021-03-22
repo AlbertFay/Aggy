@@ -10,7 +10,7 @@ void Character::Shoot(std::vector<Renderable*> &renderables){
     uint32_t current_shoot_timer_ = SDL_GetTicks();
     if (current_shoot_timer_ > (shoot_timer_ + 1000)) {
         std::cout << "ShotFired object being created" << std::endl;
-        ShotFired *firedShot = new ShotFired(1, 3, angle, "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
+        ShotFired *firedShot = new ShotFired((height * .2), (width * .4), angle, "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
         //ShotFired *ptr = &firedShot;
         renderables.emplace_back(firedShot);
         shoot_timer_ = SDL_GetTicks();
@@ -19,6 +19,7 @@ void Character::Shoot(std::vector<Renderable*> &renderables){
 }
 
 void Character::Render(SDL_Renderer* renderer) {
+    std::cout << "Character Angle: "<<angle << std::endl;
 
     // Create the block that is the character
     SDL_Rect block;

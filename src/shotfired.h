@@ -7,6 +7,7 @@
 #include <cmath>
 #include <iostream>
 #include "renderable.h"
+#include "math.h"
 
 class ShotFired : public Renderable{
   public:
