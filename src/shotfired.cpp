@@ -20,7 +20,7 @@ void ShotFired::Update() {
     y_pos_ -= y_velocity_;
 }
 
-void ShotFired::RenderRenderable(SDL_Renderer* renderer) {
+void ShotFired::RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources) {
     // Create the block that is the character
     SDL_Rect block;
     block.w = width;
@@ -29,8 +29,8 @@ void ShotFired::RenderRenderable(SDL_Renderer* renderer) {
     block.y = y_pos_;
 
     // Create Texture and Surfaces
-    SDL_Texture* tex;
-    SDL_Surface* surface;
+   /* SDL_Texture* tex = NULL;
+    SDL_Surface* surface = NULL;
     surface = IMG_Load(filepath_.c_str());
     if (surface == NULL){
         std::cerr << "surface did not get created" << std::endl;
@@ -40,7 +40,7 @@ void ShotFired::RenderRenderable(SDL_Renderer* renderer) {
         std::cerr << "Texture did not get created" << std::endl;
     }
     // Free the surface
-    SDL_FreeSurface(surface); 
+    SDL_FreeSurface(surface); */
     // Add character to the Render
-    SDL_RenderCopyEx(renderer, tex, NULL, &block, (angle_ + 90), NULL, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(renderer, resources.getTexture("fireball"), NULL, &block, (angle_ + 90), NULL, SDL_FLIP_NONE);
 }

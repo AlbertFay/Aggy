@@ -8,12 +8,13 @@
 #include <iostream>
 #include "renderable.h"
 #include "math.h"
+#include "resource-manager.h"
 
 class ShotFired : public Renderable{
   public:
     ShotFired(float start_x, float start_y, float angle, std::string filePath);
     ~ShotFired();
-    void RenderRenderable(SDL_Renderer* renderer) ;
+    void RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources) ;
     void Update() ;
     bool Exists() ;
 

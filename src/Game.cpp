@@ -3,16 +3,20 @@
 Game::Game(int number):_number(number){
     std::cout << "The game object has been constructed" << std::endl;}
 
-void Game::Run(Renderer &renderer, Controller &controller, float FPS){
+void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceManager &resources){
+    resources_ = resources;
     uint32_t title_timestamp = SDL_GetTicks();
     uint32_t frame_start, frame_end, frame_duration;
     int frame_count = 0;
     bool running = true;
 
     Character character;
-    std::vector<Renderable*> renderables;
     SDL_Renderer* pointToRenderer = renderer.GetRenderer();
+    std::vector<Renderable*> renderables;
     
+    
+    resources.LoadTexture(pointToRenderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
+    resources.LoadTexture(pointToRenderer, "fireball", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
     
     while (running) {
         frame_start = SDL_GetTicks();
@@ -33,7 +37,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS){
 
         
         //Render
-        renderer.Render(character, renderables);
+        renderer.Render(character, renderables, resources);
 
         frame_end = SDL_GetTicks();
 

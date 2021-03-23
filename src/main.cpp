@@ -17,7 +17,8 @@ int main()
     Renderer renderer(kScreenHeight, kScreenWidth, kgridHeight, kgridWidth);
     Game game(number);
     Controller controller;
-    game.Run(renderer, controller, FramePerSecond);
+    ResourceManager resources;
+    game.Run(renderer, controller, FramePerSecond, resources);
 
     //Terminate game, Then run 
     std::cout << "The object has been terminated, closing Application" << std::endl;

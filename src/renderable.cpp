@@ -5,7 +5,7 @@ bool Renderable::Exists(){
     std::cout << "This needs to be implemented" << std::endl;
 };
 
-void Renderable::RenderRenderable(SDL_Renderer* renderer){
+void Renderable::RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources){
     std::cout << "This needs to be implemented" << std::endl;
 }
 

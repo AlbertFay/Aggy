@@ -4,6 +4,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "shotfired.h"
+#include "resource-manager.h"
 #include <vector>
 
 class Character {
@@ -15,7 +16,7 @@ class Character {
     void Shoot(std::vector<Renderable*> &renderables);
     void Update(Direction direction);
     void SetTexture(SDL_Renderer* renderer);
-    void Render(SDL_Renderer* renderer);
+    void Render(SDL_Renderer* renderer, ResourceManager &resources);
 
     // Getters/Setters
     float GetAngle() {
