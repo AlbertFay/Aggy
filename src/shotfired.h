@@ -22,7 +22,7 @@ class ShotFired : public Renderable{
     SDL_Surface *surface_;
 
     float exists_ = true;
-    float velocity_ = 1;
+    float velocity_ = 4;
     float angle_;
     float x_velocity_ = 0;
     float y_velocity_ = 0;
@@ -30,6 +30,8 @@ class ShotFired : public Renderable{
     float y_pos_;
     float width = 50, height = 50;
     std::string filepath_;
+
+    uint32_t lifetime_timer_ = SDL_GetTicks();
 };
 
 #endif

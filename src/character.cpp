@@ -10,7 +10,7 @@ void Character::Shoot(std::vector<Renderable*> &renderables){
     uint32_t current_shoot_timer_ = SDL_GetTicks();
     if (current_shoot_timer_ > (shoot_timer_ + 50)) {
         std::cout << "ShotFired object being created" << std::endl;
-        ShotFired *firedShot = new ShotFired((height * .2), (width * .4), angle, "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
+        ShotFired *firedShot = new ShotFired((hand_distance_ * cos(hand_angle_) + pos_x), (-hand_distance_ * sin(hand_angle_) + pos_y), angle, "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
         //ShotFired *ptr = &firedShot;
         renderables.emplace_back(firedShot);
         shoot_timer_ = SDL_GetTicks();
