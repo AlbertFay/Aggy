@@ -27,27 +27,21 @@ void Character::Render(SDL_Renderer* renderer, ResourceManager &resources) {
     block.x = pos_x;
     block.y = pos_y;
 
-    // Create Texture and Surfaces
-    /*SDL_Texture* tex;
-    SDL_Surface* surface;
-    surface = IMG_Load("C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
-    if (surface == NULL){
-        std::cerr << "surface did not get created" << std::endl;
-    }
-    tex = SDL_CreateTextureFromSurface(renderer, surface);
-    if (tex == NULL){
-        std::cerr << "Texture did not get created" << std::endl;
-    }
-    // Free the surface
-    SDL_FreeSurface(surface); 
-    */
+    SDL_Rect rectangle;
+    rectangle.w = width;
+    rectangle.h = height;
+    rectangle.x = pos_x;
+    rectangle.y = pos_y;
+
 
     // Add character to the Render
     if(resources.getTexture("character") == NULL){
         std::cerr << "Character.cpp GetTexture = NuLL" << std::endl;
     }
-    std::cout << "character texture: "<< resources.getTexture("character") << std::endl;
     SDL_RenderCopyEx(renderer, (resources.getTexture("character")), NULL, &block, angle, NULL, SDL_FLIP_NONE);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    //SDL_RenderFillRect(renderer, &rectangle);
+    SDL_RenderDrawRect(renderer, &rectangle);
 }
 
 void Character::Update(Direction direction){

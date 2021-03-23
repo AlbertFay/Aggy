@@ -26,9 +26,9 @@ class Character {
   private:
     bool isAlive_;
     Direction direction = Direction::kUp;
-    float speed = 2;
-    float angle = 0, rotationSpeed = 3;
-    float width = 200, height = 200;
+    float speed = 3;
+    float angle = 0, rotationSpeed = 3.5;
+    float width = 100, height = 100;
     float pos_x = 0, pos_y = 0;
     float hand_angle_ = (((angle - 2.8)* 3.1415926535) / 180.0);
     float hand_distance_ = (width * .33);

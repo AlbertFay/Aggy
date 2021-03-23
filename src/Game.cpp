@@ -13,6 +13,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     Character character;
     SDL_Renderer* pointToRenderer = renderer.GetRenderer();
     std::vector<Renderable*> renderables;
+    GameMap gamemap;
     
     
     resources.LoadTexture(pointToRenderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
@@ -37,7 +38,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
 
         
         //Render
-        renderer.Render(character, renderables, resources);
+        renderer.Render(character, renderables, resources, gamemap);
 
         frame_end = SDL_GetTicks();
 

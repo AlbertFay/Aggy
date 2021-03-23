@@ -7,6 +7,7 @@
 #include "character.h"
 #include "renderable.h"
 #include "resource-manager.h"
+#include "gamemap.h"
 
 #include <iostream>
 #include <vector>

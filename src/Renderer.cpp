@@ -42,11 +42,12 @@ Renderer::~Renderer() {
 }
 
 // Draw the objects to the window
-void Renderer::Render(Character &character, std::vector<Renderable*> renderables, ResourceManager &resources) {
+void Renderer::Render(Character &character, std::vector<Renderable*> renderables, ResourceManager &resources, GameMap &gamemap) {
 
   // Clear the Render and change color of background
   SDL_SetRenderDrawColor(sdl_renderer, 90, 90, 90, 255);
   SDL_RenderClear(sdl_renderer);
+  gamemap.RenderMap(sdl_renderer);
 
   //Render the character
   character.Render(sdl_renderer, resources);
