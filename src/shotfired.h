@@ -15,8 +15,8 @@ class ShotFired : public Renderable{
     ShotFired(float start_x, float start_y, float angle, std::string filePath);
     ~ShotFired();
     void RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources) ;
-    void Update() ;
-    bool Exists() ;
+    void Update();
+    bool Exists();
 
   private:
     SDL_Surface *surface_;

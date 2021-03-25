@@ -6,7 +6,7 @@ void Controller::ChangeDirection()
 {
 }
 
-void Controller::HandleInput(Character &character, bool &running, std::vector<Renderable*> &renderables)
+void Controller::HandleInput(Character &character, bool &running)
 {
     SDL_Event sdlEvent;
     while (SDL_PollEvent(&sdlEvent)) {
@@ -61,7 +61,7 @@ void Controller::HandleInput(Character &character, bool &running, std::vector<Re
 
         if (keystate [SDL_SCANCODE_SPACE]) {
             std::cout << "Space key is pressed" << "\n";
-            character.Shoot(renderables);
+            character.Shoot();
         }
     }
 }

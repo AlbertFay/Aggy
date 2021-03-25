@@ -10,9 +10,9 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     int frame_count = 0;
     bool running = true;
 
-    Character character;
-    SDL_Renderer* pointToRenderer = renderer.GetRenderer();
     std::vector<Renderable*> renderables;
+    Character character(renderables);
+    SDL_Renderer* pointToRenderer = renderer.GetRenderer();
     GameMap gamemap;
     
     
@@ -23,7 +23,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         frame_start = SDL_GetTicks();
 
         //Input and Update
-        controller.HandleInput(character, running, renderables);
+        controller.HandleInput(character, running);
 
         for (int i = 0; i < renderables.size();) {
             if (renderables[i]->Exists()){

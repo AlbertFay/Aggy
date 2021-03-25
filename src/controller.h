@@ -9,7 +9,7 @@
 class Controller {
   public:
     void ChangeDirection();
-    void HandleInput(Character &character, bool &running, std::vector<Renderable*> &renderables);
+    void HandleInput(Character &character, bool &running);
 
   private:
     const Uint8 *keystate = NULL;

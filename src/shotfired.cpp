@@ -13,7 +13,7 @@ ShotFired::~ShotFired() {
 
 bool ShotFired::Exists() {
     uint32_t currentTime = SDL_GetTicks();
-    if(currentTime > lifetime_timer_ + 15000){
+    if(currentTime > lifetime_timer_ + 8000){
         exists_ = false;
     }
     return ShotFired::exists_;

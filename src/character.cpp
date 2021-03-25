@@ -1,18 +1,19 @@
 #include <iostream>
 #include "character.h"
 
-Character::Character(){
+Character::Character(std::vector<Renderable*> &renderables):renderables_(renderables){
     std::cout << "The character has been created" << std::endl;
     //surface = IMG_Load("C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
 }
 
-void Character::Shoot(std::vector<Renderable*> &renderables){
+void Character::Shoot(){
     uint32_t current_shoot_timer_ = SDL_GetTicks();
     if (current_shoot_timer_ > (shoot_timer_ + 50)) {
         std::cout << "ShotFired object being created" << std::endl;
+        
         ShotFired *firedShot = new ShotFired((hand_distance_ * cos(hand_angle_) + pos_x), (-hand_distance_ * sin(hand_angle_) + pos_y), angle, "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
-        //ShotFired *ptr = &firedShot;
-        renderables.emplace_back(firedShot);
+        renderables_.emplace_back(firedShot);
+
         shoot_timer_ = SDL_GetTicks();
         std::cout << "ShotFired object created" << std::endl;
     }
