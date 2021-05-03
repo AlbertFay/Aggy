@@ -37,3 +37,7 @@ void GameMap::RenderMap(SDL_Renderer* renderer) {
 void GameMap::Update() {
 
 }
+
+void GameMap::checkCollision(/*Object such as fireball or character*/) {
+    //
+}

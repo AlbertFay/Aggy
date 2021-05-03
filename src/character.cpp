@@ -74,3 +74,7 @@ void Character::Update(Direction direction){
 
     }
 }
+
+void Character::Move(){
+    
+}

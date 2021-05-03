@@ -17,6 +17,7 @@ class Character {
     void Update(Direction direction);
     void SetTexture(SDL_Renderer* renderer);
     void Render(SDL_Renderer* renderer, ResourceManager &resources);
+    void Move();
 
     // Getters/Setters
     float GetAngle() {

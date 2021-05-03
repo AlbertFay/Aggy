@@ -17,6 +17,7 @@ class GameMap {
     void LoadMap();
     void RenderMap(SDL_Renderer* renderer);
     void Update();
+    void checkCollision();
 
     Grid_Space array[7][7];
 

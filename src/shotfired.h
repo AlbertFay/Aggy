@@ -20,7 +20,7 @@ class ShotFired : public Renderable{
 
   private:
     SDL_Surface *surface_;
-
+    
     float exists_ = true;
     float velocity_ = 4;
     float angle_;
