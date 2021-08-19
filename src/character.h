@@ -22,7 +22,20 @@ class Character {
     // Getters/Setters
     float GetAngle() {
       return angle;
-    }
+    };
+
+    float GetX() {
+      return pos_x;
+    };
+    float GetY() {
+      return pos_y;
+    };
+    float GetWidth() {
+      return width;
+    };
+    float GetHeight() {
+      return height;
+    };
 
   private:
     bool isAlive_;

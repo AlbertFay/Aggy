@@ -12,7 +12,7 @@
 
 class ShotFired : public Renderable{
   public:
-    ShotFired(float start_x, float start_y, float angle, std::string filePath);
+    ShotFired(float start_x, float start_y, float angle);
     ~ShotFired();
     void RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources) ;
     void Update();

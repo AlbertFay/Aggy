@@ -1,6 +1,6 @@
 #include "shotfired.h"
 
-ShotFired::ShotFired(float start_x, float start_y, float angle, std::string filePath): x_pos_(start_x), y_pos_(start_y), angle_(angle), filepath_(filePath)  {
+ShotFired::ShotFired(float start_x, float start_y, float angle): x_pos_(start_x), y_pos_(start_y), angle_(angle) {
     float radians;
     radians = ( (angle_ - 90) * 3.1415926535) / 180.0;
     x_velocity_ = (velocity_)*(cos(radians) );

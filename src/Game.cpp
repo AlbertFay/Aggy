@@ -14,23 +14,23 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     Character character(renderables);
     SDL_Renderer* pointToRenderer = renderer.GetRenderer();
     GameMap gamemap;
+    CollisionManager collisions;
     
-    
+    //Textures get loaded in to be used later and often
     resources.LoadTexture(pointToRenderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
     resources.LoadTexture(pointToRenderer, "fireball", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
     
     while (running) {
         frame_start = SDL_GetTicks();
 
-        //Input and Update Character
-        controller.HandleInput(character, running);
 
         // Create collidables object which takes in gamemap objects, characters, and other collidables
-
+        
         // Update list of colliable objects
 
-        //Test for all collisions (then objects will be responsible for responding to collisions so updates will happen normally) 
-
+        //Test for all collisions (then objects will be responsible for responding to collisions so updates will happen normally)
+        collisions.CheckCollisions(character, gamemap);
+        
 
         //Update renderables
         for (int i = 0; i < renderables.size();) {
@@ -44,6 +44,8 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
             }
         }
 
+        //Input and Update Character
+        controller.HandleInput(character, running);
         
         //Render
         renderer.Render(character, renderables, resources, gamemap);
