@@ -36,7 +36,18 @@ class Character {
     float GetHeight() {
       return height;
     };
-
+    void SetXCollisionSpeed(float speed) {
+      x_collision_speed = speed;
+    };
+    void SetYCollisionSpeed(float speed) {
+      y_collision_speed = speed;
+    };
+    void SetXOffset(int offset){
+      pos_x = pos_x - offset;
+    };
+    void SetYOffset(int offset){
+      pos_y = pos_y - offset;
+    };
   private:
     bool isAlive_;
     Direction direction = Direction::kUp;
@@ -46,6 +57,8 @@ class Character {
     float pos_x = 0, pos_y = 0;
     float hand_angle_ = (((angle - 2.8)* 3.1415926535) / 180.0);
     float hand_distance_ = (width * .33);
+    float x_collision_speed = 1;
+    float y_collision_speed = 1;
     std::vector<Renderable*> &renderables_;
 
     uint32_t shoot_timer_ = SDL_GetTicks();

@@ -17,7 +17,6 @@ void ResourceManager::LoadTexture(SDL_Renderer* renderer, std::string id, std::s
     // Free the surface
     SDL_FreeSurface(surface); 
     texture_map_[id] = tex;
-    std::cout << "texture : " << tex << std::endl;
 }
 
 SDL_Texture* ResourceManager::getTexture(std::string id) {

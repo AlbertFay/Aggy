@@ -36,10 +36,29 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map) {
 
                     //Test if collision is on x axis or y axis
 
-                    //int x = something
+                    int centerline = ((map.array[i][j].GetX() + map.array[i][j].GetSize() - map.array[i][j].GetX())/2);
+                    int differenceX = map.array[i][j].GetX() - character.GetX();
+                    int differenceY = map.array[i][j].GetY() - character.GetY();
+                    std::cout << "centerline: " << centerline << std::endl;
+                    std::cout << "differenceX: " << differenceX << std::endl;
+                    std::cout << "differenceY: " << differenceY << std::endl;
+
+                    if(differenceX < differenceY){
+                        std::cout << "Collision on x-axis" << std::endl;
+                        //collision is on x axis
+                        character.SetXCollisionSpeed(0);
+                        character.SetXOffset(differenceX - centerline);
+                    }
+                    else{
+                        std::cout << "Collision on y-axis" << std::endl;
+                        character.SetYCollisionSpeed(0);
+                        character.SetYOffset(differenceY - centerline);
+                    }
                 }
                 else{
                     map.array[i][j].collision_ = false;
+                    character.SetXCollisionSpeed(1);
+                    character.SetYCollisionSpeed(1);
                 }
             }
         }

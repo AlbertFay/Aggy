@@ -49,19 +49,19 @@ void Character::Update(Direction direction){
     switch (direction){
         
         case Direction::kUp:
-        pos_y -= speed;
+        pos_y -= speed * y_collision_speed;
         break;
 
         case Direction::kDown:
-        pos_y += speed;
+        pos_y += speed * y_collision_speed;
         break;
 
         case Direction::kLeft:
-        pos_x -= speed;
+        pos_x -= speed * x_collision_speed;
         break;
 
         case Direction::kRight:
-        pos_x += speed;
+        pos_x += speed * x_collision_speed;
         break;
 
         case Direction::kRotateLeft:
