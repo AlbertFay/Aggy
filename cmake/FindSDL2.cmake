@@ -13,7 +13,7 @@
 #
 # SDL2_LIBRARY, the name of the library to link against
 # SDL2_FOUND, if false, do not try to link to SDL
-# SDL2_INCLUDE_DIR, where to find SDL.h
+# SDL2_INCLUDE_DIR, where to find SDL2.h
 # SDL2_VERSION_STRING, human-readable string containing the version of SDL
 #
 #
@@ -66,16 +66,16 @@
 # override this selection or set the CMake environment
 # CMAKE_INCLUDE_PATH to modify the search paths.
 #
-# Note that the header path has changed from SDL/SDL.h to just SDL.h
+# Note that the header path has changed from SDL/SDL2.h to just SDL2.h
 # This needed to change because "proper" SDL convention is #include
-# "SDL.h", not <SDL/SDL.h>. This is done for portability reasons
+# "SDL2.h", not <SDL/SDL2.h>. This is done for portability reasons
 # because not all systems place things in SDL/ (see FreeBSD).
 
 if(NOT SDL2_DIR)
   set(SDL2_DIR "" CACHE PATH "SDL2 directory")
 endif()
 
-find_path(SDL2_INCLUDE_DIR SDL.h
+find_path(SDL2_INCLUDE_DIR SDL2.h
   HINTS
     ENV SDL2DIR
     ${SDL2_DIR}
