@@ -33,6 +33,10 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map) {
                     //of collision coordinates and set character x or y collision speed to 0;
                     std::cout << "There is a collision between character and grid block" << std::endl;
                     map.array[i][j].collision_ = true;
+
+                    //Test if collision is on x axis or y axis
+
+                    //int x = something
                 }
                 else{
                     map.array[i][j].collision_ = false;

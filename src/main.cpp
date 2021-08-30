@@ -6,8 +6,8 @@
 
 constexpr std::size_t DesiredFramePerSecond = 60;
 constexpr std::size_t FramePerSecond = 1000/DesiredFramePerSecond;
-constexpr std::size_t kScreenHeight = 700;
-constexpr std::size_t kScreenWidth = 700;
+constexpr std::size_t kScreenHeight = 1024;
+constexpr std::size_t kScreenWidth = 1024;
 constexpr std::size_t kgridHeight = 10;
 constexpr std::size_t kgridWidth = 10; 
 

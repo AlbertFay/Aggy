@@ -44,10 +44,10 @@ class GameMap {
     void Update(); //Update to different maps 
 
 
-    Grid_Space array[7][7];
+    Grid_Space array[16][16];
 
   private:
-    int pixelsize_ = 100;
+    int pixelsize_ = 64;
 };
 
 #endif

@@ -1,8 +1,8 @@
 #include "gamemap.h"
 
 GameMap::GameMap(){
-    for(int i = 0; i < 7; i++) {
-        for(int j = 0; j < 7; j++) {
+    for(int i = 0; i < 16; i++) {
+        for(int j = 0; j < 16; j++) {
             array[i][j].solid_ = false;
             array[i][j].SetSize(GameMap::pixelsize_);
             array[i][j].setX(j * pixelsize_);
@@ -19,8 +19,8 @@ void GameMap::LoadMap() {
 }
 
 void GameMap::RenderMap(SDL_Renderer* renderer) {
-    for(int i = 0; i < 7; i++) {
-        for(int j = 0; j < 7; j++) {
+    for(int i = 0; i < 16; i++) {
+        for(int j = 0; j < 16; j++) {
             
             //Tempory gridlines
             SDL_Rect gridBlock;
