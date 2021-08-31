@@ -1,4 +1,5 @@
 #include "collision-manager.h"
+#include <stdlib.h>
 
 //Is the collision manager an abstract class or does it have working functions?
 
@@ -39,15 +40,18 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map) {
                     int centerline = ((map.array[i][j].GetX() + map.array[i][j].GetSize() - map.array[i][j].GetX())/2);
                     int differenceX = map.array[i][j].GetX() - character.GetX();
                     int differenceY = map.array[i][j].GetY() - character.GetY();
+                    int space = centerline + (character.GetWidth()/2) + 1;
+                    int xoffset = (map.array[i][j].GetX() + centerline)-(character.GetX() + (character.GetWidth() / 2));
+                    std::cout << "offset: " << xoffset << std::endl;
                     std::cout << "centerline: " << centerline << std::endl;
                     std::cout << "differenceX: " << differenceX << std::endl;
                     std::cout << "differenceY: " << differenceY << std::endl;
 
-                    if(differenceX < differenceY){
+                    if(abs(differenceX) >= abs (differenceY)){
                         std::cout << "Collision on x-axis" << std::endl;
                         //collision is on x axis
                         character.SetXCollisionSpeed(0);
-                        character.SetXOffset(differenceX - centerline);
+                        character.SetXOffset(xoffset - space);
                     }
                     else{
                         std::cout << "Collision on y-axis" << std::endl;
