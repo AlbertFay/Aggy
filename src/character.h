@@ -36,14 +36,44 @@ class Character {
     float GetHeight() {
       return height;
     };
+    /*
+    0 means collision on right
+    -1 means collision on left
+    1 means no collision
+    */
     void SetXCollisionSpeed(float speed) {
-      x_collision_speed = speed;
+      if(speed == 0){
+        x_right_collision_speed = 0;
+      }
+      if(speed == -1){
+        x_left_collision_speed = 0;
+      }
+      if (speed == 1){
+        x_right_collision_speed = 1;
+        x_left_collision_speed = 1;
+      }
     };
+    /*
+    0 means collision on top
+    -1 means collision on bottom
+    1 means no collision
+    */
     void SetYCollisionSpeed(float speed) {
-      y_collision_speed = speed;
+      if(speed == 0){
+        y_up_collision_speed = 0;
+      }
+      if(speed == -1){
+        y_down_collision_speed = 0;
+      }
+      if (speed == 1){
+        y_up_collision_speed = 1;
+        y_down_collision_speed = 1;
+      }
     };
     void SetXOffset(int offset){
+      std::cout << "Character pos_x before : " << pos_x << std::endl;
       pos_x = pos_x - offset;
+      std::cout << "Character pos_x after : " << pos_x << std::endl;
     };
     void SetYOffset(int offset){
       pos_y = pos_y - offset;
@@ -57,8 +87,10 @@ class Character {
     float pos_x = 0, pos_y = 0;
     float hand_angle_ = (((angle - 2.8)* 3.1415926535) / 180.0);
     float hand_distance_ = (width * .33);
-    float x_collision_speed = 1;
-    float y_collision_speed = 1;
+    float x_left_collision_speed = 1;
+    float x_right_collision_speed = 1;
+    float y_up_collision_speed = 1;
+    float y_down_collision_speed = 1;
     std::vector<Renderable*> &renderables_;
 
     uint32_t shoot_timer_ = SDL_GetTicks();

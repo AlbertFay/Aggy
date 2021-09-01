@@ -1,6 +1,7 @@
 #include "gamemap.h"
 
 GameMap::GameMap(){
+    //i is columns, j is rows
     for(int i = 0; i < 16; i++) {
         for(int j = 0; j < 16; j++) {
             array[i][j].solid_ = false;
@@ -12,6 +13,11 @@ GameMap::GameMap(){
     }
 
     array[2][4].solid_ = true;
+    array[2][6].solid_ = true;
+    array[2][7].solid_ = true;
+    array[8][1].solid_ = true;
+    array[9][2].solid_ = true;
+    array[7][1].solid_ = true;
 }
 
 void GameMap::LoadMap() {

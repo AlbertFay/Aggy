@@ -24,14 +24,6 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         frame_start = SDL_GetTicks();
 
 
-        // Create collidables object which takes in gamemap objects, characters, and other collidables
-        
-        // Update list of colliable objects
-
-        //Test for all collisions (then objects will be responsible for responding to collisions so updates will happen normally)
-        collisions.CheckCollisions(character, gamemap);
-        
-
         //Update renderables
         for (int i = 0; i < renderables.size();) {
             if (renderables[i]->Exists()){
@@ -46,6 +38,9 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
 
         //Input and Update Character
         controller.HandleInput(character, running);
+
+        //Test for all collisions
+        collisions.CheckCollisions(character, gamemap);
         
         //Render
         renderer.Render(character, renderables, resources, gamemap);
