@@ -10,6 +10,7 @@ class CollisionManager{
   public:
     CollisionManager();
     void CheckCollisions(Character &character, GameMap &map);
+    void CheckCollisions(std::vector<Renderable*> &renderables, GameMap &map);
     void CheckCollisions();
   private:
 };

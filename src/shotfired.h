@@ -17,6 +17,19 @@ class ShotFired : public Renderable{
     void RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources) ;
     void Update();
     bool Exists();
+    void Died();
+    float GetX(){
+      return x_pos_;
+    };
+    float GetY(){
+      return y_pos_;
+    };
+    float GetWidth(){
+      return width;
+    };
+    float GetHeight(){
+      return height;
+    }
 
   private:
     SDL_Surface *surface_;

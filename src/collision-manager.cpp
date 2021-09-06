@@ -71,3 +71,25 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map) {
         }
     }
 }
+
+void CollisionManager::CheckCollisions(std::vector<Renderable*> &renderables, GameMap &map){
+    for(auto object: renderables){
+        for(int i = 0; i < 16; i++) {
+            for(int j = 0; j < 16; j++) {
+                if (map.array[i][j].solid_ == true){
+                    //Checking if there is a collision using AABB collision detection
+                    if(object->GetX() + object->GetWidth() >= map.array[i][j].GetX() &&
+                     map.array[i][j].GetX() + map.array[i][j].GetSize() >= object->GetX() &&
+                     object->GetY() + object->GetHeight() >= map.array[i][j].GetY() &&
+                      map.array[i][j].GetY() + map.array[i][j].GetSize() >= object->GetY()) {
+                          //Temporary code (this changes the color of the game tile if there is a collision)  
+                           object->Died();
+                    }
+                    else{
+                    map.array[i][j].collision_ = false;
+                    }
+                }
+            }
+        }
+    }
+}

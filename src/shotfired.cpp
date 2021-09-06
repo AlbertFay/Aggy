@@ -24,6 +24,10 @@ void ShotFired::Update() {
     y_pos_ -= y_velocity_;
 }
 
+void ShotFired::Died(){
+    exists_ = false;
+}
+
 void ShotFired::RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources) {
 
     // Create the block that is the fireball

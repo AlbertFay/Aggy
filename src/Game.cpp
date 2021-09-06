@@ -41,6 +41,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
 
         //Test for all collisions
         collisions.CheckCollisions(character, gamemap);
+        collisions.CheckCollisions(renderables, gamemap);
         
         //Render
         renderer.Render(character, renderables, resources, gamemap);
