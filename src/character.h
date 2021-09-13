@@ -71,9 +71,7 @@ class Character {
       }
     };
     void SetXOffset(int offset){
-      std::cout << "Character pos_x before : " << pos_x << std::endl;
       pos_x = pos_x - offset;
-      std::cout << "Character pos_x after : " << pos_x << std::endl;
     };
     void SetYOffset(int offset){
       pos_y = pos_y - offset;

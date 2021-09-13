@@ -4,16 +4,21 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include <iostream>
+#include "resource-manager.h"
 
 class GameMap {
   public:
   
     struct Grid_Space {
       public:
+      enum class blockType {nothing, crate, stone_path};
         //TEMP
         bool collision_;
         //TEMP
-        bool solid_;  
+        bool solid_; 
+        float health_;
+        bool destroyed = false;
+
         int GetSize(){
         return pixelsize_;
         };
@@ -32,13 +37,14 @@ class GameMap {
         void setY(int y){
           y_ = y;
         }
+       blockType blocktype_ = blockType::nothing;
       private:
         int pixelsize_;
         int x_;
         int y_;
     };
 
-    GameMap();
+    GameMap(ResourceManager &resources);
     void LoadMap(); //Intended for loading textures for blocks into map
     void RenderMap(SDL_Renderer* renderer);
     void Update(); //Update to different maps 
@@ -47,6 +53,7 @@ class GameMap {
     Grid_Space array[16][16];
 
   private:
+    ResourceManager resources_;
     int pixelsize_ = 64;
 };
 

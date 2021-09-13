@@ -73,20 +73,26 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map) {
 }
 
 void CollisionManager::CheckCollisions(std::vector<Renderable*> &renderables, GameMap &map){
+    //For each object in renderables, check for collisions against map tiles
     for(auto object: renderables){
         for(int i = 0; i < 16; i++) {
             for(int j = 0; j < 16; j++) {
                 if (map.array[i][j].solid_ == true){
                     //Checking if there is a collision using AABB collision detection
                     if(object->GetX() + object->GetWidth() >= map.array[i][j].GetX() &&
-                     map.array[i][j].GetX() + map.array[i][j].GetSize() >= object->GetX() &&
-                     object->GetY() + object->GetHeight() >= map.array[i][j].GetY() &&
-                      map.array[i][j].GetY() + map.array[i][j].GetSize() >= object->GetY()) {
-                          //Temporary code (this changes the color of the game tile if there is a collision)  
+                        map.array[i][j].GetX() + map.array[i][j].GetSize() >= object->GetX() &&
+                        object->GetY() + object->GetHeight() >= map.array[i][j].GetY() &&
+                        map.array[i][j].GetY() + map.array[i][j].GetSize() >= object->GetY()) {
+                           //Destroy fireball and cause damage to map tile
                            object->Died();
+                           map.array[i][j].health_ = map.array[i][j].health_ - 1; 
+                           if(map.array[i][j].health_ <= 0){
+                               map.array[i][j].destroyed = true;
+                           }
                     }
                     else{
-                    map.array[i][j].collision_ = false;
+                    //This isn't currently implemented
+                    //map.array[i][j].collision_ = false;
                     }
                 }
             }

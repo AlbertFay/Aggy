@@ -13,12 +13,15 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     std::vector<Renderable*> renderables;
     Character character(renderables);
     SDL_Renderer* pointToRenderer = renderer.GetRenderer();
-    GameMap gamemap;
     CollisionManager collisions;
     
     //Textures get loaded in to be used later and often
     resources.LoadTexture(pointToRenderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
     resources.LoadTexture(pointToRenderer, "fireball", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
+    resources.LoadTexture(pointToRenderer, "crate", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/crate.png");
+    resources.LoadTexture(pointToRenderer, "stone path", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/stone path.png");
+
+    GameMap gamemap(resources);
     
     while (running) {
         frame_start = SDL_GetTicks();
