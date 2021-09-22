@@ -6,6 +6,11 @@
 #include <iostream>
 #include "resource-manager.h"
 
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <string>
+
 class GameMap {
   public:
   
@@ -13,11 +18,12 @@ class GameMap {
       public:
       enum class blockType {nothing, crate, stone_path};
         //TEMP
-        bool collision_;
+        bool collision_ = false;
         //TEMP
-        bool solid_; 
+        bool solid_ = false; 
         float health_;
         bool destroyed = false;
+        int num_block = 1;
 
         int GetSize(){
         return pixelsize_;
@@ -45,7 +51,7 @@ class GameMap {
     };
 
     GameMap(ResourceManager &resources);
-    void LoadMap(); //Intended for loading textures for blocks into map
+    void LoadMap(std::string fileName); //Intended for loading textures for blocks into map
     void RenderMap(SDL_Renderer* renderer);
     void Update(); //Update to different maps 
 

@@ -1,40 +1,60 @@
 #include "gamemap.h"
 
+
+using namespace std;
+
 GameMap::GameMap(ResourceManager &resources): resources_(resources){
-            
-            array[5][6].blocktype_ = Grid_Space::blockType::stone_path;
-            array[5][7].blocktype_ = Grid_Space::blockType::stone_path;
-            array[6][6].blocktype_ = Grid_Space::blockType::stone_path;
-            array[6][7].blocktype_ = Grid_Space::blockType::stone_path;
-            
-            array[2][4].blocktype_ = Grid_Space::blockType::crate;
-            array[2][6].blocktype_ = Grid_Space::blockType::crate;
-            array[2][7].blocktype_ = Grid_Space::blockType::crate;
-            array[8][1].blocktype_ = Grid_Space::blockType::crate;
-            array[9][2].blocktype_ = Grid_Space::blockType::crate;
-            array[7][1].blocktype_ = Grid_Space::blockType::crate;
+    GameMap::LoadMap("C:\\C++ Development\\C++ Projects\\Aggy\\maps\\map.txt");
+
     //i is columns, j is rows
     for(int i = 0; i < 16; i++) {
         for(int j = 0; j < 16; j++) {
-            array[i][j].solid_ = false;
             array[i][j].SetSize(GameMap::pixelsize_);
             array[i][j].setX(j * pixelsize_);
             array[i][j].setY(i * pixelsize_);
-            array[i][j].collision_ = false;
-
-
-            switch(array[i][j].blocktype_){
-                case Grid_Space::blockType::crate:
-                array[i][j].solid_ = true;
-                array[i][j].health_ = 3;
-                break;
-            }
         }
     }
 }
 
-void GameMap::LoadMap() {
-    
+void GameMap::LoadMap(string fileName) {
+    ifstream file;
+    file.open(fileName);
+    string line;
+    if(file.is_open()){
+            for(int i = 0; i < 16; i++){
+                getline(file, line);
+                stringstream stream(line);
+                while(stream.good()){
+                    for(int j = 0; j < 16; j++){
+                        string number;
+                        getline(stream, number, ',');
+                        int num = stoi(number);
+                        array[i][j].num_block = num;
+                        std::cout << "array "<< i << " " << j << " number: " << array[i][j].num_block << endl;
+                        switch(array[i][j].num_block){
+                            case 0:
+                            // std::cout << "this is case 0" << endl;
+                            array[i][j].blocktype_ = Grid_Space::blockType::nothing;
+                            break;
+
+                            case 1:
+                            // std::cout << "this is case 1" << endl;
+                            array[i][j].blocktype_ = Grid_Space::blockType::stone_path;
+                            break;
+
+                            case 2:
+                            array[i][j].blocktype_ = Grid_Space::blockType::crate;
+                            array[i][j].solid_ = true;
+                            array[i][j].health_ = 3;
+                            break;
+                        }
+                    }
+                }
+            }
+    }
+    else{
+        std::cout << "couldnt open file" << endl;
+    }
 }
 
 void GameMap::RenderMap(SDL_Renderer* renderer) {
@@ -72,8 +92,6 @@ void GameMap::RenderMap(SDL_Renderer* renderer) {
                 }
                 break;
             }
-            //If non-solid block, draw green
-            //else draw red
         }
     }
 }
