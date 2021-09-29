@@ -14,7 +14,7 @@ class Ghost: public Enemy{
         float GetHeight(){return width_;};
         float GetWidth(){return height_;};
         bool Exists(); //This function checks to see if the object is still alive or not
-        bool Died(){exists_ = false;};
+        void Died(){exists_ = false;};
         ~Ghost();
     private:
     int x_, y_, width_, height_;
