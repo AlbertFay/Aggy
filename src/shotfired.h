@@ -42,7 +42,7 @@ class ShotFired : public Renderable{
     float x_pos_;
     float y_pos_;
     float width = 50, height = 50;
-    std::string filepath_;
+    // std::string filepath_;
 
     uint32_t lifetime_timer_ = SDL_GetTicks();
 };
