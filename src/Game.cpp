@@ -1,7 +1,8 @@
 #include "game.h"
 
 Game::Game(int number):_number(number){
-    std::cout << "The game object has been constructed" << std::endl;}
+    std::cout << "The game object has been constructed" << std::endl;
+}
 
 void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceManager &resources){
     resources_ = resources;
@@ -12,7 +13,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
 
     std::vector<Renderable*> renderables;
     Character character(renderables);
-    SDL_Renderer* pointToRenderer = renderer.GetRenderer();
+    SDL_Renderer *pointToRenderer = renderer.GetRenderer();
     CollisionManager collisions;
     
     //Textures get loaded in to be used later and often
@@ -20,11 +21,16 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     resources.LoadTexture(pointToRenderer, "fireball", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
     resources.LoadTexture(pointToRenderer, "crate", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/crate.png");
     resources.LoadTexture(pointToRenderer, "stone path", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/stone path.png");
+    resources.LoadTexture(pointToRenderer, "temp_ghost", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/temp_ghost.png");
 
     GameMap gamemap(resources);
+        //Temporary Enemy Object
+        Ghost *ghost = new Ghost();
+        renderables.emplace_back(ghost);
     
     while (running) {
         frame_start = SDL_GetTicks();
+
 
 
         //Update renderables
@@ -70,7 +76,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
 
         //running = false;
     }
-    std::cout << "std::vector<Renderable>.size() == " << renderables.size() << std::endl;
+    //std::cout << "std::vector<Renderable>.size() == " << renderables.size() << std::endl;
     for (int i = 0; i < renderables.size();) {
         std::cout << "Deleting renderable" << std::endl;
         delete renderables[i];

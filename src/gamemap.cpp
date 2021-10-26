@@ -30,7 +30,6 @@ void GameMap::LoadMap(string fileName) {
                         getline(stream, number, ',');
                         int num = stoi(number);
                         array[i][j].num_block = num;
-                        std::cout << "array "<< i << " " << j << " number: " << array[i][j].num_block << endl;
                         switch(array[i][j].num_block){
                             case 0:
                             // std::cout << "this is case 0" << endl;

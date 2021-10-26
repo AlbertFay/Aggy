@@ -9,6 +9,7 @@
 #include "resource-manager.h"
 #include "gamemap.h"
 #include "collision-manager.h"
+#include "ghost.h"
 
 #include <iostream>
 #include <vector>

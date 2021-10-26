@@ -1,10 +1,10 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 #include <string>
+#include "renderable.h"
 
-class Enemy{
+class Enemy: public Renderable{
     public:
-    Enemy();
     virtual void Update() = 0;
     virtual ~Enemy() = default;
 };
