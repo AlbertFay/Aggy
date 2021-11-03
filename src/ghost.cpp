@@ -8,7 +8,7 @@ Ghost::Ghost(){
     x_ = 300;
     y_ = 300;
     health_ = 3;
-    velocity_ = 2;
+    velocity_ = 1;
 };
 
 Ghost::~Ghost(){
@@ -26,8 +26,8 @@ void Ghost::Update(int x, int y){
     double radians = atan2(y_difference, x_difference);
     angle_ = ((radians * 180)/ 3.14159) + 90; //Converted to degrees from radians
     //Update x and y with new position moving towards character
-    x_ += cos(angle_) * velocity_;
-    y_ += sin(angle_) * velocity_;
+    x_ += cos(radians) * velocity_;
+    y_ += sin(radians) * velocity_;
 };
 
 void Ghost::RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources){
