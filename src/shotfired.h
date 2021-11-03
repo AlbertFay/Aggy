@@ -35,7 +35,7 @@ class ShotFired : public Renderable{
     SDL_Surface *surface_;
     
     float exists_ = true;
-    float velocity_ = 4;
+    int velocity_ = 3.5;
     float angle_;
     float x_velocity_ = 0;
     float y_velocity_ = 0;
