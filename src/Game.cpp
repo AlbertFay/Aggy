@@ -12,6 +12,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     bool running = true;
 
     std::vector<Renderable*> renderables;
+    std::vector<Enemy*> enemies;
     Character character(renderables);
     SDL_Renderer *pointToRenderer = renderer.GetRenderer();
     CollisionManager collisions;
@@ -26,7 +27,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     GameMap gamemap(resources);
         //Temporary Enemy Object
         Ghost *ghost = new Ghost();
-        renderables.emplace_back(ghost);
+        enemies.emplace_back(ghost);
     
     while (running) {
         frame_start = SDL_GetTicks();
@@ -34,6 +35,18 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
 
 
         //Update renderables
+        for (int i = 0; i < enemies.size();) {
+            if (enemies[i]->Exists()){
+               enemies[i]->Update(character.GetX(), character.GetY());
+               i++;
+            }
+            else {
+                delete enemies[i];
+                enemies.erase(enemies.begin()+i); 
+            }
+        }
+
+        //Update enemies
         for (int i = 0; i < renderables.size();) {
             if (renderables[i]->Exists()){
                renderables[i]->Update();
@@ -53,7 +66,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         collisions.CheckCollisions(renderables, gamemap);
         
         //Render
-        renderer.Render(character, renderables, resources, gamemap);
+        renderer.Render(character, renderables, enemies, resources, gamemap);
 
         frame_end = SDL_GetTicks();
 

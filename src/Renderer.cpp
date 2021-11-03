@@ -42,7 +42,7 @@ Renderer::~Renderer() {
 }
 
 // Draw the objects to the window
-void Renderer::Render(Character &character, std::vector<Renderable*> renderables, ResourceManager &resources, GameMap &gamemap) {
+void Renderer::Render(Character &character, std::vector<Renderable*> renderables, std::vector<Enemy*> enemies, ResourceManager &resources, GameMap &gamemap) {
 
   // Clear the Render and change color of background
   SDL_SetRenderDrawColor(sdl_renderer, 90, 90, 90, 255);
@@ -54,6 +54,9 @@ void Renderer::Render(Character &character, std::vector<Renderable*> renderables
 
   for (auto renderable: renderables) {
     renderable->RenderRenderable(sdl_renderer, resources);
+  }
+  for (auto enemies: enemies) {
+    enemies->RenderRenderable(sdl_renderer, resources);
   }
   
 

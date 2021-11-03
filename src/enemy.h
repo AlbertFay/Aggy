@@ -6,6 +6,7 @@
 class Enemy: public Renderable{
     public:
     virtual void Update() = 0;
+    virtual void Update(int x, int y) = 0;
     virtual ~Enemy() = default;
 };
 

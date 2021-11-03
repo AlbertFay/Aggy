@@ -5,11 +5,13 @@
 #include "SDL2/SDL_image.h"
 #include "renderable.h"
 #include "resource-manager.h"
+#include <cmath>
 
 class Ghost: public Enemy{
     public:
         Ghost();
         ~Ghost();
+        void Update(int x, int y);
         void Update();
         void RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources);
         float GetX(){return x_;};
@@ -19,7 +21,7 @@ class Ghost: public Enemy{
         bool Exists(); //This function checks to see if the object is still alive or not
         void Died(){exists_ = false;};
     private:
-    int x_, y_, angle_;
+    double x_, y_, angle_;
     int width_ = 64;
     int height_ = 64;
     bool exists_;

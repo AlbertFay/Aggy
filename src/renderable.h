@@ -8,6 +8,7 @@ class Renderable {
   public:
     virtual ~Renderable() = default;
     virtual void Update() = 0;
+    //virtual void Update(int x, int y) = 0;
     virtual void RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources) = 0;
     virtual bool Exists() = 0;
     virtual float GetX() = 0;
