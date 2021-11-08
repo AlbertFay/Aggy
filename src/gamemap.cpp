@@ -86,7 +86,7 @@ void GameMap::RenderMap(SDL_Renderer* renderer) {
                 case Grid_Space::blockType::crate:
                 SDL_RenderCopy(renderer, resources_.getTexture("crate"), NULL, &gridBlock);
                 if(array[i][j].collision_){
-                    std::cout << "there is a collision with crate" << std::endl;
+                    // std::cout << "there is a collision with crate" << std::endl;
                     SDL_RenderCopy(renderer, resources_.getTexture("crate"), NULL, &gridBlock);
                 }
                 break;

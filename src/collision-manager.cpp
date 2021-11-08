@@ -124,7 +124,9 @@ void CollisionManager::CheckCollisions(std::vector<Renderable *> &renderables, G
 void CollisionManager::CheckCollisions(std::vector<Enemy *> &enemies, GameMap &map)
 {
     //Iterate through all the game tiles and check if they are solid (meaning they are collidable)
-    for (auto enemies : enemies)
+    for (auto enemies : enemies){
+        enemies->SetXCollisionSpeed(1);
+        enemies->SetYCollisionSpeed(1);
         for (int i = 0; i < 16; i++)
         {
             for (int j = 0; j < 16; j++)
@@ -157,6 +159,7 @@ void CollisionManager::CheckCollisions(std::vector<Enemy *> &enemies, GameMap &m
                         //Testing to see if collision is on X-axis
                         if (abs(differenceX) >= abs(differenceY))
                         {
+                            std::cout << "Collisions on X axis" << std::endl;
                             //If collision is on left side
                             if (xoffset < 0)
                             {
@@ -173,6 +176,7 @@ void CollisionManager::CheckCollisions(std::vector<Enemy *> &enemies, GameMap &m
                         //Collision is on Y-axis
                         else
                         {
+                            std::cout << "Collisions on Y axis" << std::endl;
                             //Collision on top
                             if (yoffset < 0)
                             {
@@ -191,10 +195,9 @@ void CollisionManager::CheckCollisions(std::vector<Enemy *> &enemies, GameMap &m
                     {
                         //No collisions, reset enemies movement to normal
                         map.array[i][j].collision_ = false;
-                        enemies->SetXCollisionSpeed(1);
-                        enemies->SetYCollisionSpeed(1);
                     }
                 }
             }
         }
+    }
 };

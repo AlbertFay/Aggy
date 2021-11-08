@@ -23,7 +23,7 @@ class Ghost: public Enemy{
         void SetYCollisionSpeed(int collisionDirection) {
             if (collisionDirection != 1){
                 yCollisionDirection_ = collisionDirection;
-                std::cout << "collision direction in h file" << yCollisionDirection_ << std::endl;
+                // std::cout << "collision direction in h file" << yCollisionDirection_ << std::endl;
             }
             else{
                 //std::cout << "THis shouldnt be running" << std::endl;
@@ -33,7 +33,7 @@ class Ghost: public Enemy{
         void SetXCollisionSpeed(int collisionDirection) {
             if (collisionDirection != 1){
                 xCollisionDirection_ = collisionDirection;
-                std::cout << "collision direction in h file" << xCollisionDirection_ << std::endl;
+                // std::cout << "collision direction in h file" << xCollisionDirection_ << std::endl;
             }
             else{
                 // std::cout << "THis shouldnt be running" << std::endl;
