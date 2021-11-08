@@ -27,7 +27,7 @@ void Ghost::Update(int x, int y){
     angle_ = ((radians * 180)/ 3.14159) + 90; //Converted to degrees from radians
     //Update x and y with new position moving towards character
     //if moving left
-    std::cout << "collision directionx::Y  " << xCollisionDirection_ << ":" << yCollisionDirection_ << std::endl;
+    // std::cout << "collision direction X::Y  " << xCollisionDirection_ << ":" << yCollisionDirection_ << std::endl;
     if((cos(radians) * velocity_ < 0) && (xCollisionDirection_ == -1)){
         //set xoffset
         x_ = x_ - xOffset_;

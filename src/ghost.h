@@ -48,7 +48,7 @@ class Ghost: public Enemy{
     int height_ = 64;
     bool exists_;
     int velocity_, x_velocity_, y_velocity_;
-    int xOffset_, yOffset_, xCollisionDirection_, yCollisionDirection_;
+    int xOffset_ = 0, yOffset_ = 0, xCollisionDirection_ = 1, yCollisionDirection_ = 1;
     int health_ = 5;
 };
 

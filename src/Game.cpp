@@ -98,4 +98,11 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         renderables.erase(renderables.begin()+i); 
     }
 
+    for (int i = 0; i < enemies.size();) {
+        std::cout << "Deleting enemies" << std::endl;
+        delete enemies[i];
+        std::cout << "Removing enemy pointer from vector" << std::endl;
+        enemies.erase(enemies.begin()+i); 
+    }
+
 }
