@@ -61,7 +61,7 @@ class Character {
     void SetYCollisionSpeed(float speed) {
       if(speed == 0){
         y_up_collision_speed = 0;
-      }
+      } 
       if(speed == -1){
         y_down_collision_speed = 0;
       }

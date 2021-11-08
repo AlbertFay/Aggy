@@ -8,6 +8,10 @@ class Enemy: public Renderable{
     virtual void Update() = 0;
     virtual void Update(int x, int y) = 0;
     virtual ~Enemy() = default;
+    virtual void SetXOffset(int offset) = 0;
+    virtual void SetYOffset(int offset) = 0;
+    virtual void SetXCollisionSpeed(int collisionDirection) = 0;
+    virtual void SetYCollisionSpeed(int collisionDirection) = 0;
 };
 
 #endif
