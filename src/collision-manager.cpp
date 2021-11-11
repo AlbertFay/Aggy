@@ -230,7 +230,9 @@ void CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, Character &
             enemy->GetY() + enemy->GetHeight() >= character.GetY() &&
             character.GetY() + character.GetHeight() >= enemy->GetY()) {
 
-                std::cout << "There is a collision between character and enemy" << std::endl;
+                //Stop flipping ghost around like crazy
+                //Have character take damage
+                //Check to see if character died
             }
     }
 };

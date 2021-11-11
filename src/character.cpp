@@ -75,6 +75,7 @@ void Character::Update(Direction direction){
     }
 }
 
-void Character::Move(){
-    
-}
+void Character::Died(){
+    //Set isAlive_ to false;
+    //Set up endgame screen either here or in render.cpp. 
+};

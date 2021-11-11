@@ -17,7 +17,7 @@ class Character {
     void Update(Direction direction);
     void SetTexture(SDL_Renderer* renderer);
     void Render(SDL_Renderer* renderer, ResourceManager &resources);
-    void Move();
+    void Died();
 
     // Getters/Setters
     float GetAngle() {
@@ -77,7 +77,7 @@ class Character {
       pos_y = pos_y - offset;
     };
   private:
-    bool isAlive_;
+    bool isAlive_ = true;
     Direction direction = Direction::kUp;
     float speed = 3;
     float angle = 0, rotationSpeed = 3.5;
