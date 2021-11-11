@@ -201,3 +201,36 @@ void CollisionManager::CheckCollisions(std::vector<Enemy *> &enemies, GameMap &m
         }
     }
 };
+
+void CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, std::vector<Renderable*> &renderables) {
+    for(auto enemy: enemies){
+        for(auto renderable: renderables){
+            //Checking if there is a collision using AABB collision detection
+            if (enemy->GetX() + enemy->GetWidth() >= renderable->GetX() &&
+                renderable->GetX() + renderable->GetWidth() >= enemy->GetX() &&
+                enemy->GetY() + enemy->GetHeight() >= renderable->GetY() &&
+                renderable->GetY() + renderable->GetHeight() >= enemy->GetY()) {
+
+                    //Destroy fireball and create damage to enemy
+                    renderable->Died();
+                    enemy->TakeDamage(1);
+                    if(enemy->GetHealth() <= 0){
+                        enemy->Died();
+                    }
+            }
+        }
+    }
+};
+
+void CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, Character &character){
+    for(auto enemy: enemies){
+        //Checking if there is a collision using AABB collision detection
+        if (enemy->GetX() + enemy->GetWidth() >= character.GetX() &&
+            character.GetX() + character.GetWidth() >= enemy->GetX() &&
+            enemy->GetY() + enemy->GetHeight() >= character.GetY() &&
+            character.GetY() + character.GetHeight() >= enemy->GetY()) {
+
+                std::cout << "There is a collision between character and enemy" << std::endl;
+            }
+    }
+};

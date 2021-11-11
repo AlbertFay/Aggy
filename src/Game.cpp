@@ -65,6 +65,8 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         collisions.CheckCollisions(character, gamemap);
         collisions.CheckCollisions(renderables, gamemap);
         collisions.CheckCollisions(enemies, gamemap);
+        collisions.CheckCollisions(enemies, renderables);
+        collisions.CheckCollisions(enemies, character);
         
         //Render
         renderer.Render(character, renderables, enemies, resources, gamemap);

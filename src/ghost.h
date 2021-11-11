@@ -42,6 +42,9 @@ class Ghost: public Enemy{
         };
         bool Exists(); //This function checks to see if the object is still alive or not
         void Died(){exists_ = false;};
+        void TakeDamage(int damage);
+        int GetHealth(){return health_;};
+
     private:
     double x_, y_, angle_;
     int width_ = 64;

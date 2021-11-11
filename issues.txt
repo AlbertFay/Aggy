@@ -1,5 +1,6 @@
 Updated 11/8/2021
 
 -Character moves too fast when going at an angle (ex. moving down and left at the same time)
--Character collision has bug during collision when moving against boxes
+-Character collision has bug during collision when moving against solid map objects
+-Enemies collision has bug during collision when moving against solid map objects
 -Fireball does not shoot from correct place

@@ -72,10 +72,14 @@ void Ghost::RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources)
 };
 
 bool Ghost::Exists(){
-    if(health_ > 0){
+    if(exists_ == true){
         return true;
     }
     else{
         return false;
     }
+};
+
+void Ghost::TakeDamage(int damage){
+    health_ -= damage;
 };
