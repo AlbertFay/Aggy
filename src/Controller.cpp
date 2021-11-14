@@ -53,3 +53,23 @@ void Controller::HandleInput(Character &character, bool &running)
         }
     }
 }
+
+void Controller::MenuInput(bool &running){
+    SDL_Event e;
+    while (SDL_PollEvent(&e)){
+        if(e.type == SDL_QUIT){
+            running = false;
+        }
+        else if (e.type == SDL_KEYDOWN){
+            //this is key being pressed down
+            switch (e.key.keysym.sym) {
+                
+                case SDLK_ESCAPE:
+                std::cout << "Escape key is pressed" << "\n";
+                running = false;
+                break;
+            }
+            
+        }
+    }
+};

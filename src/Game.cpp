@@ -90,7 +90,10 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
             SDL_Delay(FPS - frame_duration);
         }
 
-        //running = false;
+        while(!character.IsAlive() && running == true){
+            renderer.EndMenu();
+            controller.MenuInput(running);
+        }
     }
     //std::cout << "std::vector<Renderable>.size() == " << renderables.size() << std::endl;
     for (int i = 0; i < renderables.size();) {

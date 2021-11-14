@@ -73,9 +73,13 @@ void Character::Update(Direction direction){
         break;
 
     }
+    if(health_ <= 0){
+        isAlive_ = false;
+    }
 }
 
 void Character::Died(){
+    isAlive_ = false;
     //Set isAlive_ to false;
     //Set up endgame screen either here or in render.cpp. 
 };

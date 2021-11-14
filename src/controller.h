@@ -10,6 +10,7 @@ class Controller {
   public:
     void ChangeDirection();
     void HandleInput(Character &character, bool &running);
+    void MenuInput(bool &running);
 
   private:
     const Uint8 *keystate = NULL;

@@ -73,3 +73,16 @@ SDL_Renderer* Renderer::GetRenderer() {
 // Updates the Window title to show updated score and fps
 void Renderer::UpdateWindowTitle() {
 }
+
+void Renderer::EndMenu() {
+SDL_SetRenderDrawBlendMode(sdl_renderer, SDL_BLENDMODE_BLEND);
+SDL_SetRenderDrawColor(sdl_renderer, 82, 82, 82, 25);
+SDL_Rect menuScreen;
+menuScreen.x = 0;
+menuScreen.y = 0;
+menuScreen.w = 1024;
+menuScreen.h = 1024;
+
+SDL_RenderFillRect(sdl_renderer, &menuScreen);
+SDL_RenderPresent(sdl_renderer);
+};

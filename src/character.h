@@ -18,6 +18,7 @@ class Character {
     void SetTexture(SDL_Renderer* renderer);
     void Render(SDL_Renderer* renderer, ResourceManager &resources);
     void Died();
+    void TakeDamage(int damage) {health_ -= damage;};
 
     // Getters/Setters
     float GetAngle() {
@@ -36,6 +37,9 @@ class Character {
     float GetHeight() {
       return height;
     };
+    bool IsAlive(){
+      return isAlive_;
+    }
     /*
     0 means collision on right
     -1 means collision on left
@@ -90,6 +94,7 @@ class Character {
     float y_up_collision_speed = 1;
     float y_down_collision_speed = 1;
     std::vector<Renderable*> &renderables_;
+    int health_ = 5;
 
     uint32_t shoot_timer_ = SDL_GetTicks();
 
