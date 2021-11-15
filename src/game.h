@@ -10,6 +10,7 @@
 #include "gamemap.h"
 #include "collision-manager.h"
 #include "ghost.h"
+#include "SDL2/SDL_ttf.h"
 
 #include <iostream>
 #include <vector>
