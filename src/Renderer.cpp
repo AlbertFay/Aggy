@@ -17,6 +17,10 @@ Renderer::Renderer(const std::size_t screen_height, const std::size_t screen_wid
     std::cout << "Error code: " << IMG_GetError();
   }
 
+  if(TTF_Init() < 0) {
+    std::cout << "Couldn't initialize TTF lib: " << TTF_GetError() << std::endl;
+  }
+
   // Initialize SDL Window
   sdl_window = SDL_CreateWindow("Aggy", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screen_height, _screen_width, SDL_WINDOW_SHOWN);
   if (nullptr == sdl_window) {
@@ -75,6 +79,7 @@ void Renderer::UpdateWindowTitle() {
 }
 
 void Renderer::EndMenu() {
+//SDL_RenderClear(sdl_renderer);
 SDL_SetRenderDrawBlendMode(sdl_renderer, SDL_BLENDMODE_BLEND);
 SDL_SetRenderDrawColor(sdl_renderer, 82, 82, 82, 25);
 SDL_Rect menuScreen;
@@ -83,6 +88,22 @@ menuScreen.y = 0;
 menuScreen.w = 1024;
 menuScreen.h = 1024;
 
+TTF_Font* Sans = TTF_OpenFont("C:/C++ Development/C++ Projects/Aggy/Fonts/open-sans.ttf", 24);
+if(!Sans) {
+    printf("TTF_OpenFont: %s\n", TTF_GetError());
+    // handle error
+}
+SDL_Color White = {255, 255, 255};
+SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, "Game Over", White);
+SDL_Texture* Message = SDL_CreateTextureFromSurface(sdl_renderer, surfaceMessage);
+SDL_Rect Message_rect; //create a rect
+Message_rect.x = 100;  //controls the rect's x coordinate 
+Message_rect.y = 100; // controls the rect's y coordinte
+Message_rect.w = 700; // controls the width of the rect
+Message_rect.h = 300; // controls the height of the rect
+
+
+SDL_RenderCopy(sdl_renderer, Message, NULL, &Message_rect);
 SDL_RenderFillRect(sdl_renderer, &menuScreen);
 SDL_RenderPresent(sdl_renderer);
 };

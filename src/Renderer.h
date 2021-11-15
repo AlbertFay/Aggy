@@ -8,6 +8,7 @@
 #include "resource-manager.h"
 #include "gamemap.h"
 #include "enemy.h"
+#include "SDL2/sdl_ttf.h"
 
 class Renderer {
   public:
