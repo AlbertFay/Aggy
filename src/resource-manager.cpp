@@ -1,5 +1,7 @@
 #include "resource-manager.h"
 
+
+
 void ResourceManager::LoadTexture(SDL_Renderer* renderer, std::string id, std::string filepath){
         // Create Texture and Surfaces
     SDL_Texture* tex = NULL;
@@ -18,6 +20,14 @@ void ResourceManager::LoadTexture(SDL_Renderer* renderer, std::string id, std::s
     SDL_FreeSurface(surface); 
     texture_map_[id] = tex;
 }
+
+void ResourceManager::LoadText(SDL_Renderer*renderer, const char *id, TTF_Font *font, SDL_Color &color){
+    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, id, color);
+    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+    SDL_FreeSurface(surfaceMessage);
+    std::string stringID = id;
+    texture_map_[stringID] = Message;
+};
 
 SDL_Texture* ResourceManager::getTexture(std::string id) {
     return texture_map_.at(id);

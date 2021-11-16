@@ -19,7 +19,8 @@ class Renderer {
     void Render(Character &character, std::vector<Renderable*> renderables, std::vector<Enemy*> enemies, ResourceManager &resources, GameMap &gamemap);
     void UpdateWindowTitle();
     SDL_Renderer* GetRenderer();
-    void EndMenu();
+    void EndMenu(ResourceManager &resources);
+    void LoadEndMenuResources(ResourceManager &resources);
 
 
   private:

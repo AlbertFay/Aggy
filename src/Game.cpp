@@ -23,6 +23,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     resources.LoadTexture(pointToRenderer, "crate", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/crate.png");
     resources.LoadTexture(pointToRenderer, "stone path", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/stone path.png");
     resources.LoadTexture(pointToRenderer, "temp_ghost", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/temp_ghost.png");
+    renderer.LoadEndMenuResources(resources_);
 
     GameMap gamemap(resources);
         //Temporary Enemy Object
@@ -91,7 +92,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         }
 
         while(!character.IsAlive() && running == true){
-            renderer.EndMenu();
+            renderer.EndMenu(resources_);
             controller.MenuInput(running);
         }
     }

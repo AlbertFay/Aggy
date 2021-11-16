@@ -78,7 +78,7 @@ SDL_Renderer* Renderer::GetRenderer() {
 void Renderer::UpdateWindowTitle() {
 }
 
-void Renderer::EndMenu() {
+void Renderer::EndMenu(ResourceManager &resources) {
 //SDL_RenderClear(sdl_renderer);
 SDL_SetRenderDrawBlendMode(sdl_renderer, SDL_BLENDMODE_BLEND);
 SDL_SetRenderDrawColor(sdl_renderer, 82, 82, 82, 25);
@@ -93,17 +93,33 @@ if(!Sans) {
     printf("TTF_OpenFont: %s\n", TTF_GetError());
     // handle error
 }
-SDL_Color White = {255, 255, 255};
-SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, "Game Over", White);
-SDL_Texture* Message = SDL_CreateTextureFromSurface(sdl_renderer, surfaceMessage);
-SDL_Rect Message_rect; //create a rect
-Message_rect.x = 100;  //controls the rect's x coordinate 
-Message_rect.y = 100; // controls the rect's y coordinte
-Message_rect.w = 700; // controls the width of the rect
-Message_rect.h = 300; // controls the height of the rect
+
+SDL_Rect game_over; //create a rect
+game_over.x = 100;  //controls the rect's x coordinate 
+game_over.y = 100; // controls the rect's y coordinte
+game_over.w = 700; // controls the width of the rect
+game_over.h = 300; // controls the height of the rect
+SDL_RenderCopy(sdl_renderer, resources.getTexture("Game Over"), NULL, &game_over);
+
+SDL_Rect your_score; //create a rect
+your_score.x = 150;  //controls the rect's x coordinate 
+your_score.y = 0; // controls the rect's y coordinte
+your_score.w = 400; // controls the width of the rect
+your_score.h = 100; // controls the height of the rect
+SDL_RenderCopy(sdl_renderer, resources.getTexture("Your Score: "), NULL, &your_score);
 
 
-SDL_RenderCopy(sdl_renderer, Message, NULL, &Message_rect);
 SDL_RenderFillRect(sdl_renderer, &menuScreen);
 SDL_RenderPresent(sdl_renderer);
+};
+
+void Renderer::LoadEndMenuResources(ResourceManager &resources){
+  SDL_Color white = {255, 255, 255};
+  TTF_Font* Sans = TTF_OpenFont("C:/C++ Development/C++ Projects/Aggy/Fonts/open-sans.ttf", 24);
+  if(!Sans) {
+    printf("TTF_OpenFont: %s\n", TTF_GetError());
+    // handle error
+  }
+  resources.LoadText(sdl_renderer, "Game Over", Sans, white);
+  resources.LoadText(sdl_renderer, ("Your Score: "), Sans, white);
 };
