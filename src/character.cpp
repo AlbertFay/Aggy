@@ -88,4 +88,5 @@ void Character::Died(){
 
 void Character::LoadResources(SDL_Renderer *renderer, ResourceManager &resources){
   resources.LoadTexture(renderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
+    resources.LoadTexture(renderer, "fireball", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
 };

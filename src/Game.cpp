@@ -21,7 +21,6 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     //resources.LoadTexture(pointToRenderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
     renderer.LoadUI(resources);
     character.LoadResources(pointToRenderer, resources);
-    resources.LoadTexture(pointToRenderer, "fireball", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
     resources.LoadTexture(pointToRenderer, "crate", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/crate.png");
     resources.LoadTexture(pointToRenderer, "stone path", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/stone path.png");
     resources.LoadTexture(pointToRenderer, "temp_ghost", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/temp_ghost.png");

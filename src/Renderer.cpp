@@ -42,6 +42,25 @@ Renderer::Renderer(const std::size_t screen_height, const std::size_t screen_wid
     std::cerr << "Renderer could not be created.\n";
     std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
   }
+
+  // Create UI Dimensions
+
+  //Calculate placement of score
+  double percent = screen_height / 100;
+  score_rect_.w = 20*percent;
+  score_rect_.h = 10*percent;
+  score_rect_.x = (45*percent) - (score_rect_.w /2);
+  score_rect_.y = (4*percent) - (score_rect_.h /2);
+
+  health_bar_outline_.w = 256;
+  health_bar_outline_.h = 32;
+  health_bar_outline_.x = 50;
+  health_bar_outline_.y = 25;
+
+  digit_rect_.w = 4*percent;
+  digit_rect_.h = 10*percent;
+  digit_rect_.y = score_rect_.y = (4*percent) - (score_rect_.h /2);
+  
 }
 Renderer::~Renderer()
 {
@@ -100,7 +119,7 @@ void Renderer::EndMenu(ResourceManager &resources)
   menuScreen.w = 1024;
   menuScreen.h = 1024;
 
-  TTF_Font *Sans = TTF_OpenFont("C:/C++ Development/C++ Projects/Aggy/Fonts/open-sans.ttf", 24);
+  TTF_Font *Sans = TTF_OpenFont("C:/C++ Development/C++ Projects/Aggy/Fonts/open-sans.ttf", 72);
   if (!Sans)
   {
     printf("TTF_OpenFont: %s\n", TTF_GetError());
@@ -128,7 +147,7 @@ void Renderer::EndMenu(ResourceManager &resources)
 void Renderer::LoadEndMenuResources(ResourceManager &resources)
 {
   SDL_Color white = {255, 255, 255};
-  TTF_Font *Sans = TTF_OpenFont("C:/C++ Development/C++ Projects/Aggy/Fonts/open-sans.ttf", 24);
+  TTF_Font *Sans = TTF_OpenFont("C:/C++ Development/C++ Projects/Aggy/Fonts/open-sans.ttf", 144);
   if (!Sans)
   {
     printf("TTF_OpenFont: %s\n", TTF_GetError());
@@ -140,13 +159,23 @@ void Renderer::LoadEndMenuResources(ResourceManager &resources)
 
 void Renderer::LoadUI(ResourceManager &resources){
   SDL_Color white = {255, 255, 255};
-  TTF_Font* Sans = TTF_OpenFont("C:/C++ Development/C++ Projects/Aggy/Fonts/open-sans.ttf", 24);
+  TTF_Font* Sans = TTF_OpenFont("C:/C++ Development/C++ Projects/Aggy/Fonts/open-sans.ttf", 144);
   if(!Sans) {
     printf("TTF_OpenFont: %s\n", TTF_GetError());
     // handle error
   }
   resources.LoadText(sdl_renderer, ("Score: "), Sans, white);
   resources.LoadTexture(sdl_renderer, ("Health Bar Outline"), "C:/C++ Development/C++ Projects/Aggy/Resources/Images/health bar_outline.png");
+  resources.LoadText(sdl_renderer, ("1"), Sans, white);
+  resources.LoadText(sdl_renderer, ("2"), Sans, white);
+  resources.LoadText(sdl_renderer, ("3"), Sans, white);
+  resources.LoadText(sdl_renderer, ("4"), Sans, white);
+  resources.LoadText(sdl_renderer, ("5"), Sans, white);
+  resources.LoadText(sdl_renderer, ("6"), Sans, white);
+  resources.LoadText(sdl_renderer, ("7"), Sans, white);
+  resources.LoadText(sdl_renderer, ("8"), Sans, white);
+  resources.LoadText(sdl_renderer, ("9"), Sans, white);
+  resources.LoadText(sdl_renderer, ("0"), Sans, white);
 };
 
 void Renderer::RenderUI(ResourceManager &resources, Character &character){
@@ -160,12 +189,25 @@ void Renderer::RenderUI(ResourceManager &resources, Character &character){
     SDL_RenderFillRect(sdl_renderer, &health_bar);
 
     //Render Health Bar Outline
-    SDL_Rect health_bar_outline;
-    health_bar_outline.w = 256;
-    health_bar_outline.h = 32;
-    health_bar_outline.x = 50;
-    health_bar_outline.y = 25;
-    SDL_RenderCopy(sdl_renderer, resources.getTexture("Health Bar Outline"), NULL, &health_bar_outline);
-    //Render Score: 
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Health Bar Outline"), NULL, &health_bar_outline_);
+    //Render Score:
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Score: "), NULL, &score_rect_);
     //Render physical score
+    int score = character.score;
+    int reversescore = 0;
+    std::vector<int> scoredigits;
+    while(score >= 10){
+      reversescore = score % 10;
+      score = score / 10; 
+      scoredigits.push_back(reversescore);
+    }
+    scoredigits.push_back(score);
+    int digits = 0;
+    while(scoredigits.size() > 0){
+      score = scoredigits.back();
+      digit_rect_.x = ((score_rect_.x + (score_rect_.w )) + (digits * digit_rect_.w));
+      SDL_RenderCopy(sdl_renderer, resources.getTexture(std::to_string(score)), NULL, &digit_rect_);
+      digits += 1;
+      scoredigits.pop_back();
+    }
 };

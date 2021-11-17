@@ -34,6 +34,11 @@ class Renderer {
     const std::size_t _grid_width;
     const std::size_t _grid_height;
 
+    SDL_Rect score_rect_;
+    SDL_Rect health_bar_outline_;
+    SDL_Rect digit_rect_;
+    double score_num_place_x_, score_num_place_y_;
+
 
 };
 
