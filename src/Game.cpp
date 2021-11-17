@@ -19,6 +19,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     
     //Textures get loaded in to be used later and often
     //resources.LoadTexture(pointToRenderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
+    renderer.LoadUI(resources);
     character.LoadResources(pointToRenderer, resources);
     resources.LoadTexture(pointToRenderer, "fireball", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
     resources.LoadTexture(pointToRenderer, "crate", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/crate.png");
@@ -78,6 +79,11 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
 
         frame_end = SDL_GetTicks();
 
+        while(!character.IsAlive() && running == true){
+            renderer.EndMenu(resources);
+            controller.MenuInput(running);
+        }
+
         // Keep track of how long each loop through Input/Update/Render cycles takes.
         frame_count++;
         frame_duration = frame_end - frame_start;
@@ -95,10 +101,6 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
             SDL_Delay(FPS - frame_duration);
         }
 
-        while(!character.IsAlive() && running == true){
-            renderer.EndMenu(resources);
-            controller.MenuInput(running);
-        }
     }
     //std::cout << "std::vector<Renderable>.size() == " << renderables.size() << std::endl;
     for (int i = 0; i < renderables.size();) {

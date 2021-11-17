@@ -42,24 +42,6 @@ void Character::Render(SDL_Renderer* renderer, ResourceManager &resources) {
     //Temp code to draw rectangle around character
     //SDL_RenderDrawRect(renderer, &rectangle);
 
-    //Render health bar
-    SDL_Rect health_bar;
-    health_bar.w = (252.0 / max_health) * health_;
-    health_bar.h = 28;
-    health_bar.x = 52;
-    health_bar.y = 27;
-    SDL_SetRenderDrawColor(renderer, 255, 64, 52, 255);
-    SDL_RenderFillRect(renderer, &health_bar);
-
-    //Render Health Bar Outline
-    SDL_Rect health_bar_outline;
-    health_bar_outline.w = 256;
-    health_bar_outline.h = 32;
-    health_bar_outline.x = 50;
-    health_bar_outline.y = 25;
-    SDL_RenderCopy(renderer, resources.getTexture("Health Bar Outline"), NULL, &health_bar_outline);
-    //Render Score: 
-    //Render physical score
 }
 
 void Character::Update(Direction direction){
@@ -105,13 +87,5 @@ void Character::Died(){
 };
 
 void Character::LoadResources(SDL_Renderer *renderer, ResourceManager &resources){
-  SDL_Color white = {255, 255, 255};
-  TTF_Font* Sans = TTF_OpenFont("C:/C++ Development/C++ Projects/Aggy/Fonts/open-sans.ttf", 24);
-  if(!Sans) {
-    printf("TTF_OpenFont: %s\n", TTF_GetError());
-    // handle error
-  }
   resources.LoadTexture(renderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
-  resources.LoadText(renderer, ("Score: "), Sans, white);
-  resources.LoadTexture(renderer, ("Health Bar Outline"), "C:/C++ Development/C++ Projects/Aggy/Resources/Images/health bar_outline.png");
 };

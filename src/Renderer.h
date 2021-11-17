@@ -21,6 +21,8 @@ class Renderer {
     SDL_Renderer* GetRenderer();
     void EndMenu(ResourceManager &resources);
     void LoadEndMenuResources(ResourceManager &resources);
+    void LoadUI(ResourceManager &resources);
+    void RenderUI(ResourceManager &resources, Character &character);
 
 
   private:

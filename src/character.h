@@ -13,6 +13,8 @@ class Character {
     enum class Direction {kUp, kDown, kLeft, kRight, kRotateRight, kRotateLeft};
     std::vector<ShotFired> vecShotFired;
     int score = 0;
+    int health_ = 5;
+    int max_health = 5;
   
     Character(std::vector<Renderable*> &renderables);
     void Shoot();
@@ -98,8 +100,6 @@ class Character {
     float y_up_collision_speed = 1;
     float y_down_collision_speed = 1;
     std::vector<Renderable*> &renderables_;
-    int health_ = 5;
-    int max_health = 5;
 
     uint32_t shoot_timer_ = SDL_GetTicks();
 
