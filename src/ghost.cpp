@@ -69,6 +69,10 @@ void Ghost::RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources)
     block.y = y_;
     //std::cout << "Texture: " << resources.getTexture("temp_ghost") << std::endl;
     SDL_RenderCopyEx(renderer, resources.getTexture("temp_ghost"), NULL, &block, angle_, NULL, SDL_FLIP_NONE);
+
+    //Create the health Bar outline
+    //create the health Bar
+    //Create score display
 };
 
 bool Ghost::Exists(){
@@ -83,3 +87,19 @@ bool Ghost::Exists(){
 void Ghost::TakeDamage(int damage){
     health_ -= damage;
 };
+
+int32_t Ghost::GiveDamage(){
+    uint32_t current_shoot_timer_ = SDL_GetTicks();
+    if (current_shoot_timer_ > (shoot_timer_ + 1000)) {
+        std::cout << "Is damage timer going?" << std::endl;
+        shoot_timer_ = SDL_GetTicks();
+        return 1;
+    }
+    else{
+        return 0;
+    }
+};
+
+int Ghost::GivePoints(){
+    return 1;
+}

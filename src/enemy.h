@@ -14,6 +14,8 @@ class Enemy: public Renderable{
     virtual void SetYCollisionSpeed(int collisionDirection) = 0;
     virtual void TakeDamage(int damage) = 0;
     virtual int GetHealth() = 0;
+    virtual int GiveDamage() = 0;
+    virtual int GivePoints() = 0;
 };
 
 #endif

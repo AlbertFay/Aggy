@@ -19,6 +19,7 @@ void ResourceManager::LoadTexture(SDL_Renderer* renderer, std::string id, std::s
     // Free the surface
     SDL_FreeSurface(surface); 
     texture_map_[id] = tex;
+    std::cout << "\"" << id << "\" has been put into texture map" << std::endl; 
 }
 
 void ResourceManager::LoadText(SDL_Renderer*renderer, const char *id, TTF_Font *font, SDL_Color &color){
@@ -30,5 +31,12 @@ void ResourceManager::LoadText(SDL_Renderer*renderer, const char *id, TTF_Font *
 };
 
 SDL_Texture* ResourceManager::getTexture(std::string id) {
-    return texture_map_.at(id);
-}
+    if(texture_map_.count(id)){
+        //std::cout << "Texture ID \"" << id << "\" is found in resources" << std::endl;
+        return texture_map_.at(id);
+    }
+    else {
+        std::cerr << "Texture ID \"" << id << "\" is not found in resources" << std::endl;
+        return NULL;
+    }
+};

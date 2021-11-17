@@ -51,6 +51,9 @@ void Controller::HandleInput(Character &character, bool &running)
         if (keystate [SDL_SCANCODE_SPACE]) {
             character.Shoot();
         }
+        else{
+            character.Update();
+        }
     }
 }
 

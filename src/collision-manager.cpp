@@ -233,7 +233,7 @@ void CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, Character &
                 //Stop flipping ghost around like crazy
                 //Have character take damage
                 //Check to see if character died
-                character.TakeDamage(1);
+                character.TakeDamage(enemy->GiveDamage());
             }
     }
 };

@@ -18,17 +18,19 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     CollisionManager collisions;
     
     //Textures get loaded in to be used later and often
-    resources.LoadTexture(pointToRenderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
+    //resources.LoadTexture(pointToRenderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
+    character.LoadResources(pointToRenderer, resources);
     resources.LoadTexture(pointToRenderer, "fireball", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
     resources.LoadTexture(pointToRenderer, "crate", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/crate.png");
     resources.LoadTexture(pointToRenderer, "stone path", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/stone path.png");
     resources.LoadTexture(pointToRenderer, "temp_ghost", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/temp_ghost.png");
-    renderer.LoadEndMenuResources(resources_);
+    renderer.LoadEndMenuResources(resources);
 
     GameMap gamemap(resources);
-        //Temporary Enemy Object
-        Ghost *ghost = new Ghost();
-        enemies.emplace_back(ghost);
+    
+    //Temporary Enemy Object
+    Ghost *ghost = new Ghost();
+    enemies.emplace_back(ghost);
     
     while (running) {
         frame_start = SDL_GetTicks();
@@ -42,6 +44,8 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
                i++;
             }
             else {
+                character.score += enemies[i]->GivePoints();
+                std::cout << "Character Score: "<< character.score << std::endl;
                 delete enemies[i];
                 enemies.erase(enemies.begin()+i); 
             }
@@ -92,7 +96,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         }
 
         while(!character.IsAlive() && running == true){
-            renderer.EndMenu(resources_);
+            renderer.EndMenu(resources);
             controller.MenuInput(running);
         }
     }

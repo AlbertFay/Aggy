@@ -44,6 +44,8 @@ class Ghost: public Enemy{
         void Died(){exists_ = false;};
         void TakeDamage(int damage);
         int GetHealth(){return health_;};
+        int GiveDamage();
+        int GivePoints();
 
     private:
     double x_, y_, angle_;
@@ -53,6 +55,7 @@ class Ghost: public Enemy{
     int velocity_, x_velocity_, y_velocity_;
     int xOffset_ = 0, yOffset_ = 0, xCollisionDirection_ = 1, yCollisionDirection_ = 1;
     int health_ = 5;
+    uint32_t shoot_timer_ = SDL_GetTicks();
 };
 
 #endif

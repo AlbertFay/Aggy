@@ -6,19 +6,23 @@
 #include "shotfired.h"
 #include "resource-manager.h"
 #include <vector>
+#include "SDL2/SDL_ttf.h"
 
 class Character {
   public:
     enum class Direction {kUp, kDown, kLeft, kRight, kRotateRight, kRotateLeft};
     std::vector<ShotFired> vecShotFired;
+    int score = 0;
   
     Character(std::vector<Renderable*> &renderables);
     void Shoot();
     void Update(Direction direction);
+    void Update();
     void SetTexture(SDL_Renderer* renderer);
     void Render(SDL_Renderer* renderer, ResourceManager &resources);
     void Died();
     void TakeDamage(int damage) {health_ -= damage;};
+    void LoadResources(SDL_Renderer *renderer, ResourceManager &resources);
 
     // Getters/Setters
     float GetAngle() {
@@ -95,8 +99,11 @@ class Character {
     float y_down_collision_speed = 1;
     std::vector<Renderable*> &renderables_;
     int health_ = 5;
+    int max_health = 5;
 
     uint32_t shoot_timer_ = SDL_GetTicks();
+
+
 
 };
 
