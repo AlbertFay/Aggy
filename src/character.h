@@ -12,7 +12,7 @@ class Character {
   public:
     enum class Direction {kUp, kDown, kLeft, kRight, kRotateRight, kRotateLeft};
     std::vector<ShotFired> vecShotFired;
-    int score = 123151;
+    int score = 0;
     int health_ = 5;
     int max_health = 5;
   

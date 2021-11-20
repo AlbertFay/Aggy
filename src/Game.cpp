@@ -23,7 +23,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     character.LoadResources(pointToRenderer, resources);
     resources.LoadTexture(pointToRenderer, "crate", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/crate.png");
     resources.LoadTexture(pointToRenderer, "stone path", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/stone path.png");
-    resources.LoadTexture(pointToRenderer, "temp_ghost", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/temp_ghost.png");
+    resources.LoadTexture(pointToRenderer, "ghost sprite sheet", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/ghost sprite sheet.png");
     renderer.LoadEndMenuResources(resources);
 
     GameMap gamemap(resources);

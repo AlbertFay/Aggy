@@ -9,6 +9,7 @@ Ghost::Ghost(){
     y_ = 300;
     health_ = 5;
     velocity_ = 1;
+    LoadAnimation();
 };
 
 Ghost::~Ghost(){
@@ -62,17 +63,22 @@ void Ghost::Update(int x, int y){
 
 void Ghost::RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources){
     // Create the block that is the ghost
+    //SDL_Rect sprite[3];
     SDL_Rect block;
+    SDL_Rect block2;
     block.w = width_;
     block.h = height_;
     block.x = x_;
     block.y = y_;
-    //std::cout << "Texture: " << resources.getTexture("temp_ghost") << std::endl;
-    SDL_RenderCopyEx(renderer, resources.getTexture("temp_ghost"), NULL, &block, angle_, NULL, SDL_FLIP_NONE);
 
-    //Create the health Bar outline
-    //create the health Bar
-    //Create score display
+
+    
+    
+    //SDL_SetTextureBlendMode(resources.getTexture("ghost sprite sheet"), SDL_BLENDMODE_NONE);
+    if(SDL_RenderCopyEx(renderer, resources.getTexture("ghost sprite sheet"), &(animationSheet.at(Animation())), &block, 0, NULL, SDL_FLIP_NONE) < 0){
+        std::cout << "SDL_Error: " << SDL_GetError() << std::endl;
+    }
+
 };
 
 bool Ghost::Exists(){
@@ -91,7 +97,6 @@ void Ghost::TakeDamage(int damage){
 int32_t Ghost::GiveDamage(){
     uint32_t current_shoot_timer_ = SDL_GetTicks();
     if (current_shoot_timer_ > (shoot_timer_ + 1000)) {
-        std::cout << "Is damage timer going?" << std::endl;
         shoot_timer_ = SDL_GetTicks();
         return 1;
     }
@@ -102,4 +107,44 @@ int32_t Ghost::GiveDamage(){
 
 int Ghost::GivePoints(){
     return 1;
+};
+
+
+
+float Ghost::Animation(){
+    currentAnimTimer_ = SDL_GetTicks();
+    if(currentAnimTimer_ > (animTimer_ + animSpeed_)) {
+        animTimer_ = SDL_GetTicks();
+            currentAnim++;
+        for(currentAnim; currentAnim <= 3;){
+            if(currentAnim == 3){
+                currentAnim = 0;
+            }
+            return currentAnim;
+        }
+    }
+    return currentAnim;
+};
+
+void Ghost::LoadAnimation(){
+    SDL_Rect sprite[3];
+    sprite[0].w = 64;
+    sprite[0].h = 64;
+    sprite[0].x = 0;
+    sprite[0].y = 0;
+
+    sprite[1].x = 64;
+    sprite[1].y = 0;
+    sprite[1].w = 64;
+    sprite[1].h = 64;
+
+    sprite[2].w = 64;
+    sprite[2].h = 64;
+    sprite[2].x = 128;
+    sprite[2].y = 0;
+
+    animationSheet.push_back(sprite[0]);
+    animationSheet.push_back(sprite[1]);
+    animationSheet.push_back(sprite[2]);
+
 }

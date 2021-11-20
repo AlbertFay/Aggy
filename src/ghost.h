@@ -6,9 +6,11 @@
 #include "renderable.h"
 #include "resource-manager.h"
 #include <cmath>
+#include <vector>
 
 class Ghost: public Enemy{
     public:
+        enum class anim_Sequence{walk};
         Ghost();
         ~Ghost();
         void Update(int x, int y);
@@ -46,6 +48,8 @@ class Ghost: public Enemy{
         int GetHealth(){return health_;};
         int GiveDamage();
         int GivePoints();
+        float Animation();
+        void LoadAnimation();
 
     private:
     double x_, y_, angle_;
@@ -55,7 +59,13 @@ class Ghost: public Enemy{
     int velocity_, x_velocity_, y_velocity_;
     int xOffset_ = 0, yOffset_ = 0, xCollisionDirection_ = 1, yCollisionDirection_ = 1;
     int health_ = 5;
+    int animSpeed_ = 250;
+    std::vector<SDL_Rect> animationSheet;
+
     uint32_t shoot_timer_ = SDL_GetTicks();
+    uint32_t animTimer_= SDL_GetTicks();
+    uint32_t currentAnimTimer_ = 0;
+    float currentAnim = 0;
 };
 
 #endif
