@@ -48,7 +48,7 @@ class Ghost: public Enemy{
         int GetHealth(){return health_;};
         int GiveDamage();
         int GivePoints();
-        float Animation();
+        float Animation(anim_Sequence animationSequence);
         void LoadAnimation();
 
     private:

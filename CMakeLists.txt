@@ -15,7 +15,7 @@ find_package(SDL2_ttf REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS} src)
 
-add_executable(aggy src/main.cpp src/controller.cpp src/game.cpp src/renderer.cpp src/character.cpp src/shotfired.cpp src/renderable.cpp src/resource-manager.cpp src/gamemap.cpp src/collision-manager.cpp src/ghost.cpp src/test.cpp)
+add_executable(aggy src/main.cpp src/controller.cpp src/game.cpp src/renderer.cpp src/character.cpp src/shotfired.cpp src/renderable.cpp src/resource-manager.cpp src/gamemap.cpp src/collision-manager.cpp src/ghost.cpp src/test.cpp src/level.cpp)
 string(STRIP "${SDL2_LIBRARIES}" SDL2_LIBRARIES)
 target_link_libraries(aggy ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES})
 add_definitions(-DSDL_MAIN_HANDLED)

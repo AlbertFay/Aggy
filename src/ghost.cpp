@@ -75,7 +75,7 @@ void Ghost::RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources)
     
     
     //SDL_SetTextureBlendMode(resources.getTexture("ghost sprite sheet"), SDL_BLENDMODE_NONE);
-    if(SDL_RenderCopyEx(renderer, resources.getTexture("ghost sprite sheet"), &(animationSheet.at(Animation())), &block, 0, NULL, SDL_FLIP_NONE) < 0){
+    if(SDL_RenderCopyEx(renderer, resources.getTexture("ghost sprite sheet"), &(animationSheet.at(Animation(anim_Sequence::walk))), &block, 0, NULL, SDL_FLIP_NONE) < 0){
         std::cout << "SDL_Error: " << SDL_GetError() << std::endl;
     }
 
@@ -111,17 +111,22 @@ int Ghost::GivePoints(){
 
 
 
-float Ghost::Animation(){
-    currentAnimTimer_ = SDL_GetTicks();
-    if(currentAnimTimer_ > (animTimer_ + animSpeed_)) {
-        animTimer_ = SDL_GetTicks();
-            currentAnim++;
-        for(currentAnim; currentAnim <= 3;){
-            if(currentAnim == 3){
-                currentAnim = 0;
+float Ghost::Animation(anim_Sequence animationSequence){
+    switch(animationSequence){
+
+        case anim_Sequence::walk:
+        currentAnimTimer_ = SDL_GetTicks();
+        if(currentAnimTimer_ > (animTimer_ + animSpeed_)) {
+            animTimer_ = SDL_GetTicks();
+                currentAnim++;
+            for(currentAnim; currentAnim <= 3;){
+                if(currentAnim == 3){
+                    currentAnim = 0;
+                }
+                return currentAnim;
             }
-            return currentAnim;
         }
+        return currentAnim;
     }
     return currentAnim;
 };
