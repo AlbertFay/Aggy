@@ -15,7 +15,6 @@ void Character::Shoot(){
         renderables_.emplace_back(firedShot);
 
         shoot_timer_ = SDL_GetTicks();
-        std::cout << "ShotFired object created" << std::endl;
     }
 }
 

@@ -159,7 +159,6 @@ void CollisionManager::CheckCollisions(std::vector<Enemy *> &enemies, GameMap &m
                         //Testing to see if collision is on X-axis
                         if (abs(differenceX) >= abs(differenceY))
                         {
-                            std::cout << "Collisions on X axis" << std::endl;
                             //If collision is on left side
                             if (xoffset < 0)
                             {
@@ -176,7 +175,6 @@ void CollisionManager::CheckCollisions(std::vector<Enemy *> &enemies, GameMap &m
                         //Collision is on Y-axis
                         else
                         {
-                            std::cout << "Collisions on Y axis" << std::endl;
                             //Collision on top
                             if (yoffset < 0)
                             {

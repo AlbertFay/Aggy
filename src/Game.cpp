@@ -16,6 +16,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     Character character(renderables);
     SDL_Renderer *pointToRenderer = renderer.GetRenderer();
     CollisionManager collisions;
+    Level level;
     
     //Textures get loaded in to be used later and often
     //resources.LoadTexture(pointToRenderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
@@ -28,13 +29,10 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
 
     GameMap gamemap(resources);
     
-    //Temporary Enemy Object
-    Ghost *ghost = new Ghost();
-    enemies.emplace_back(ghost);
-    
     while (running) {
         frame_start = SDL_GetTicks();
-
+        
+        level.SpawnEnemies(enemies);
 
 
         //Update renderables

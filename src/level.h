@@ -3,6 +3,8 @@
 
 #include <vector>
 #include "enemy.h"
+#include <cmath>
+#include "ghost.h"
 
 class Level {
     public:
@@ -11,13 +13,16 @@ class Level {
        Coordinate(int x, int y): x_(x), y_(y) {}
     };
     
-    Level(std::vector<Enemy*> enemies);
-    void SpawnEnemies();
+    Level();
+    void SpawnEnemies(std::vector<Enemy*> &enemies);
     private:
     std::vector<Coordinate> coordinates_;
     uint32_t timer_ = SDL_GetTicks();
     uint32_t currentTimer_= SDL_GetTicks();
-    int randTime_ = std::rand() % 2000;
+    int min_ = 0;
+    int max_ = 2000;
+    int randomTime_ = std::round(min_ + (float)(rand()) / ((float)(RAND_MAX / (max_ - min_))));
+
 };
 
 #endif

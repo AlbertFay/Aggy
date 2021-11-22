@@ -11,6 +11,14 @@ Ghost::Ghost(){
     velocity_ = 1;
     LoadAnimation();
 };
+Ghost::Ghost(int x, int y){
+    std::cout << "ghost has been created" << std::endl;
+    x_ = x;
+    y_ = y;
+    health_ = 5;
+    velocity_ = 1;
+    LoadAnimation();
+};
 
 Ghost::~Ghost(){
     std::cout << "Ghost Deconstructor called" << std::endl;
@@ -32,13 +40,11 @@ void Ghost::Update(int x, int y){
     if((cos(radians) * velocity_ < 0) && (xCollisionDirection_ == -1)){
         //set xoffset
         x_ = x_ - xOffset_;
-        std::cout << "There is a collision on the left" << std::endl;
     }
     //If moving right
     else if((cos(radians) * velocity_) > 0 && (xCollisionDirection_ == 0)){
         //Set xOffset
         x_ = x_ - xOffset_;
-        std::cout << "There is a collision on the right" << std::endl;
     }
     else {
         x_ += cos(radians) * velocity_;
@@ -48,13 +54,11 @@ void Ghost::Update(int x, int y){
     if((sin(radians) * velocity_) > 0 && (yCollisionDirection_ == -1)){
         //Set yOffset
         y_ = y_ - yOffset_;
-        std::cout << "There is a collision on the bottom" << std::endl;
     }
     //if moving up
     else if((sin(radians) * velocity_) < 0 && (yCollisionDirection_ == 0)){
         //Set yOffset
         y_ = y_ - yOffset_;
-        std::cout << "There is a collision on the top" << std::endl;
     }
     else {
     y_ += sin(radians) * velocity_;

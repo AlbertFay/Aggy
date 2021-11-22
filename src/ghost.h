@@ -12,6 +12,7 @@ class Ghost: public Enemy{
     public:
         enum class anim_Sequence{walk};
         Ghost();
+        Ghost(int x, int y);
         ~Ghost();
         void Update(int x, int y);
         void Update();
@@ -20,6 +21,8 @@ class Ghost: public Enemy{
         float GetY(){return y_;};
         float GetHeight(){return width_;};
         float GetWidth(){return height_;};
+        void SetX(int x){x_ = x;};
+        void SetY(int y){y_ = y;};
         void SetXOffset(int offset) {xOffset_ = offset;};
         void SetYOffset(int offset) {xOffset_ = offset;};
         void SetYCollisionSpeed(int collisionDirection) {
