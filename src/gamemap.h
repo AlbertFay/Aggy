@@ -16,7 +16,7 @@ class GameMap {
   
     struct Grid_Space {
       public:
-      enum class blockType {nothing, crate, stone_path};
+      enum class blockType {nothing, crate, stone_path, grass};
         //TEMP
         bool collision_ = false;
         //TEMP

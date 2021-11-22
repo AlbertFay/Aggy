@@ -46,6 +46,10 @@ void GameMap::LoadMap(string fileName) {
                             array[i][j].solid_ = true;
                             array[i][j].health_ = 3;
                             break;
+
+                            case 3:
+                            array[i][j].blocktype_ = Grid_Space::blockType::grass;
+                            break;
                         }
                     }
                 }
@@ -89,6 +93,10 @@ void GameMap::RenderMap(SDL_Renderer* renderer) {
                     // std::cout << "there is a collision with crate" << std::endl;
                     SDL_RenderCopy(renderer, resources_.getTexture("crate"), NULL, &gridBlock);
                 }
+                break;
+
+                case Grid_Space::blockType::grass:
+                SDL_RenderCopy(renderer, resources_.getTexture("grass"), NULL, &gridBlock);
                 break;
             }
         }
