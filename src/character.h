@@ -15,6 +15,8 @@ class Character {
     int score = 0;
     int health_ = 5;
     int max_health = 5;
+    int mousex = 0;
+    int mousey = 0;
   
     Character(std::vector<Renderable*> &renderables);
     void Shoot();

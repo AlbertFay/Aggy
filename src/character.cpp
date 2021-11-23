@@ -44,6 +44,8 @@ void Character::Render(SDL_Renderer* renderer, ResourceManager &resources) {
 }
 
 void Character::Update(Direction direction){
+    double rads = atan2((mousey - (pos_y + (height / 2))), (mousex - (pos_x + (width / 2))));
+    angle = ((rads * 180) / 3.14159265) + 90;
     switch (direction){
         
         case Direction::kUp:
@@ -63,11 +65,11 @@ void Character::Update(Direction direction){
         break;
 
         case Direction::kRotateLeft:
-        angle -= rotationSpeed;
+        //angle -= rotationSpeed;
         break;
 
         case Direction::kRotateRight:
-        angle += rotationSpeed;
+        //angle += rotationSpeed;
         break;
 
     }
@@ -76,6 +78,9 @@ void Character::Update(Direction direction){
     }
 }
 void Character::Update(){
+    double rads = atan2((mousey - (pos_y + (height / 2))), (mousex - (pos_x + (width / 2))));
+    angle = ((rads * 180) / 3.14159265) + 90;
+
     if(health_ <= 0){
         isAlive_ = false;
     }

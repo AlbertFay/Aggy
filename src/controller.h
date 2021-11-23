@@ -14,6 +14,7 @@ class Controller {
 
   private:
     const Uint8 *keystate = NULL;
+    SDL_MouseButtonEvent mousestate;
 };
 
 #endif

@@ -8,11 +8,19 @@ void Controller::ChangeDirection()
 
 void Controller::HandleInput(Character &character, bool &running)
 {
+    int x, y;
+    SDL_GetMouseState(&x, &y);
+    character.mousex = x;
+    character.mousey = y;
+
     SDL_Event sdlEvent;
     while (SDL_PollEvent(&sdlEvent)) {
         if (sdlEvent.type == SDL_QUIT) {
             running = false;
         }
+    }
+    if(mousestate.button == SDL_BUTTON_LEFT){
+    std::cout << "Mouse button left has been pressed" << std::endl;   
     }
 
 
@@ -20,19 +28,19 @@ void Controller::HandleInput(Character &character, bool &running)
     {
         keystate = SDL_GetKeyboardState(NULL);
         //continuous-response keys
-        if (keystate[SDL_SCANCODE_LEFT])
+        if (keystate[SDL_SCANCODE_A])
         {
             character.Update(Character::Direction::kLeft);
         }
-        if (keystate[SDL_SCANCODE_RIGHT])
+        if (keystate[SDL_SCANCODE_D])
         {
             character.Update(Character::Direction::kRight);
         }
-        if (keystate[SDL_SCANCODE_UP])
+        if (keystate[SDL_SCANCODE_W])
         {
             character.Update(Character::Direction::kUp);
         }
-        if (keystate[SDL_SCANCODE_DOWN])
+        if (keystate[SDL_SCANCODE_S])
         {
             character.Update(Character::Direction::kDown);
         }
@@ -48,7 +56,8 @@ void Controller::HandleInput(Character &character, bool &running)
             character.Update(Character::Direction::kRotateRight);
         }
 
-        if (keystate [SDL_SCANCODE_SPACE]) {
+        if (keystate [SDL_BUTTON_LEFT]) {
+            std::cout << "Mouse button left has been pressed" << std::endl;
             character.Shoot();
         }
         else{
