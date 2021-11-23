@@ -9,7 +9,6 @@ Character::Character(std::vector<Renderable*> &renderables):renderables_(rendera
 void Character::Shoot(){
     uint32_t current_shoot_timer_ = SDL_GetTicks();
     if (current_shoot_timer_ > (shoot_timer_ + 150)) {
-        std::cout << "ShotFired object being created" << std::endl;
         
         ShotFired *firedShot = new ShotFired((hand_distance_ * cos(hand_angle_) + pos_x), (-hand_distance_ * sin(hand_angle_) + pos_y), angle);
         renderables_.emplace_back(firedShot);

@@ -13,8 +13,10 @@ class Controller {
     void MenuInput(bool &running);
 
   private:
+    bool buttonRelease_ = true;
+    bool leftMouseButton_ = false;
     const Uint8 *keystate = NULL;
-    SDL_MouseButtonEvent mousestate;
+    //SDL_MouseButtonEvent mousestate;
 };
 
 #endif

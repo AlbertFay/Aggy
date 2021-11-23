@@ -13,15 +13,25 @@ void Controller::HandleInput(Character &character, bool &running)
     character.mousex = x;
     character.mousey = y;
 
+    SDL_MouseButtonEvent mouseEvent;
     SDL_Event sdlEvent;
     while (SDL_PollEvent(&sdlEvent)) {
         if (sdlEvent.type == SDL_QUIT) {
             running = false;
         }
+        
+        if(sdlEvent.button.button == SDL_BUTTON_LEFT){
+            buttonRelease_ = false;
+            leftMouseButton_ = true;
+        }
+
+        if(sdlEvent.button.type == SDL_MOUSEBUTTONUP){
+            buttonRelease_ = true;
+            leftMouseButton_ = false;
+        }
+        
     }
-    if(mousestate.button == SDL_BUTTON_LEFT){
-    std::cout << "Mouse button left has been pressed" << std::endl;   
-    }
+
 
 
     if (SDL_WasInit(SDL_INIT_VIDEO) != 0)
@@ -56,9 +66,9 @@ void Controller::HandleInput(Character &character, bool &running)
             character.Update(Character::Direction::kRotateRight);
         }
 
-        if (keystate [SDL_BUTTON_LEFT]) {
-            std::cout << "Mouse button left has been pressed" << std::endl;
+        if(leftMouseButton_ ==  true && buttonRelease_ == false){ 
             character.Shoot();
+            character.Update();
         }
         else{
             character.Update();
