@@ -1,7 +1,7 @@
 #include "ghost.h"
 
 Ghost::Ghost(){
-    std::cout << "ghost has been created" << std::endl;
+    //std::cout << "ghost has been created" << std::endl;
     //Setup starting position
     //Set angle
     //Set speed
@@ -12,7 +12,7 @@ Ghost::Ghost(){
     LoadAnimation();
 };
 Ghost::Ghost(int x, int y){
-    std::cout << "ghost has been created" << std::endl;
+    //std::cout << "ghost has been created" << std::endl;
     x_ = x;
     y_ = y;
     health_ = 5;
@@ -21,7 +21,7 @@ Ghost::Ghost(int x, int y){
 };
 
 Ghost::~Ghost(){
-    std::cout << "Ghost Deconstructor called" << std::endl;
+    //std::cout << "Ghost Deconstructor called" << std::endl;
 }
 
 void Ghost::Update(){

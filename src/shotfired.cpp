@@ -8,7 +8,7 @@ ShotFired::ShotFired(float start_x, float start_y, float angle): x_pos_(start_x)
 }
 
 ShotFired::~ShotFired() {
-    std::cout << "ShotFired Deconstructor called" << std::endl;
+   // std::cout << "ShotFired Deconstructor called" << std::endl;
 }
 
 bool ShotFired::Exists() {

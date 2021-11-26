@@ -37,7 +37,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     while (running) {
         frame_start = SDL_GetTicks();
         
-        // level.SpawnEnemies(enemies);
+        level.SpawnEnemies(enemies);
 
 
         //Update renderables
@@ -106,16 +106,16 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     }
     //std::cout << "std::vector<Renderable>.size() == " << renderables.size() << std::endl;
     for (int i = 0; i < renderables.size();) {
-        std::cout << "Deleting renderable" << std::endl;
+        //std::cout << "Deleting renderable" << std::endl;
         delete renderables[i];
-        std::cout << "Removing renderable from vector" << std::endl;
+        //std::cout << "Removing renderable from vector" << std::endl;
         renderables.erase(renderables.begin()+i); 
     }
 
     for (int i = 0; i < enemies.size();) {
-        std::cout << "Deleting enemies" << std::endl;
+        //std::cout << "Deleting enemies" << std::endl;
         delete enemies[i];
-        std::cout << "Removing enemy pointer from vector" << std::endl;
+        //std::cout << "Removing enemy pointer from vector" << std::endl;
         enemies.erase(enemies.begin()+i); 
     }
 
