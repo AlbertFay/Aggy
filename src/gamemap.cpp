@@ -42,7 +42,8 @@ void GameMap::LoadMap(string fileName) {
                             break;
 
                             case 2:
-                            array[i][j].blocktype_ = Grid_Space::blockType::crate;
+                            array[i][j].blocktype_ = Grid_Space::blockType::grass;
+                            array[i][j].blocktype2_ = Grid_Space::blockType::crate;
                             array[i][j].solidForCharacter = true;
                             array[i][j].solidForOther = true;
                             array[i][j].health_ = 3;
@@ -66,7 +67,27 @@ void GameMap::LoadMap(string fileName) {
                             break;
 
                             case 7:
-                            array[i][j].blocktype_ = Grid_Space::blockType::shrub;
+                            array[i][j].blocktype_ = Grid_Space::blockType::shrub1;
+                            array[i][j].solidForCharacter = true;
+                            break;
+
+                            case 8:
+                            array[i][j].blocktype_ = Grid_Space::blockType::grass;
+                            array[i][j].blocktype2_ = Grid_Space::blockType::flower1;
+                            break;
+
+                            case 9:
+                            array[i][j].blocktype_ = Grid_Space::blockType::grass;
+                            array[i][j].blocktype2_ = Grid_Space::blockType::flower2;
+                            break;
+
+                            case 10:
+                            array[i][j].blocktype_ = Grid_Space::blockType::grass;
+                            array[i][j].blocktype2_ = Grid_Space::blockType::flower3;
+                            break;
+
+                            case 11:
+                            array[i][j].blocktype_ = Grid_Space::blockType::shrub2;
                             array[i][j].solidForCharacter = true;
                             break;
                         }
@@ -82,6 +103,7 @@ void GameMap::LoadMap(string fileName) {
 void GameMap::RenderMap(SDL_Renderer* renderer) {
     SDL_Rect sprite1;
     SDL_Rect sprite2;
+    SDL_Rect sprite3;
     sprite1.x = 0;
     sprite1.y = 0;
     sprite1.w = 64;
@@ -91,6 +113,11 @@ void GameMap::RenderMap(SDL_Renderer* renderer) {
     sprite2.y = 0;
     sprite2.w = 64;
     sprite2.h = 64;
+
+    sprite3.x = 128;
+    sprite3.y = 0;
+    sprite3.w = 64;
+    sprite3.h = 64;
 
     for(int i = 0; i < 16; i++) {
         for(int j = 0; j < 16; j++) {
@@ -104,7 +131,7 @@ void GameMap::RenderMap(SDL_Renderer* renderer) {
 
             if (array[i][j].destroyed == true){
                 array[i][j].destroyed = false;
-                array[i][j].blocktype_ = Grid_Space::blockType::nothing;
+                array[i][j].blocktype2_ = Grid_Space::blockType::nothing;
                 array[i][j].solidForOther = false;
                 array[i][j].solidForCharacter = false;
             }
@@ -117,14 +144,6 @@ void GameMap::RenderMap(SDL_Renderer* renderer) {
 
                 case Grid_Space::blockType::stone_path:
                 SDL_RenderCopy(renderer, resources_.getTexture("stone path"), NULL, &gridBlock);
-                break;
-                
-                case Grid_Space::blockType::crate:
-                SDL_RenderCopy(renderer, resources_.getTexture("crate"), NULL, &gridBlock);
-                if(array[i][j].collision_){
-                    // std::cout << "there is a collision with crate" << std::endl;
-                    SDL_RenderCopy(renderer, resources_.getTexture("crate"), NULL, &gridBlock);
-                }
                 break;
 
                 case Grid_Space::blockType::grass:
@@ -143,8 +162,33 @@ void GameMap::RenderMap(SDL_Renderer* renderer) {
                 SDL_RenderCopy(renderer, resources_.getTexture("water"), NULL, &gridBlock);
                 break;
 
-                case Grid_Space::blockType::shrub:
-                SDL_RenderCopy(renderer, resources_.getTexture("shrub"), NULL, &gridBlock);
+                case Grid_Space::blockType::shrub1:
+                SDL_RenderCopy(renderer, resources_.getTexture("shrub"), &sprite1, &gridBlock);
+                break;
+
+                case Grid_Space::blockType::shrub2:
+                SDL_RenderCopy(renderer, resources_.getTexture("shrub"), &sprite2, &gridBlock);
+                break;
+            }
+            switch(array[i][j].blocktype2_){
+                case Grid_Space::blockType::flower1:
+                SDL_RenderCopy(renderer, resources_.getTexture("flowers"), &sprite1, &gridBlock);
+                break;
+
+                case Grid_Space::blockType::flower2:
+                SDL_RenderCopy(renderer, resources_.getTexture("flowers"), &sprite2, &gridBlock);
+                break;
+
+                case Grid_Space::blockType::flower3:
+                SDL_RenderCopy(renderer, resources_.getTexture("flowers"), &sprite3, &gridBlock);
+                break;
+
+                case Grid_Space::blockType::crate:
+                SDL_RenderCopy(renderer, resources_.getTexture("crate"), NULL, &gridBlock);
+                if(array[i][j].collision_){
+                    // std::cout << "there is a collision with crate" << std::endl;
+                    SDL_RenderCopy(renderer, resources_.getTexture("crate"), NULL, &gridBlock);
+                }
                 break;
             }
         }

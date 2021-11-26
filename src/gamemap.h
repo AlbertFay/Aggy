@@ -16,7 +16,7 @@ class GameMap {
   
     struct Grid_Space {
       public:
-      enum class blockType {nothing, crate, stone_path, grass, grassToWater1, grassToWater2, water, shrub};
+      enum class blockType {nothing, crate, stone_path, grass, grassToWater1, grassToWater2, water, shrub1, shrub2, flower1, flower2, flower3};
         //TEMP
         bool collision_ = false;
         //TEMP
@@ -45,6 +45,7 @@ class GameMap {
           y_ = y;
         }
        blockType blocktype_ = blockType::nothing;
+       blockType blocktype2_ = blockType::nothing;
       private:
         int pixelsize_;
         int x_;

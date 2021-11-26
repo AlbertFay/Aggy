@@ -29,6 +29,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     resources.LoadTexture(pointToRenderer, "grass_to_water", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/grass_to_water.png");
     resources.LoadTexture(pointToRenderer, "water", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/water.png");
     resources.LoadTexture(pointToRenderer, "shrub", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/shrub.png");
+    resources.LoadTexture(pointToRenderer, "flowers", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/flowers.png");
     renderer.LoadEndMenuResources(resources);
 
     GameMap gamemap(resources);
