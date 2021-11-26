@@ -93,7 +93,7 @@ class Character {
     Direction direction = Direction::kUp;
     float speed = 2;
     float angle = 0, rotationSpeed = 3.5;
-    float width = 80, height = 80;
+    float width = 64, height = 64;
     float pos_x = 512, pos_y = 512;
     float hand_angle_ = (((angle - 2.8)* 3.1415926535) / 180.0);
     float hand_distance_ = (width * .33);
