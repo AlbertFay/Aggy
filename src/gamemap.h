@@ -16,11 +16,12 @@ class GameMap {
   
     struct Grid_Space {
       public:
-      enum class blockType {nothing, crate, stone_path, grass};
+      enum class blockType {nothing, crate, stone_path, grass, grassToWater1, grassToWater2, water, shrub};
         //TEMP
         bool collision_ = false;
         //TEMP
-        bool solid_ = false; 
+        bool solidForCharacter = false; 
+        bool solidForOther = false;
         float health_;
         bool destroyed = false;
         int num_block = 1;

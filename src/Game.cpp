@@ -26,6 +26,9 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     resources.LoadTexture(pointToRenderer, "stone path", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/stone path.png");
     resources.LoadTexture(pointToRenderer, "ghost sprite sheet", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/ghost sprite sheet.png");
     resources.LoadTexture(pointToRenderer, "grass", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/grass.png");
+    resources.LoadTexture(pointToRenderer, "grass_to_water", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/grass_to_water.png");
+    resources.LoadTexture(pointToRenderer, "water", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/water.png");
+    resources.LoadTexture(pointToRenderer, "shrub", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/shrub.png");
     renderer.LoadEndMenuResources(resources);
 
     GameMap gamemap(resources);
@@ -33,7 +36,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     while (running) {
         frame_start = SDL_GetTicks();
         
-        //level.SpawnEnemies(enemies);
+        // level.SpawnEnemies(enemies);
 
 
         //Update renderables

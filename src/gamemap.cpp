@@ -43,12 +43,31 @@ void GameMap::LoadMap(string fileName) {
 
                             case 2:
                             array[i][j].blocktype_ = Grid_Space::blockType::crate;
-                            array[i][j].solid_ = true;
+                            array[i][j].solidForCharacter = true;
+                            array[i][j].solidForOther = true;
                             array[i][j].health_ = 3;
                             break;
 
                             case 3:
                             array[i][j].blocktype_ = Grid_Space::blockType::grass;
+                            break;
+
+                            case 4:
+                            array[i][j].blocktype_ = Grid_Space::blockType::grassToWater1;
+                            break;
+                            
+                            case 5:
+                            array[i][j].blocktype_ = Grid_Space::blockType::grassToWater2;
+                            break;
+
+                            case 6:
+                            array[i][j].blocktype_ = Grid_Space::blockType::water;
+                            array[i][j].solidForCharacter = true;
+                            break;
+
+                            case 7:
+                            array[i][j].blocktype_ = Grid_Space::blockType::shrub;
+                            array[i][j].solidForCharacter = true;
                             break;
                         }
                     }
@@ -61,6 +80,18 @@ void GameMap::LoadMap(string fileName) {
 }
 
 void GameMap::RenderMap(SDL_Renderer* renderer) {
+    SDL_Rect sprite1;
+    SDL_Rect sprite2;
+    sprite1.x = 0;
+    sprite1.y = 0;
+    sprite1.w = 64;
+    sprite1.h = 64;
+
+    sprite2.x = 64;
+    sprite2.y = 0;
+    sprite2.w = 64;
+    sprite2.h = 64;
+
     for(int i = 0; i < 16; i++) {
         for(int j = 0; j < 16; j++) {
             
@@ -74,7 +105,8 @@ void GameMap::RenderMap(SDL_Renderer* renderer) {
             if (array[i][j].destroyed == true){
                 array[i][j].destroyed = false;
                 array[i][j].blocktype_ = Grid_Space::blockType::nothing;
-                array[i][j].solid_ = false;
+                array[i][j].solidForOther = false;
+                array[i][j].solidForCharacter = false;
             }
 
             switch(array[i][j].blocktype_){
@@ -97,6 +129,22 @@ void GameMap::RenderMap(SDL_Renderer* renderer) {
 
                 case Grid_Space::blockType::grass:
                 SDL_RenderCopy(renderer, resources_.getTexture("grass"), NULL, &gridBlock);
+                break;
+
+                case Grid_Space::blockType::grassToWater1:
+                SDL_RenderCopy(renderer, resources_.getTexture("grass_to_water"), &sprite1, &gridBlock);
+                break;
+
+                case Grid_Space::blockType::grassToWater2:
+                SDL_RenderCopy(renderer, resources_.getTexture("grass_to_water"), &sprite2, &gridBlock);
+                break;
+
+                case Grid_Space::blockType::water:
+                SDL_RenderCopy(renderer, resources_.getTexture("water"), NULL, &gridBlock);
+                break;
+
+                case Grid_Space::blockType::shrub:
+                SDL_RenderCopy(renderer, resources_.getTexture("shrub"), NULL, &gridBlock);
                 break;
             }
         }

@@ -15,7 +15,7 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map)
     {
         for (int j = 0; j < 16; j++)
         {
-            if (map.array[i][j].solid_ == true)
+            if (map.array[i][j].solidForCharacter == true)
             {
 
                 //Checking if there is a collision using AABB collision detection
@@ -94,7 +94,7 @@ void CollisionManager::CheckCollisions(std::vector<Renderable *> &renderables, G
         {
             for (int j = 0; j < 16; j++)
             {
-                if (map.array[i][j].solid_ == true)
+                if (map.array[i][j].solidForOther == true)
                 {
                     //Checking if there is a collision using AABB collision detection
                     if (object->GetX() + object->GetWidth() >= map.array[i][j].GetX() &&
@@ -131,7 +131,7 @@ void CollisionManager::CheckCollisions(std::vector<Enemy *> &enemies, GameMap &m
         {
             for (int j = 0; j < 16; j++)
             {
-                if (map.array[i][j].solid_ == true)
+                if (map.array[i][j].solidForOther == true)
                 {
 
                     //Checking if there is a collision using AABB collision detection
