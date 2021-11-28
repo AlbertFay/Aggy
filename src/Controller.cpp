@@ -8,6 +8,7 @@ void Controller::ChangeDirection()
 
 void Controller::HandleInput(Character &character, bool &running)
 {
+    //character.SetSpeed(character.defaultspeed);
     int x, y;
     SDL_GetMouseState(&x, &y);
     character.mousex = x;
@@ -64,6 +65,13 @@ void Controller::HandleInput(Character &character, bool &running)
 
         if (keystate[SDL_SCANCODE_E]){
             character.Update(Character::Direction::kRotateRight);
+        }
+
+        if (keystate[SDL_SCANCODE_LSHIFT]){
+            character.Update(3);
+        }
+        if (!keystate[SDL_SCANCODE_LSHIFT]){
+            character.Update(character.defaultspeed);
         }
 
         if(leftMouseButton_ ==  true && buttonRelease_ == false){ 

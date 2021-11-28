@@ -48,19 +48,19 @@ void Character::Update(Direction direction){
     switch (direction){
         
         case Direction::kUp:
-        pos_y -= speed * y_up_collision_speed;
+        pos_y -= speed_ * y_up_collision_speed;
         break;
 
         case Direction::kDown:
-        pos_y += speed * y_down_collision_speed;
+        pos_y += speed_ * y_down_collision_speed;
         break;
 
         case Direction::kLeft:
-        pos_x -= speed * x_left_collision_speed;
+        pos_x -= speed_ * x_left_collision_speed;
         break;
 
         case Direction::kRight:
-        pos_x += speed * x_right_collision_speed;
+        pos_x += speed_ * x_right_collision_speed;
         break;
 
         case Direction::kRotateLeft:
@@ -76,6 +76,7 @@ void Character::Update(Direction direction){
         isAlive_ = false;
     }
 }
+
 void Character::Update(){
     double rads = atan2((mousey - (pos_y + (height / 2))), (mousex - (pos_x + (width / 2))));
     angle = ((rads * 180) / 3.14159265) + 90;
@@ -84,6 +85,17 @@ void Character::Update(){
         isAlive_ = false;
     }
 }
+
+void Character::Update(int speed){
+    std::cout << "Update(int speed) has been called" << std::endl;
+    speed_ = speed;
+    double rads = atan2((mousey - (pos_y + (height / 2))), (mousex - (pos_x + (width / 2))));
+    angle = ((rads * 180) / 3.14159265) + 90;
+
+    if(health_ <= 0){
+        isAlive_ = false;
+    }
+};
 
 void Character::Died(){
     isAlive_ = false; 

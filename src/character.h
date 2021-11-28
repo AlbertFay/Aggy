@@ -17,11 +17,13 @@ class Character {
     int max_health = 5;
     int mousex = 0;
     int mousey = 0;
+    const float defaultspeed = 2;
   
     Character(std::vector<Renderable*> &renderables);
     void Shoot();
     void Update(Direction direction);
     void Update();
+    void Update(int speed);
     void SetTexture(SDL_Renderer* renderer);
     void Render(SDL_Renderer* renderer, ResourceManager &resources);
     void Died();
@@ -88,10 +90,13 @@ class Character {
     void SetYOffset(int offset){
       pos_y = pos_y - offset;
     };
+
+    void SetSpeed(int speed){speed_ = speed;};
+
   private:
     bool isAlive_ = true;
     Direction direction = Direction::kUp;
-    float speed = 2;
+    float speed_ = 2;
     float angle = 0, rotationSpeed = 3.5;
     float width = 64, height = 64;
     float pos_x = 512, pos_y = 512;
