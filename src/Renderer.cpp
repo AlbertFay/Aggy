@@ -54,12 +54,17 @@ Renderer::Renderer(const std::size_t screen_height, const std::size_t screen_wid
 
   health_bar_outline_.w = 256;
   health_bar_outline_.h = 32;
-  health_bar_outline_.x = 50;
-  health_bar_outline_.y = 25;
+  health_bar_outline_.x = (5*percent);
+  health_bar_outline_.y = (2.5*percent);
+
+  energy_bar_outline_.w = 256;
+  energy_bar_outline_.h = 32;
+  energy_bar_outline_.x = (5*percent);
+  energy_bar_outline_.y = (6*percent);
 
   digit_rect_.w = 4*percent;
   digit_rect_.h = 10*percent;
-  digit_rect_.y = score_rect_.y = (4*percent) - (score_rect_.h /2);
+  digit_rect_.y = score_rect_.y;
   
 }
 Renderer::~Renderer()
@@ -181,15 +186,27 @@ void Renderer::LoadUI(ResourceManager &resources){
 void Renderer::RenderUI(ResourceManager &resources, Character &character){
       //Render health bar
     SDL_Rect health_bar;
-    health_bar.w = (252.0 / character.max_health) * character.health_;
-    health_bar.h = 28;
-    health_bar.x = 52;
-    health_bar.y = 27;
-    SDL_SetRenderDrawColor(sdl_renderer, 255, 15, 0, 255);
-    SDL_RenderFillRect(sdl_renderer, &health_bar);
+    health_bar.w = (252.0 / character.max_health) * character.health_; //252 is pixel size of outline of health_bar
+    health_bar.h = health_bar_outline_.h - 4;
+    health_bar.x = health_bar_outline_.x + 2;
+    health_bar.y = health_bar_outline_.y + 2;
+
+    SDL_Rect energy_bar;
+    energy_bar.w = (252.0 / character.max_energy) * character.energy;
+    energy_bar.h = energy_bar_outline_.h - 4;
+    energy_bar.x = energy_bar_outline_.x + 2;
+    energy_bar.y = energy_bar_outline_.y + 2;
+
+    SDL_SetRenderDrawColor(sdl_renderer, 255, 15, 0, 255); //Set Color to red
+    SDL_RenderFillRect(sdl_renderer, &health_bar); //Draw health bar
+
+    SDL_SetRenderDrawColor(sdl_renderer, 15, 50, 255, 255); //Set Color to blue
+    SDL_RenderFillRect(sdl_renderer, &energy_bar); //Draw energy bar
 
     //Render Health Bar Outline
     SDL_RenderCopy(sdl_renderer, resources.getTexture("Health Bar Outline"), NULL, &health_bar_outline_);
+    //Render Energy Bar Outline
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Health Bar Outline"), NULL, &energy_bar_outline_);
     //Render Score:
     SDL_RenderCopy(sdl_renderer, resources.getTexture("Score: "), NULL, &score_rect_);
     //Render physical score

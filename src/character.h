@@ -14,7 +14,9 @@ class Character {
     std::vector<ShotFired> vecShotFired;
     int score = 0;
     int health_ = 5;
+    int energy = 100;
     int max_health = 5;
+    int max_energy = 100;
     int mousex = 0;
     int mousey = 0;
     const float defaultspeed = 2;
@@ -23,7 +25,7 @@ class Character {
     void Shoot();
     void Update(Direction direction);
     void Update();
-    void Update(int speed);
+    void Sprint(int speed);
     void SetTexture(SDL_Renderer* renderer);
     void Render(SDL_Renderer* renderer, ResourceManager &resources);
     void Died();

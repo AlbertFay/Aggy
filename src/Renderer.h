@@ -37,6 +37,7 @@ class Renderer {
     SDL_Rect score_rect_;
     SDL_Rect health_bar_outline_;
     SDL_Rect digit_rect_;
+    SDL_Rect energy_bar_outline_;
     double score_num_place_x_, score_num_place_y_;
 
 

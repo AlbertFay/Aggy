@@ -86,9 +86,11 @@ void Character::Update(){
     }
 }
 
-void Character::Update(int speed){
-    std::cout << "Update(int speed) has been called" << std::endl;
-    speed_ = speed;
+void Character::Sprint(int speed){
+    if(energy > 0){
+        speed_ = speed;
+        energy -= .00001;
+    }
     double rads = atan2((mousey - (pos_y + (height / 2))), (mousex - (pos_x + (width / 2))));
     angle = ((rads * 180) / 3.14159265) + 90;
 

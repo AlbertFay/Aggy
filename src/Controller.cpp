@@ -68,10 +68,10 @@ void Controller::HandleInput(Character &character, bool &running)
         }
 
         if (keystate[SDL_SCANCODE_LSHIFT]){
-            character.Update(3);
+            character.Sprint(3);
         }
         if (!keystate[SDL_SCANCODE_LSHIFT]){
-            character.Update(character.defaultspeed);
+            character.SetSpeed(character.defaultspeed);
         }
 
         if(leftMouseButton_ ==  true && buttonRelease_ == false){ 
