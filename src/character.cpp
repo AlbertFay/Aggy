@@ -7,13 +7,16 @@ Character::Character(std::vector<Renderable*> &renderables):renderables_(rendera
 }
 
 void Character::Shoot(){
-    uint32_t current_shoot_timer_ = SDL_GetTicks();
-    if (current_shoot_timer_ > (shoot_timer_ + 150)) {
-        
-        ShotFired *firedShot = new ShotFired((hand_distance_ * cos(hand_angle_) + pos_x), (-hand_distance_ * sin(hand_angle_) + pos_y), angle);
-        renderables_.emplace_back(firedShot);
+    if(energy > 0){
+        uint32_t current_shoot_timer_ = SDL_GetTicks();
+        if (current_shoot_timer_ > (shoot_timer_ + 150)) {
+            
+            ShotFired *firedShot = new ShotFired((hand_distance_ * cos(hand_angle_) + pos_x), (-hand_distance_ * sin(hand_angle_) + pos_y), angle, energy);
+            renderables_.emplace_back(firedShot);
 
-        shoot_timer_ = SDL_GetTicks();
+            shoot_timer_ = SDL_GetTicks();
+            energy_timer_ = SDL_GetTicks();
+        }
     }
 }
 
@@ -39,6 +42,12 @@ void Character::Render(SDL_Renderer* renderer, ResourceManager &resources) {
 
     //Temp code to draw rectangle around character
     //SDL_RenderDrawRect(renderer, &rectangle);
+
+    uint32_t current_energy_timer = SDL_GetTicks();
+    if(current_energy_timer > (energy_timer_ + 2500)){
+        energy_timer_ = SDL_GetTicks();
+        energy += 20;
+    }
 
 }
 
@@ -88,8 +97,13 @@ void Character::Update(){
 
 void Character::Sprint(int speed){
     if(energy > 0){
-        speed_ = speed;
-        energy -= .00001;
+        uint32_t current_sprint_timer_ = SDL_GetTicks();
+        if (current_sprint_timer_ > (sprint_timer_ + 100)) {
+            speed_ = speed;
+            energy -= 1;
+            energy_timer_ = SDL_GetTicks();
+            sprint_timer_ = SDL_GetTicks();
+        }
     }
     double rads = atan2((mousey - (pos_y + (height / 2))), (mousex - (pos_x + (width / 2))));
     angle = ((rads * 180) / 3.14159265) + 90;

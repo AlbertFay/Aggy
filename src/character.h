@@ -14,7 +14,7 @@ class Character {
     std::vector<ShotFired> vecShotFired;
     int score = 0;
     int health_ = 5;
-    int energy = 100;
+    double energy = 100;
     int max_health = 5;
     int max_energy = 100;
     int mousex = 0;
@@ -111,6 +111,8 @@ class Character {
     std::vector<Renderable*> &renderables_;
 
     uint32_t shoot_timer_ = SDL_GetTicks();
+    uint32_t sprint_timer_ = SDL_GetTicks();
+    uint32_t energy_timer_ = SDL_GetTicks();
 
 
 

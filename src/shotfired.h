@@ -12,7 +12,7 @@
 
 class ShotFired : public Renderable{
   public:
-    ShotFired(float start_x, float start_y, float angle);
+    ShotFired(float start_x, float start_y, float angle, double &energy);
     ~ShotFired();
     void RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources) ;
     void Update();
