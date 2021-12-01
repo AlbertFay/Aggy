@@ -4,6 +4,10 @@
 Character::Character(std::vector<Renderable*> &renderables):renderables_(renderables){
     std::cout << "The character has been created" << std::endl;
     //surface = IMG_Load("C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
+    hitBox_.w = width -20;
+    hitBox_.h = height -4;
+    hitBox_.x = pos_x +2;
+    hitBox_.y = pos_y +2;
 }
 
 void Character::Shoot(){
@@ -30,21 +34,21 @@ void Character::Render(SDL_Renderer* renderer, ResourceManager &resources) {
     block.y = pos_y;
 
     //Temp code to draw rectangle around character
-    SDL_Rect rectangle;
-    rectangle.w = width;
-    rectangle.h = height;
-    rectangle.x = pos_x;
-    rectangle.y = pos_y;
+    hitBox_.w = width -20;
+    hitBox_.h = height -4;
+    hitBox_.x = pos_x +2;
+    hitBox_.y = pos_y +2;
 
     // Add character to the Render
     SDL_RenderCopyEx(renderer, (resources.getTexture("character")), NULL, &block, angle, NULL, SDL_FLIP_NONE);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 
     //Temp code to draw rectangle around character
-    //SDL_RenderDrawRect(renderer, &rectangle);
+    SDL_RenderDrawRect(renderer, &hitBox_);
 
+    //Automatically regain health after certain time
     uint32_t current_energy_timer = SDL_GetTicks();
-    if(current_energy_timer > (energy_timer_ + 2500)){
+    if(current_energy_timer > (energy_timer_ + 2500) && energy < max_energy){
         energy_timer_ = SDL_GetTicks();
         energy += 20;
     }

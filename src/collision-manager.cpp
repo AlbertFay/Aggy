@@ -10,6 +10,8 @@ CollisionManager::CollisionManager()
 
 void CollisionManager::CheckCollisions(Character &character, GameMap &map)
 {
+    character.SetXCollisionSpeed(1);
+    character.SetYCollisionSpeed(1);
     //Iterate through all the game tiles and check if they are solid (meaning they are collidable)
     for (int i = 0; i < 16; i++)
     {
@@ -19,10 +21,10 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map)
             {
 
                 //Checking if there is a collision using AABB collision detection
-                if (character.GetX() + character.GetWidth() >= map.array[i][j].GetX() &&
-                    map.array[i][j].GetX() + map.array[i][j].GetSize() >= character.GetX() &&
-                    character.GetY() + character.GetHeight() >= map.array[i][j].GetY() &&
-                    map.array[i][j].GetY() + map.array[i][j].GetSize() >= character.GetY())
+                if (character.hitBox_.x + character.hitBox_.w >= map.array[i][j].GetX() &&
+                    map.array[i][j].GetX() + map.array[i][j].GetSize() >= character.hitBox_.x &&
+                    character.hitBox_.y + character.hitBox_.h >= map.array[i][j].GetY() &&
+                    map.array[i][j].GetY() + map.array[i][j].GetSize() >= character.hitBox_.y)
                 {
 
                     //Temporary code (this changes the color of the game tile if there is a collision)
@@ -31,12 +33,12 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map)
                     //Variables needed for calculating character vs block and for setting character
                     //position to the correct spot
                     int centerline = ((map.array[i][j].GetX() + map.array[i][j].GetSize() - map.array[i][j].GetX()) / 2);
-                    int characterXCenter = character.GetX() + (character.GetWidth() / 2);
-                    int characterYCenter = character.GetY() + (character.GetWidth() / 2);
+                    int characterXCenter = character.hitBox_.x + (character.hitBox_.w / 2);
+                    int characterYCenter = character.hitBox_.y + (character.hitBox_.h / 2);
                     int differenceX = (map.array[i][j].GetX() + (map.array[i][j].GetSize() / 2)) - characterXCenter;
                     int differenceY = (map.array[i][j].GetY() + (map.array[i][j].GetSize() / 2)) - characterYCenter;
-                    int xspace = centerline + (character.GetWidth() / 2);
-                    int yspace = centerline + (character.GetHeight() / 2);
+                    int xspace = centerline + (character.hitBox_.w / 2);
+                    int yspace = centerline + (character.hitBox_.h / 2);
                     int xoffset = (map.array[i][j].GetX() + centerline) - characterXCenter;
                     int yoffset = (map.array[i][j].GetY() + centerline) - characterYCenter;
 
@@ -46,8 +48,9 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map)
                         //If collision is on left side
                         if (xoffset < 0)
                         {
-                            character.SetXCollisionSpeed(-1);
+                            std::cout << "Collision on left Side" << std::endl;
                             character.SetXOffset(-(xspace + xoffset));
+                            character.SetXCollisionSpeed(-1);
                         }
                         //Collision is on right side
                         else
@@ -77,8 +80,6 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map)
                 {
                     //No collisions, reset character movement to normal
                     map.array[i][j].collision_ = false;
-                    character.SetXCollisionSpeed(1);
-                    character.SetYCollisionSpeed(1);
                 }
             }
         }
@@ -223,10 +224,10 @@ void CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, std::vector
 void CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, Character &character){
     for(auto enemy: enemies){
         //Checking if there is a collision using AABB collision detection
-        if (enemy->GetX() + enemy->GetWidth() >= character.GetX() &&
-            character.GetX() + character.GetWidth() >= enemy->GetX() &&
-            enemy->GetY() + enemy->GetHeight() >= character.GetY() &&
-            character.GetY() + character.GetHeight() >= enemy->GetY()) {
+        if (enemy->GetX() + enemy->GetWidth() >= character.hitBox_.x &&
+            character.hitBox_.x + character.hitBox_.w >= enemy->GetX() &&
+            enemy->GetY() + enemy->GetHeight() >= character.hitBox_.y &&
+            character.hitBox_.y + character.hitBox_.h >= enemy->GetY()) {
 
                 //Stop flipping ghost around like crazy
                 //Have character take damage

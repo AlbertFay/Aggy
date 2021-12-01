@@ -31,6 +31,7 @@ class Character {
     void Died();
     void TakeDamage(int damage) {health_ -= damage;};
     void LoadResources(SDL_Renderer *renderer, ResourceManager &resources);
+    SDL_Rect hitBox_;
 
     // Getters/Setters
     float GetAngle() {
