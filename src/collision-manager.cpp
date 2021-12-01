@@ -27,12 +27,9 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map)
                     map.array[i][j].GetY() + map.array[i][j].GetSize() >= character.hitBox_.y)
                 {
 
-                    //Temporary code (this changes the color of the game tile if there is a collision)
-                    map.array[i][j].collision_ = true;
-
                     //Variables needed for calculating character vs block and for setting character
                     //position to the correct spot
-                    int centerline = ((map.array[i][j].GetX() + map.array[i][j].GetSize() - map.array[i][j].GetX()) / 2);
+                    int centerline = ((map.array[i][j].GetY() + map.array[i][j].GetSize() - map.array[i][j].GetY()) / 2);
                     int characterXCenter = character.hitBox_.x + (character.hitBox_.w / 2);
                     int characterYCenter = character.hitBox_.y + (character.hitBox_.h / 2);
                     int differenceX = (map.array[i][j].GetX() + (map.array[i][j].GetSize() / 2)) - characterXCenter;
@@ -45,12 +42,12 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map)
                     //Testing to see if collision is on X-axis
                     if (abs(differenceX) >= abs(differenceY))
                     {
+                        std::cout << "Collision is on X " << std::endl;
                         //If collision is on left side
                         if (xoffset < 0)
                         {
-                            std::cout << "Collision on left Side" << std::endl;
-                            character.SetXOffset(-(xspace + xoffset));
                             character.SetXCollisionSpeed(-1);
+                            character.SetXOffset(-(xspace + xoffset));
                         }
                         //Collision is on right side
                         else
@@ -59,6 +56,7 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map)
                             character.SetXOffset(xspace - xoffset);
                         }
                     }
+                    //if (abs(differenceX) == abs(differenceY)){}
                     //Collision is on Y-axis
                     else
                     {

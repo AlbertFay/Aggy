@@ -34,10 +34,10 @@ void Character::Render(SDL_Renderer* renderer, ResourceManager &resources) {
     block.y = pos_y;
 
     //Temp code to draw rectangle around character
-    hitBox_.w = width -20;
-    hitBox_.h = height -4;
-    hitBox_.x = pos_x +2;
-    hitBox_.y = pos_y +2;
+    hitBox_.w = width ;
+    hitBox_.h = height;
+    hitBox_.x = pos_x ;
+    hitBox_.y = pos_y ;
 
     // Add character to the Render
     SDL_RenderCopyEx(renderer, (resources.getTexture("character")), NULL, &block, angle, NULL, SDL_FLIP_NONE);
@@ -62,18 +62,22 @@ void Character::Update(Direction direction){
         
         case Direction::kUp:
         pos_y -= speed_ * y_up_collision_speed;
+        hitBox_.y = pos_y;
         break;
 
         case Direction::kDown:
         pos_y += speed_ * y_down_collision_speed;
+        hitBox_.y = pos_y;
         break;
 
         case Direction::kLeft:
         pos_x -= speed_ * x_left_collision_speed;
+        hitBox_.x = pos_x;
         break;
 
         case Direction::kRight:
         pos_x += speed_ * x_right_collision_speed;
+        hitBox_.x = pos_x;
         break;
 
         case Direction::kRotateLeft:

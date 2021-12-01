@@ -37,7 +37,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     while (running) {
         frame_start = SDL_GetTicks();
         
-        level.SpawnEnemies(enemies);
+        //level.SpawnEnemies(enemies);
 
 
         //Update renderables
