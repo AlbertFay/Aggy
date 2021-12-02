@@ -42,7 +42,6 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map)
                     //Testing to see if collision is on X-axis
                     if (abs(differenceX) >= abs(differenceY))
                     {
-                        std::cout << "Collision is on X " << std::endl;
                         //If collision is on left side
                         if (xoffset < 0)
                         {

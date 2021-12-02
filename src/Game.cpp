@@ -1,11 +1,12 @@
 #include "game.h"
+#include <thread>
+#include "pthread.h"
 
 Game::Game(int number):_number(number){
     std::cout << "The game object has been constructed" << std::endl;
 }
 
 void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceManager &resources){
-    resources_ = resources;
     uint32_t title_timestamp = SDL_GetTicks();
     uint32_t frame_start, frame_end, frame_duration;
     int frame_count = 0;
@@ -20,8 +21,8 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     
     //Textures get loaded in to be used later and often
     //resources.LoadTexture(pointToRenderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
-    renderer.LoadUI(resources);
-    character.LoadResources(pointToRenderer, resources);
+    //renderer.LoadUI(resources);
+    //character.LoadResources(pointToRenderer, resources);
     resources.LoadTexture(pointToRenderer, "crate", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/crate.png");
     resources.LoadTexture(pointToRenderer, "stone path", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/stone path.png");
     resources.LoadTexture(pointToRenderer, "ghost sprite sheet", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/ghost sprite sheet.png");
@@ -30,8 +31,27 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     resources.LoadTexture(pointToRenderer, "water", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/water.png");
     resources.LoadTexture(pointToRenderer, "shrub", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/shrub.png");
     resources.LoadTexture(pointToRenderer, "flowers", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/flowers.png");
-    renderer.LoadEndMenuResources(resources);
+    //renderer.LoadEndMenuResources(resources);
+    
+    
+    std::thread t1([&renderer, &resources](){
+        renderer.LoadUI(resources);
+        std::cout << "T1 has finished" << std::endl;
+    });
+    
+    std::thread t2([&character, &pointToRenderer, &resources](){
+        character.LoadResources(pointToRenderer, resources);
+        std::cout << "T2 has finished" << std::endl;
+    });
+    std::thread t3([&renderer, &resources](){
+        renderer.LoadEndMenuResources(resources);
+        std::cout << "T3 has finished" << std::endl;
+    });
+    t1.join();
+    t2.join();
+    t3.join();
 
+    
     GameMap gamemap(resources);
     
     while (running) {

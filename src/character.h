@@ -60,11 +60,9 @@ class Character {
     */
     void SetXCollisionSpeed(float speed) {
       if(speed == 0){
-        std::cout << "Can't move to the right" << std::endl;
         x_right_collision_speed = 0;
       }
       if(speed == -1){
-        std::cout << "Can't move to the left" << std::endl;
         x_left_collision_speed = 0;
       }
       if (speed == 1){
@@ -79,11 +77,9 @@ class Character {
     */
     void SetYCollisionSpeed(float speed) {
       if(speed == 0){
-        std::cout << "Can't move to the up" << std::endl;
         y_up_collision_speed = 0;
       } 
       if(speed == -1){
-        std::cout << "Can't move to the down" << std::endl;
         y_down_collision_speed = 0;
       }
       if (speed == 1){

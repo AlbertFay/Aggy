@@ -18,7 +18,6 @@
 
 class Game {
   public:
-    ResourceManager resources_;
     Game(int number);
     void Run(Renderer &renderer, Controller &controller, float FPS, ResourceManager &resources);
 
