@@ -15,7 +15,8 @@ class CollisionManager{
     
     void CheckCollisions(std::vector<Enemy*> &enemies, GameMap &map); //Implemented
     void CheckCollisions(std::vector<Enemy*> &enemies, std::vector<Renderable*> &renderables); //Implemented
-    void CheckCollisions(std::vector<Enemy*> &enemies, Character &character); //Needs to be implemented
+    void CheckCollisions(std::vector<Enemy*> &enemies, Character &character); //Implemented
+    void LoadResources(SDL_Renderer *renderer, ResourceManager &resources);
 
   private:
 };

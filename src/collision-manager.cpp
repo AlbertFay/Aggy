@@ -233,3 +233,14 @@ void CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, Character &
             }
     }
 };
+
+void CollisionManager::LoadResources(SDL_Renderer *renderer, ResourceManager &resources){
+    resources.LoadTexture(renderer, "crate", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/crate.png");
+    resources.LoadTexture(renderer, "stone path", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/stone path.png");
+    resources.LoadTexture(renderer, "ghost sprite sheet", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/ghost sprite sheet.png");
+    resources.LoadTexture(renderer, "grass", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/grass.png");
+    resources.LoadTexture(renderer, "grass_to_water", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/grass_to_water.png");
+    resources.LoadTexture(renderer, "water", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/water.png");
+    resources.LoadTexture(renderer, "shrub", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/shrub.png");
+    resources.LoadTexture(renderer, "flowers", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/flowers.png");
+};

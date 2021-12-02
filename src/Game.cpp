@@ -19,21 +19,6 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     CollisionManager collisions;
     Level level;
     
-    //Textures get loaded in to be used later and often
-    //resources.LoadTexture(pointToRenderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
-    //renderer.LoadUI(resources);
-    //character.LoadResources(pointToRenderer, resources);
-    resources.LoadTexture(pointToRenderer, "crate", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/crate.png");
-    resources.LoadTexture(pointToRenderer, "stone path", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/stone path.png");
-    resources.LoadTexture(pointToRenderer, "ghost sprite sheet", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/ghost sprite sheet.png");
-    resources.LoadTexture(pointToRenderer, "grass", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/grass.png");
-    resources.LoadTexture(pointToRenderer, "grass_to_water", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/grass_to_water.png");
-    resources.LoadTexture(pointToRenderer, "water", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/water.png");
-    resources.LoadTexture(pointToRenderer, "shrub", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/shrub.png");
-    resources.LoadTexture(pointToRenderer, "flowers", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/flowers.png");
-    //renderer.LoadEndMenuResources(resources);
-    
-    
     std::thread t1([&renderer, &resources](){
         renderer.LoadUI(resources);
         std::cout << "T1 has finished" << std::endl;
@@ -47,9 +32,13 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         renderer.LoadEndMenuResources(resources);
         std::cout << "T3 has finished" << std::endl;
     });
+    std::thread t4([&collisions, &pointToRenderer, &resources](){
+        collisions.LoadResources(pointToRenderer, resources);
+    });
     t1.join();
     t2.join();
     t3.join();
+    t4.join();
 
     
     GameMap gamemap(resources);
