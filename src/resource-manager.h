@@ -17,9 +17,12 @@ class ResourceManager {
     void LoadTexture(SDL_Renderer* renderer, std::string id, std::string filepath);
     void LoadText(SDL_Renderer*renderer, const char *id, TTF_Font *font, SDL_Color &color);
     SDL_Texture* getTexture(std::string id);
-    ResourceManager();
-    ResourceManager(const ResourceManager& other);
-    ResourceManager& operator=(const ResourceManager& other);
+    ResourceManager(); //Constructor
+    ResourceManager(const ResourceManager& other); //Copy Constructor
+    ResourceManager& operator=(const ResourceManager& other); //Copy Assignment Operator
+    ResourceManager(ResourceManager&& other);//Move Constructor
+    ResourceManager& operator=(ResourceManager&& other);//Move Assignment Operator
+    ~ResourceManager();//Destructor
     
   private:
     std::map<std::string, SDL_Texture*> texture_map_;

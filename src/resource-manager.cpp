@@ -50,13 +50,41 @@ SDL_Texture* ResourceManager::getTexture(std::string id) {
         return NULL;
     }
 };
+//Constructor
 ResourceManager::ResourceManager(){
-    //Constructor
 };
+//Copy Constructor
 ResourceManager::ResourceManager(const ResourceManager& other) : texture_map_(other.texture_map_){
+    texture_map_ = other.texture_map_;
 };
 
+//Copy Assignment Operator
 ResourceManager& ResourceManager::operator=(const ResourceManager& other){
+    if(this == &other){
+        return *this;
+    }
     texture_map_ = other.texture_map_;
     return *this;
+};
+
+//Move Constructor
+ResourceManager::ResourceManager(ResourceManager&& other){
+    texture_map_ = other.texture_map_;
+    other.texture_map_.clear();
+};
+
+//Move Assignment Operator
+ResourceManager& ResourceManager::operator=(ResourceManager&& other){
+    if(this == &other){
+        return *this;
+    }
+    texture_map_.clear();
+    texture_map_ = other.texture_map_;
+    other.texture_map_.clear();
+    return *this;
+};
+
+//Destructor
+ResourceManager::~ResourceManager(){
+    texture_map_.clear();
 };
