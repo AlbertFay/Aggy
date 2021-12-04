@@ -1,28 +1,42 @@
 #include <iostream>
 #include "character.h"
 
-Character::Character(std::vector<Renderable*> &renderables):renderables_(renderables){
+Character::Character(std::vector<Renderable*> &renderables){
     std::cout << "The character has been created" << std::endl;
     //surface = IMG_Load("C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
     hitBox_.w = width -20;
     hitBox_.h = height -4;
     hitBox_.x = pos_x +2;
     hitBox_.y = pos_y +2;
-}
+};
 
-void Character::Shoot(){
-    if(energy > 0){
+Character::Character(){
+    //testenemies_ = testenemies;
+    std::cout << "The character has been created" << std::endl;
+    //surface = IMG_Load("C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
+    hitBox_.w = width -20;
+    hitBox_.h = height -4;
+    hitBox_.x = pos_x +2;
+    hitBox_.y = pos_y +2;
+};
+
+std::vector<std::unique_ptr<Renderable>>&& Character::Shoot(std::vector<std::unique_ptr<Renderable>> &&testenemies){
+    if(energy >= 5){
         uint32_t current_shoot_timer_ = SDL_GetTicks();
         if (current_shoot_timer_ > (shoot_timer_ + 150)) {
             
-            ShotFired *firedShot = new ShotFired((hand_distance_ * cos(hand_angle_) + pos_x), (-hand_distance_ * sin(hand_angle_) + pos_y), angle, energy);
-            renderables_.emplace_back(firedShot);
+            //ShotFired *firedShot = new ShotFired((hand_distance_ * cos(hand_angle_) + pos_x), (-hand_distance_ * sin(hand_angle_) + pos_y), angle, energy);
+            //renderables_.emplace_back(firedShot);
+
+            std::unique_ptr<ShotFired> pointer(new ShotFired((hand_distance_ * cos(hand_angle_) + pos_x), (-hand_distance_ * sin(hand_angle_) + pos_y), angle, energy));
+            testenemies.push_back(std::move(pointer));
 
             shoot_timer_ = SDL_GetTicks();
             energy_timer_ = SDL_GetTicks();
         }
     }
-}
+    return std::move(testenemies);
+};
 
 void Character::Render(SDL_Renderer* renderer, ResourceManager &resources) {
 
@@ -50,10 +64,16 @@ void Character::Render(SDL_Renderer* renderer, ResourceManager &resources) {
     uint32_t current_energy_timer = SDL_GetTicks();
     if(current_energy_timer > (energy_timer_ + 2500) && energy < max_energy){
         energy_timer_ = SDL_GetTicks();
-        energy += 20;
+        if(energy <= 80){
+            energy += 20;
+        }
+        else{
+            energy += (max_energy - energy);
+        }
+
     }
 
-}
+};
 
 void Character::Update(Direction direction){
     double rads = atan2((mousey - (pos_y + (height / 2))), (mousex - (pos_x + (width / 2))));
@@ -92,7 +112,7 @@ void Character::Update(Direction direction){
     if(health_ <= 0){
         isAlive_ = false;
     }
-}
+};
 
 void Character::Update(){
     double rads = atan2((mousey - (pos_y + (height / 2))), (mousex - (pos_x + (width / 2))));
@@ -101,10 +121,10 @@ void Character::Update(){
     if(health_ <= 0){
         isAlive_ = false;
     }
-}
+};
 
 void Character::Sprint(int speed){
-    if(energy > 0){
+    if(energy >=1){
         uint32_t current_sprint_timer_ = SDL_GetTicks();
         if (current_sprint_timer_ > (sprint_timer_ + 100)) {
             speed_ = speed;
@@ -126,6 +146,6 @@ void Character::Died(){
 };
 
 void Character::LoadResources(SDL_Renderer *renderer, ResourceManager &resources){
-  resources.LoadTexture(renderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
+    resources.LoadTexture(renderer, "character", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
     resources.LoadTexture(renderer, "fireball", "C:/C++ Development/C++ Projects/Aggy/Resources/Images/red_fireball.png");
 };

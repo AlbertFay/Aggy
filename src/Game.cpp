@@ -14,7 +14,12 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
 
     std::vector<Renderable*> renderables;
     std::vector<Enemy*> enemies;
-    Character character(renderables);
+
+    //trying to work with unique pointers
+    std::vector<std::unique_ptr<Renderable>> testenemies;
+
+
+    Character character;
     SDL_Renderer *pointToRenderer = renderer.GetRenderer();
     CollisionManager collisions;
     Level level;
@@ -64,19 +69,19 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         }
 
         //Update enemies
-        for (int i = 0; i < renderables.size();) {
-            if (renderables[i]->Exists()){
-               renderables[i]->Update();
+        for (int i = 0; i < testenemies.size();) {
+            if (testenemies[i]->Exists()){
+               testenemies[i]->Update();
                i++;
             }
             else {
-                delete renderables[i];
-                renderables.erase(renderables.begin()+i); 
+                //delete testenemies[i];
+                testenemies.erase(testenemies.begin()+i);
             }
         }
 
         //Input and Update Character
-        controller.HandleInput(character, running);
+        controller.HandleInput(character, running, std::move(testenemies));
 
         //Test for all collisions
         collisions.CheckCollisions(character, gamemap);

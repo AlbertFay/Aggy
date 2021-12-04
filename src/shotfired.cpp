@@ -1,6 +1,7 @@
 #include "shotfired.h"
 
 ShotFired::ShotFired(float start_x, float start_y, float angle, double &energy): x_pos_(start_x), y_pos_(start_y), angle_(angle) {
+    std::cout << "Fireball has been created" << std::endl;
     float radians;
     radians = ( (angle_ - 90) * 3.1415926535) / 180.0;
     x_velocity_ = (velocity_)*(cos(radians) );
@@ -9,6 +10,7 @@ ShotFired::ShotFired(float start_x, float start_y, float angle, double &energy):
 }
 
 ShotFired::~ShotFired() {
+    std::cout << "Fireball has been destroyed" << std::endl;
    // std::cout << "ShotFired Deconstructor called" << std::endl;
 }
 
