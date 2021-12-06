@@ -6,7 +6,7 @@ void Controller::ChangeDirection()
 {
 }
 
-std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &character, bool &running, std::vector<std::unique_ptr<Renderable>> &&testenemies)
+std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &character, bool &running, std::vector<std::unique_ptr<Renderable>> &&FiredShots)
 {
     //character.SetSpeed(character.defaultspeed);
     int x, y;
@@ -75,14 +75,14 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &ch
         }
 
         if(leftMouseButton_ ==  true && buttonRelease_ == false){ 
-            character.Shoot(std::move(testenemies));
+            character.Shoot(std::move(FiredShots));
             character.Update();
         }
         else{
             character.Update();
         }
     }
-    return std::move(testenemies);
+    return std::move(FiredShots);
 };
 
 void Controller::MenuInput(bool &running){

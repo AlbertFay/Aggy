@@ -83,10 +83,10 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map)
     }
 }
 
-void CollisionManager::CheckCollisions(std::vector<Renderable *> &renderables, GameMap &map)
+std::vector<std::unique_ptr<Renderable>>&& CollisionManager::CheckCollisions(std::vector<std::unique_ptr<Renderable>> &&FiredShots, GameMap &map)
 {
     //For each object in renderables, check for collisions against map tiles
-    for (auto object : renderables)
+    for (auto &object : FiredShots)
     {
         for (int i = 0; i < 16; i++)
         {
@@ -117,6 +117,7 @@ void CollisionManager::CheckCollisions(std::vector<Renderable *> &renderables, G
             }
         }
     }
+    return std::move(FiredShots);
 }
 
 void CollisionManager::CheckCollisions(std::vector<Enemy *> &enemies, GameMap &map)
@@ -198,17 +199,17 @@ void CollisionManager::CheckCollisions(std::vector<Enemy *> &enemies, GameMap &m
     }
 };
 
-void CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, std::vector<Renderable*> &renderables) {
+std::vector<std::unique_ptr<Renderable>>&& CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, std::vector<std::unique_ptr<Renderable>> &&FiredShots) {
     for(auto enemy: enemies){
-        for(auto renderable: renderables){
+        for(auto &object: FiredShots){
             //Checking if there is a collision using AABB collision detection
-            if (enemy->GetX() + enemy->GetWidth() >= renderable->GetX() &&
-                renderable->GetX() + renderable->GetWidth() >= enemy->GetX() &&
-                enemy->GetY() + enemy->GetHeight() >= renderable->GetY() &&
-                renderable->GetY() + renderable->GetHeight() >= enemy->GetY()) {
+            if (enemy->GetX() + enemy->GetWidth() >= object->GetX() &&
+                object->GetX() + object->GetWidth() >= enemy->GetX() &&
+                enemy->GetY() + enemy->GetHeight() >= object->GetY() &&
+                object->GetY() + object->GetHeight() >= enemy->GetY()) {
 
                     //Destroy fireball and create damage to enemy
-                    renderable->Died();
+                    object->Died();
                     enemy->TakeDamage(1);
                     if(enemy->GetHealth() <= 0){
                         enemy->Died();
@@ -216,6 +217,7 @@ void CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, std::vector
             }
         }
     }
+    return std::move(FiredShots);
 };
 
 void CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, Character &character){

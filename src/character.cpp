@@ -1,26 +1,15 @@
 #include <iostream>
 #include "character.h"
 
-Character::Character(std::vector<Renderable*> &renderables){
-    std::cout << "The character has been created" << std::endl;
-    //surface = IMG_Load("C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
-    hitBox_.w = width -20;
-    hitBox_.h = height -4;
-    hitBox_.x = pos_x +2;
-    hitBox_.y = pos_y +2;
-};
-
 Character::Character(){
-    //testenemies_ = testenemies;
     std::cout << "The character has been created" << std::endl;
-    //surface = IMG_Load("C:/C++ Development/C++ Projects/Aggy/Resources/Images/wizard_shooting.png");
     hitBox_.w = width -20;
     hitBox_.h = height -4;
     hitBox_.x = pos_x +2;
     hitBox_.y = pos_y +2;
 };
 
-std::vector<std::unique_ptr<Renderable>>&& Character::Shoot(std::vector<std::unique_ptr<Renderable>> &&testenemies){
+std::vector<std::unique_ptr<Renderable>>&& Character::Shoot(std::vector<std::unique_ptr<Renderable>> &&FiredShots){
     if(energy >= 5){
         uint32_t current_shoot_timer_ = SDL_GetTicks();
         if (current_shoot_timer_ > (shoot_timer_ + 150)) {
@@ -29,13 +18,13 @@ std::vector<std::unique_ptr<Renderable>>&& Character::Shoot(std::vector<std::uni
             //renderables_.emplace_back(firedShot);
 
             std::unique_ptr<ShotFired> pointer(new ShotFired((hand_distance_ * cos(hand_angle_) + pos_x), (-hand_distance_ * sin(hand_angle_) + pos_y), angle, energy));
-            testenemies.push_back(std::move(pointer));
+            FiredShots.push_back(std::move(pointer));
 
             shoot_timer_ = SDL_GetTicks();
             energy_timer_ = SDL_GetTicks();
         }
     }
-    return std::move(testenemies);
+    return std::move(FiredShots);
 };
 
 void Character::Render(SDL_Renderer* renderer, ResourceManager &resources) {

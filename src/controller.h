@@ -9,7 +9,7 @@
 class Controller {
   public:
     void ChangeDirection();
-    std::vector<std::unique_ptr<Renderable>>&& HandleInput(Character &character, bool &running, std::vector<std::unique_ptr<Renderable>> &&testenemies);
+    std::vector<std::unique_ptr<Renderable>>&& HandleInput(Character &character, bool &running, std::vector<std::unique_ptr<Renderable>> &&FiredShots);
     void MenuInput(bool &running);
 
   private:

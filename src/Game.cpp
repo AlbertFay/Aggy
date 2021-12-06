@@ -16,7 +16,8 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     std::vector<Enemy*> enemies;
 
     //trying to work with unique pointers
-    std::vector<std::unique_ptr<Renderable>> testenemies;
+    std::vector<std::unique_ptr<Renderable>> FiredShots;
+    //std::vector<std::unique_ptr<Enemy>> myEnemies;
 
 
     Character character;
@@ -69,29 +70,29 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         }
 
         //Update enemies
-        for (int i = 0; i < testenemies.size();) {
-            if (testenemies[i]->Exists()){
-               testenemies[i]->Update();
+        for (int i = 0; i < FiredShots.size();) {
+            if (FiredShots[i]->Exists()){
+               FiredShots[i]->Update();
                i++;
             }
             else {
-                //delete testenemies[i];
-                testenemies.erase(testenemies.begin()+i);
+                //delete FiredShots[i];
+                FiredShots.erase(FiredShots.begin()+i);
             }
         }
 
         //Input and Update Character
-        controller.HandleInput(character, running, std::move(testenemies));
+        controller.HandleInput(character, running, std::move(FiredShots));
 
         //Test for all collisions
         collisions.CheckCollisions(character, gamemap);
-        collisions.CheckCollisions(renderables, gamemap);
+        collisions.CheckCollisions(std::move(FiredShots), gamemap);
         collisions.CheckCollisions(enemies, gamemap);
-        collisions.CheckCollisions(enemies, renderables);
+        collisions.CheckCollisions(enemies, std::move(FiredShots));
         collisions.CheckCollisions(enemies, character);
         
         //Render
-        renderer.Render(character, renderables, enemies, resources, gamemap);
+        renderer.Render(character, std::move(FiredShots), enemies, resources, gamemap);
 
         frame_end = SDL_GetTicks();
 
@@ -117,13 +118,6 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
             SDL_Delay(FPS - frame_duration);
         }
 
-    }
-    //std::cout << "std::vector<Renderable>.size() == " << renderables.size() << std::endl;
-    for (int i = 0; i < renderables.size();) {
-        //std::cout << "Deleting renderable" << std::endl;
-        delete renderables[i];
-        //std::cout << "Removing renderable from vector" << std::endl;
-        renderables.erase(renderables.begin()+i); 
     }
 
     for (int i = 0; i < enemies.size();) {

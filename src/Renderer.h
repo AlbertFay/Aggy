@@ -9,6 +9,7 @@
 #include "gamemap.h"
 #include "enemy.h"
 #include "SDL2/sdl_ttf.h"
+#include <tuple>
 
 class Renderer {
   public:
@@ -16,7 +17,7 @@ class Renderer {
     Renderer(const std::size_t screen_height, const std::size_t screen_width, const std::size_t grid_height, const std::size_t grid_width);
     ~Renderer();
 
-    void Render(Character &character, std::vector<Renderable*> renderables, std::vector<Enemy*> enemies, ResourceManager &resources, GameMap &gamemap);
+    std::vector<std::unique_ptr<Renderable>>&& Render(Character &character, std::vector<std::unique_ptr<Renderable>> &&firedShot, std::vector<Enemy*> &enemies, ResourceManager &resources, GameMap &gamemap);
     void UpdateWindowTitle();
     SDL_Renderer* GetRenderer();
     void EndMenu(ResourceManager &resources);

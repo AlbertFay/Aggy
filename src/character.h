@@ -22,9 +22,8 @@ class Character {
     int mousey = 0;
     const float defaultspeed = 2;
   
-    Character(std::vector<Renderable*> &renderables);
     Character();
-    std::vector<std::unique_ptr<Renderable>>&& Shoot(std::vector<std::unique_ptr<Renderable>> &&testenemies);
+    std::vector<std::unique_ptr<Renderable>>&& Shoot(std::vector<std::unique_ptr<Renderable>> &&FiredShots);
     void Update(Direction direction);
     void Update();
     void Sprint(int speed);
@@ -111,8 +110,6 @@ class Character {
     float x_right_collision_speed = 1;
     float y_up_collision_speed = 1;
     float y_down_collision_speed = 1;
-    //std::vector<Renderable*> &renderables_ ;
-    std::vector<std::shared_ptr<Renderable>> testenemies_;
 
     uint32_t shoot_timer_ = SDL_GetTicks();
     uint32_t sprint_timer_ = SDL_GetTicks();

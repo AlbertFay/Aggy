@@ -77,7 +77,7 @@ Renderer::~Renderer()
 }
 
 // Draw the objects to the window
-void Renderer::Render(Character &character, std::vector<Renderable *> renderables, std::vector<Enemy *> enemies, ResourceManager &resources, GameMap &gamemap)
+std::vector<std::unique_ptr<Renderable>>&& Renderer::Render(Character &character, std::vector<std::unique_ptr<Renderable>> &&firedShot, std::vector<Enemy*> &enemies, ResourceManager &resources, GameMap &gamemap)
 {
 
   // Clear the Render and change color of background
@@ -88,11 +88,11 @@ void Renderer::Render(Character &character, std::vector<Renderable *> renderable
   //Render the character
   character.Render(sdl_renderer, resources);
 
-  for (auto renderable : renderables)
+  for (auto &renderable : firedShot)
   {
     renderable->RenderRenderable(sdl_renderer, resources);
   }
-  for (auto enemies : enemies)
+  for (auto &enemies : enemies)
   {
     enemies->RenderRenderable(sdl_renderer, resources);
   }
@@ -101,7 +101,9 @@ void Renderer::Render(Character &character, std::vector<Renderable *> renderable
 
   // Display the Render onto the screen; Update Frame
   SDL_RenderPresent(sdl_renderer);
-}
+  // return std::move(FiredShots);
+  return std::move(firedShot);
+};
 
 SDL_Renderer *Renderer::GetRenderer()
 {
