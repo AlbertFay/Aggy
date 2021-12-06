@@ -77,7 +77,7 @@ Renderer::~Renderer()
 }
 
 // Draw the objects to the window
-std::vector<std::unique_ptr<Renderable>>&& Renderer::Render(Character &character, std::vector<std::unique_ptr<Renderable>> &&firedShot, std::vector<Enemy*> &enemies, ResourceManager &resources, GameMap &gamemap)
+std::vector<std::unique_ptr<Renderable>>&& Renderer::Render(Character &character, std::vector<std::unique_ptr<Renderable>> &&firedShot, std::vector<std::shared_ptr<Enemy>> &enemies, ResourceManager &resources, GameMap &gamemap)
 {
 
   // Clear the Render and change color of background

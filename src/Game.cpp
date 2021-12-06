@@ -12,12 +12,13 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     int frame_count = 0;
     bool running = true;
 
-    std::vector<Renderable*> renderables;
-    std::vector<Enemy*> enemies;
+    //std::vector<Renderable*> renderables;
+    //std::vector<Enemy*> enemies;
 
     //trying to work with unique pointers
     std::vector<std::unique_ptr<Renderable>> FiredShots;
-    //std::vector<std::unique_ptr<Enemy>> myEnemies;
+    std::vector<std::shared_ptr<Enemy>> enemies;
+
 
 
     Character character;
@@ -52,8 +53,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     while (running) {
         frame_start = SDL_GetTicks();
         
-        //level.SpawnEnemies(enemies);
-
+        level.SpawnEnemies(enemies);
 
         //Update renderables
         for (int i = 0; i < enemies.size();) {
@@ -64,7 +64,6 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
             else {
                 character.score += enemies[i]->GivePoints();
                 std::cout << "Character Score: "<< character.score << std::endl;
-                delete enemies[i];
                 enemies.erase(enemies.begin()+i); 
             }
         }
@@ -119,12 +118,12 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         }
 
     }
-
+    /*
     for (int i = 0; i < enemies.size();) {
         //std::cout << "Deleting enemies" << std::endl;
         delete enemies[i];
         //std::cout << "Removing enemy pointer from vector" << std::endl;
         enemies.erase(enemies.begin()+i); 
-    }
+    }*/
 
 }

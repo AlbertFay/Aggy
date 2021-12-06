@@ -120,7 +120,7 @@ std::vector<std::unique_ptr<Renderable>>&& CollisionManager::CheckCollisions(std
     return std::move(FiredShots);
 }
 
-void CollisionManager::CheckCollisions(std::vector<Enemy *> &enemies, GameMap &map)
+void CollisionManager::CheckCollisions(std::vector<std::shared_ptr<Enemy>> &enemies, GameMap &map)
 {
     //Iterate through all the game tiles and check if they are solid (meaning they are collidable)
     for (auto enemies : enemies){
@@ -199,7 +199,7 @@ void CollisionManager::CheckCollisions(std::vector<Enemy *> &enemies, GameMap &m
     }
 };
 
-std::vector<std::unique_ptr<Renderable>>&& CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, std::vector<std::unique_ptr<Renderable>> &&FiredShots) {
+std::vector<std::unique_ptr<Renderable>>&& CollisionManager::CheckCollisions(std::vector<std::shared_ptr<Enemy>> &enemies, std::vector<std::unique_ptr<Renderable>> &&FiredShots) {
     for(auto enemy: enemies){
         for(auto &object: FiredShots){
             //Checking if there is a collision using AABB collision detection
@@ -220,7 +220,7 @@ std::vector<std::unique_ptr<Renderable>>&& CollisionManager::CheckCollisions(std
     return std::move(FiredShots);
 };
 
-void CollisionManager::CheckCollisions(std::vector<Enemy*> &enemies, Character &character){
+void CollisionManager::CheckCollisions(std::vector<std::shared_ptr<Enemy>> &enemies, Character &character){
     for(auto enemy: enemies){
         //Checking if there is a collision using AABB collision detection
         if (enemy->GetX() + enemy->GetWidth() >= character.hitBox_.x &&

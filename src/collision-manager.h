@@ -12,10 +12,9 @@ class CollisionManager{
     CollisionManager();
     void CheckCollisions(Character &character, GameMap &map); //Implemented
     std::vector<std::unique_ptr<Renderable>>&& CheckCollisions(std::vector<std::unique_ptr<Renderable>> &&FiredShots, GameMap &map); //Implemented
-    
-    void CheckCollisions(std::vector<Enemy*> &enemies, GameMap &map); //Implemented
-    std::vector<std::unique_ptr<Renderable>>&& CheckCollisions(std::vector<Enemy*> &enemies, std::vector<std::unique_ptr<Renderable>> &&FiredShots); //Implemented
-    void CheckCollisions(std::vector<Enemy*> &enemies, Character &character); //Implemented
+    void CheckCollisions(std::vector<std::shared_ptr<Enemy>> &enemies, GameMap &map); //Implemented
+    std::vector<std::unique_ptr<Renderable>>&& CheckCollisions(std::vector<std::shared_ptr<Enemy>> &enemies, std::vector<std::unique_ptr<Renderable>> &&FiredShots); //Implemented
+    void CheckCollisions(std::vector<std::shared_ptr<Enemy>> &enemies, Character &character); //Implemented
     void LoadResources(SDL_Renderer *renderer, ResourceManager &resources);
 
   private:

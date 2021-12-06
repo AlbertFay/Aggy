@@ -4,6 +4,7 @@
 #include <vector>
 #include "enemy.h"
 #include <cmath>
+#include <memory>
 #include "ghost.h"
 
 class Level {
@@ -14,7 +15,7 @@ class Level {
     };
     
     Level();
-    void SpawnEnemies(std::vector<Enemy*> &enemies);
+    void SpawnEnemies(std::vector<std::shared_ptr<Enemy>> &enemies);
     private:
     std::vector<Coordinate> coordinates_;
     uint32_t timer_ = SDL_GetTicks();
