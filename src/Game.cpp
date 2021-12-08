@@ -6,26 +6,21 @@ Game::Game(int number):_number(number){
     std::cout << "The game object has been constructed" << std::endl;
 }
 
+
 void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceManager &resources){
     uint32_t title_timestamp = SDL_GetTicks();
     uint32_t frame_start, frame_end, frame_duration;
     int frame_count = 0;
     bool running = true;
 
-    //std::vector<Renderable*> renderables;
-    //std::vector<Enemy*> enemies;
-
-    //trying to work with unique pointers
     std::vector<std::unique_ptr<Renderable>> FiredShots;
     std::vector<std::shared_ptr<Enemy>> enemies;
 
-
-
     Character character;
     SDL_Renderer *pointToRenderer = renderer.GetRenderer();
-    CollisionManager collisions;
+    CollisionManager collisions; 
     Level level;
-    
+
     std::thread t1([&renderer, &resources](){
         renderer.LoadUI(resources);
         std::cout << "T1 has finished" << std::endl;
@@ -46,7 +41,6 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     t2.join();
     t3.join();
     t4.join();
-
     
     GameMap gamemap(resources);
     
@@ -89,7 +83,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         collisions.CheckCollisions(enemies, gamemap);
         collisions.CheckCollisions(enemies, std::move(FiredShots));
         collisions.CheckCollisions(enemies, character);
-        
+
         //Render
         renderer.Render(character, std::move(FiredShots), enemies, resources, gamemap);
 
@@ -118,12 +112,4 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         }
 
     }
-    /*
-    for (int i = 0; i < enemies.size();) {
-        //std::cout << "Deleting enemies" << std::endl;
-        delete enemies[i];
-        //std::cout << "Removing enemy pointer from vector" << std::endl;
-        enemies.erase(enemies.begin()+i); 
-    }*/
-
 }

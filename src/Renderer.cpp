@@ -126,7 +126,7 @@ void Renderer::EndMenu(ResourceManager &resources)
   menuScreen.w = 1024;
   menuScreen.h = 1024;
 
-  TTF_Font *Sans = TTF_OpenFont("C:/C++ Development/C++ Projects/Aggy/Fonts/open-sans.ttf", 72);
+  TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 72);
   if (!Sans)
   {
     printf("TTF_OpenFont: %s\n", TTF_GetError());
@@ -154,7 +154,7 @@ void Renderer::EndMenu(ResourceManager &resources)
 void Renderer::LoadEndMenuResources(ResourceManager &resources)
 {
   SDL_Color white = {255, 255, 255};
-  TTF_Font *Sans = TTF_OpenFont("C:/C++ Development/C++ Projects/Aggy/Fonts/open-sans.ttf", 144);
+  TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 144);
   if (!Sans)
   {
     printf("TTF_OpenFont: %s\n", TTF_GetError());
@@ -166,13 +166,13 @@ void Renderer::LoadEndMenuResources(ResourceManager &resources)
 
 void Renderer::LoadUI(ResourceManager &resources){
   SDL_Color white = {255, 255, 255};
-  TTF_Font* Sans = TTF_OpenFont("C:/C++ Development/C++ Projects/Aggy/Fonts/open-sans.ttf", 144);
+  TTF_Font* Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 144);
   if(!Sans) {
     printf("TTF_OpenFont: %s\n", TTF_GetError());
     // handle error
   }
   resources.LoadText(sdl_renderer, ("Score: "), Sans, white);
-  resources.LoadTexture(sdl_renderer, ("Health Bar Outline"), "C:/C++ Development/C++ Projects/Aggy/Resources/Images/health bar_outline.png");
+  resources.LoadTexture(sdl_renderer, ("Health Bar Outline"), "../Resources/Images/health bar_outline.png");
   resources.LoadText(sdl_renderer, ("1"), Sans, white);
   resources.LoadText(sdl_renderer, ("2"), Sans, white);
   resources.LoadText(sdl_renderer, ("3"), Sans, white);

@@ -23,10 +23,10 @@ void Level::SpawnEnemies(std::vector<std::shared_ptr<Enemy>> &enemies){
         ghost->SetX(coordinates_.at(randomNumber).x_);
         ghost->SetY(coordinates_.at(randomNumber).y_);
         enemies.push_back(ghost);
-        std::cout << "ghost has been created" << std::endl;
+        // std::cout << "ghost has been created" << std::endl;
         max_ = 8000;
         randomTime_ = std::round(min_ + (float)(rand()) / ((float)(RAND_MAX / (max_ - min_))));
-        std::cout << "randomTime = " << randomTime_ << std::endl;
+        // std::cout << "randomTime = " << randomTime_ << std::endl;
         
     }
 };
