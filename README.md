@@ -42,10 +42,14 @@
 
 * Loops, Functions, I/O
   1. The project demonstrates an understandings of C++ functions and control structures.
+    - The whole project?
   2. The project reads datat from a file and processes the data, or the program writes data to a file.
+    - gamemap.cpp Gamemap::LoadMap line-19: Takes input from text file and sets background tiles for game
   3. The project accepts user input and processes the input.
+    - controller.cpp: THe whole file is for taking in keyboard and mouse inputs from user and moves character in game
 * Object Oriented Programming
   1. The project uses Object Oriented Programming techniques.
+    - The whole Project?
   2. Classes use appropriate access specifiers for class members.
   3. Class constructors utilize member initialization lists.
   4. Classes abstract implementation details from their interfaces.
