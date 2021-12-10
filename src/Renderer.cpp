@@ -115,7 +115,7 @@ void Renderer::UpdateWindowTitle()
 {
 }
 
-void Renderer::EndMenu(ResourceManager &resources)
+void Renderer::EndMenu(ResourceManager &resources, int score, std::vector<MenuBoxes> &menuBoxes)
 {
   //SDL_RenderClear(sdl_renderer);
   SDL_SetRenderDrawBlendMode(sdl_renderer, SDL_BLENDMODE_BLEND);
@@ -132,6 +132,8 @@ void Renderer::EndMenu(ResourceManager &resources)
     printf("TTF_OpenFont: %s\n", TTF_GetError());
     // handle error
   }
+  
+  double percent = 1024 / 100;
 
   SDL_Rect game_over; //create a rect
   game_over.x = 100;  //controls the rect's x coordinate
@@ -146,8 +148,39 @@ void Renderer::EndMenu(ResourceManager &resources)
   your_score.w = 400;  // controls the width of the rect
   your_score.h = 100;  // controls the height of the rect
   SDL_RenderCopy(sdl_renderer, resources.getTexture("Your Score: "), NULL, &your_score);
+  
+  digit_rect_.w = 4*percent;
+  digit_rect_.h = your_score.h;
+  digit_rect_.y = your_score.y;
+ 
+    int reversescore = 0;
+    std::vector<int> scoredigits;
+    while(score >= 10){
+      reversescore = score % 10;
+      score = score / 10; 
+      scoredigits.push_back(reversescore);
+    }
+    scoredigits.push_back(score);
+    int digits = 0;
+    while(scoredigits.size() > 0){
+      score = scoredigits.back();
+      digit_rect_.x = ((your_score.x + (your_score.w )) + (digits * digit_rect_.w));
+      SDL_RenderCopy(sdl_renderer, resources.getTexture(std::to_string(score)), NULL, &digit_rect_);
+      digits += 1;
+      scoredigits.pop_back();
+    }
 
   SDL_RenderFillRect(sdl_renderer, &menuScreen);
+  //**********************************************************************************************************************************************
+  SDL_SetRenderDrawColor(sdl_renderer, 15, 15, 255, 255);
+  if(menuBoxes[0].collision_ == true){
+    SDL_RenderFillRect(sdl_renderer, &(menuBoxes[0].box_));
+  }
+  else{
+    SDL_RenderDrawRect(sdl_renderer, &(menuBoxes[0].box_));
+  }
+  //**********************************************************************************************************************************************
+
   SDL_RenderPresent(sdl_renderer);
 };
 
@@ -229,4 +262,13 @@ void Renderer::RenderUI(ResourceManager &resources, Character &character){
       digits += 1;
       scoredigits.pop_back();
     }
+};
+
+void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes){
+  menuBoxes.clear();
+  play_again_.x = 400;
+  play_again_.y = 400;
+  play_again_.w = 250;
+  play_again_.h = 100;
+  menuBoxes.emplace_back(MenuBoxes(play_again_, false));
 };

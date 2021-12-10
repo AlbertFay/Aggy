@@ -236,6 +236,19 @@ void CollisionManager::CheckCollisions(std::vector<std::shared_ptr<Enemy>> &enem
     }
 };
 
+void CollisionManager::CheckCollisions(std::vector<Renderer::MenuBoxes> &boxes){
+    int x,y;
+    SDL_GetMouseState(&x, &y);
+    for(auto &box: boxes){
+        if(x > box.box_.x && x < (box.box_.x + box.box_.w) && y > box.box_.y && y < box.box_.y + box.box_.h){
+            box.collision_ = true;
+        }
+        else{
+            box.collision_ = false;
+        }
+    }
+};
+
 void CollisionManager::LoadResources(SDL_Renderer *renderer, ResourceManager &resources){
     resources.LoadTexture(renderer, "crate", "../Resources/Images/crate.png");
     resources.LoadTexture(renderer, "stone path", "../Resources/Images/stone path.png");

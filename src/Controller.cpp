@@ -74,6 +74,11 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &ch
             character.SetSpeed(character.defaultspeed);
         }
 
+        //BE SURE TO REMOVE THIS WHEN DONE
+        if(keystate[SDL_SCANCODE_F1]){
+            character.health_ = 0;
+        }
+
         if(leftMouseButton_ ==  true && buttonRelease_ == false){ 
             character.Shoot(std::move(FiredShots));
             character.Update();

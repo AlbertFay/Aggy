@@ -1,6 +1,7 @@
 #include "game.h"
 #include <thread>
 #include "pthread.h"
+#include "collision-manager.h"
 
 Game::Game(int number):_number(number){
     std::cout << "The game object has been constructed" << std::endl;
@@ -20,6 +21,10 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     SDL_Renderer *pointToRenderer = renderer.GetRenderer();
     CollisionManager collisions; 
     Level level;
+    std::vector<Renderer::MenuBoxes> EndMenuBoxes_;
+    //Renderer::MenuBoxes banabnana;
+
+    renderer.LoadEndMenuBoxes(EndMenuBoxes_);
 
     std::thread t1([&renderer, &resources](){
         renderer.LoadUI(resources);
@@ -90,8 +95,9 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         frame_end = SDL_GetTicks();
 
         while(!character.IsAlive() && running == true){
-            renderer.EndMenu(resources);
             controller.MenuInput(running);
+            collisions.CheckCollisions(EndMenuBoxes_);
+            renderer.EndMenu(resources, character.score, EndMenuBoxes_);
         }
 
         // Keep track of how long each loop through Input/Update/Render cycles takes.
