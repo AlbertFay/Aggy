@@ -20,6 +20,7 @@ class Renderer {
         MenuBoxes(SDL_Rect box, bool collision):box_(box), collision_(collision){};
         SDL_Rect box_;
         bool collision_;
+        bool boxClicked_ = false;
     };
 
     Renderer(const std::size_t screen_height, const std::size_t screen_width, const std::size_t grid_height, const std::size_t grid_width);

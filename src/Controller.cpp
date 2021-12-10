@@ -90,11 +90,19 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &ch
     return std::move(FiredShots);
 };
 
-void Controller::MenuInput(bool &running){
+void Controller::MenuInput(bool &running, std::vector<Renderer::MenuBoxes> &boxes){
     SDL_Event e;
     while (SDL_PollEvent(&e)){
         if(e.type == SDL_QUIT){
             running = false;
+        }
+        if(e.button.button == SDL_BUTTON_LEFT && e.button.type == SDL_MOUSEBUTTONDOWN){
+            for(auto &box: boxes){
+                if(box.collision_ == true){
+                    box.boxClicked_ == true;
+                    std::cout << "Box has been clicked" << std::endl;
+                }
+            }
         }
         else if (e.type == SDL_KEYDOWN){
             //this is key being pressed down
@@ -107,5 +115,11 @@ void Controller::MenuInput(bool &running){
             }
             
         }
+    }
+};
+
+void Controller::EndMenuFunctions(std::vector<Renderer::MenuBoxes> &boxes){
+    if(boxes[0].boxClicked_){
+        //reset game somehow
     }
 };

@@ -95,8 +95,8 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         frame_end = SDL_GetTicks();
 
         while(!character.IsAlive() && running == true){
-            controller.MenuInput(running);
             collisions.CheckCollisions(EndMenuBoxes_);
+            controller.MenuInput(running, EndMenuBoxes_);
             renderer.EndMenu(resources, character.score, EndMenuBoxes_);
         }
 
