@@ -20,6 +20,9 @@
 
 class Game {
   public:
+  
+  //Timer using RAII to determine how long a program runs until
+  //it reaches end of scope
   struct Timer{
     public:
       Timer(){};

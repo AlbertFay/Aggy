@@ -61,7 +61,12 @@
   1. The project makes use of references in function declarations.
   2. The project uses destructors appropriately.
   3. The project follows the Rule of 5.
+    -resource-manager.cpp
   4. The project uses smart pointers instead of raw pointers.
+    -game.cpp Game::Run() Line 17, 18
 * Concurrency
   1. The project uses multithreading.
-  2. A mutex or lock is used in the project 
+    -game.cpp Game::run() line:29-48
+  2. A mutex or lock is used in the project
+    -resource-manager.h line 16
+    -resource-manager.cpp ResourceManager::LoadTexture(), ResourceManager::LoadText(), ResourceManager::GetTexture()
