@@ -179,6 +179,14 @@ void Renderer::EndMenu(ResourceManager &resources, int score, std::vector<MenuBo
   else{
     SDL_RenderDrawRect(sdl_renderer, &(menuBoxes[0].box_));
   }
+
+  SDL_SetRenderDrawColor(sdl_renderer, 255, 15, 15, 255);
+  if(menuBoxes[1].collision_ == true){
+    SDL_RenderFillRect(sdl_renderer, &(menuBoxes[1].box_));
+  }
+  else{
+    SDL_RenderDrawRect(sdl_renderer, &(menuBoxes[1].box_));
+  }
   //**********************************************************************************************************************************************
 
   SDL_RenderPresent(sdl_renderer);
@@ -271,4 +279,10 @@ void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes){
   play_again_.w = 250;
   play_again_.h = 100;
   menuBoxes.emplace_back(MenuBoxes(play_again_, false));
+
+  quit_.x = 400;
+  quit_.y = 600;
+  quit_.w = 250;
+  quit_.h = 100;
+  menuBoxes.emplace_back(MenuBoxes(quit_, false));
 };

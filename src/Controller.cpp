@@ -1,6 +1,7 @@
 #include "controller.h"
 
 #include <iostream>
+#include <thread>
 
 void Controller::ChangeDirection()
 {
@@ -56,7 +57,7 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &ch
             character.Update(Character::Direction::kDown);
         }
         if (keystate[SDL_SCANCODE_ESCAPE]){
-            running = false;
+            // running = false;
         }
 
         if (keystate[SDL_SCANCODE_Q]){
@@ -99,7 +100,7 @@ void Controller::MenuInput(bool &running, std::vector<Renderer::MenuBoxes> &boxe
         if(e.button.button == SDL_BUTTON_LEFT && e.button.type == SDL_MOUSEBUTTONDOWN){
             for(auto &box: boxes){
                 if(box.collision_ == true){
-                    box.boxClicked_ == true;
+                    box.boxClicked_ = true;
                     std::cout << "Box has been clicked" << std::endl;
                 }
             }
@@ -110,7 +111,7 @@ void Controller::MenuInput(bool &running, std::vector<Renderer::MenuBoxes> &boxe
                 
                 case SDLK_ESCAPE:
                 std::cout << "Escape key is pressed" << "\n";
-                running = false;
+                // running = false;
                 break;
             }
             
@@ -118,8 +119,22 @@ void Controller::MenuInput(bool &running, std::vector<Renderer::MenuBoxes> &boxe
     }
 };
 
-void Controller::EndMenuFunctions(std::vector<Renderer::MenuBoxes> &boxes){
+std::vector<std::unique_ptr<Renderable>>&& Controller::EndMenuFunctions(std::vector<Renderer::MenuBoxes> &boxes, Character &character, std::vector<std::shared_ptr<Enemy>> &enemies, std::vector<std::unique_ptr<Renderable>> &&FiredShots, GameMap &map, bool &running){
+    // Box[0] "Play Again"
     if(boxes[0].boxClicked_){
+        std::cout << "Does this run part 2" << std::endl;
         //reset game somehow
+        character.Reset();
+        enemies.clear();
+        FiredShots.clear();
+        boxes[0].boxClicked_ = false;
+        map.LoadMap("C:\\C++ Development\\C++ Projects\\Aggy\\maps\\map.txt");
+        std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
+
+    // Box[1] "Quit"
+    if(boxes[1].boxClicked_){
+        running = false;
+    }
+    return std::move(FiredShots); 
 };

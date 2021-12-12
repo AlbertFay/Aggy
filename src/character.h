@@ -32,6 +32,7 @@ class Character {
     void Died();
     void TakeDamage(int damage) {health_ -= damage;};
     void LoadResources(SDL_Renderer *renderer, ResourceManager &resources);
+    void Reset();
     SDL_Rect hitBox_;
 
     // Getters/Setters

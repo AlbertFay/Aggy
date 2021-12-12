@@ -138,3 +138,12 @@ void Character::LoadResources(SDL_Renderer *renderer, ResourceManager &resources
     resources.LoadTexture(renderer, "character", "../Resources/Images/wizard_shooting.png");
     resources.LoadTexture(renderer, "fireball", "../Resources/Images/red_fireball.png");
 };
+
+void Character::Reset(){
+    pos_x = 512;
+    pos_y = 512;
+    health_ = 5;
+    energy = 100;
+    score = 0;
+    isAlive_ = true;
+};

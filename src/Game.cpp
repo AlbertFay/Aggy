@@ -97,6 +97,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         while(!character.IsAlive() && running == true){
             collisions.CheckCollisions(EndMenuBoxes_);
             controller.MenuInput(running, EndMenuBoxes_);
+            controller.EndMenuFunctions(EndMenuBoxes_, character, enemies, std::move(FiredShots), gamemap, running);
             renderer.EndMenu(resources, character.score, EndMenuBoxes_);
         }
 
