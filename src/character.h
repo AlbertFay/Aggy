@@ -21,7 +21,7 @@ class Character {
     int mousex = 0;
     int mousey = 0;
     const float defaultspeed = 2;
-  
+
     Character();
     std::vector<std::unique_ptr<Renderable>>&& Shoot(std::vector<std::unique_ptr<Renderable>> &&FiredShots);
     void Update(Direction direction);
@@ -29,36 +29,45 @@ class Character {
     void Sprint(int speed);
     void SetTexture(SDL_Renderer* renderer);
     void Render(SDL_Renderer* renderer, ResourceManager &resources);
-    void Died();
     void TakeDamage(int damage) {health_ -= damage;};
     void LoadResources(SDL_Renderer *renderer, ResourceManager &resources);
     void Reset();
     SDL_Rect hitBox_;
 
-    // Getters/Setters
+    // Returns character's angle
     float GetAngle() {
       return angle;
     };
 
+    // Returns character's x position
     float GetX() {
       return pos_x;
     };
+
+    // Returns character's y position
     float GetY() {
       return pos_y;
     };
+
+    // Returns character width
     float GetWidth() {
       return width;
     };
+    
+    // Returns character height
     float GetHeight() {
       return height;
     };
+
+    // Returns isAlive_ bool for character
     bool IsAlive(){
       return isAlive_;
     }
-    /*
-    0 means collision on right
-    -1 means collision on left
-    1 means no collision
+
+    /**
+     * 0 means collision on right
+     * -1 means collision on left
+     * 1 means no collision
     */
     void SetXCollisionSpeed(float speed) {
       if(speed == 0){
@@ -72,10 +81,11 @@ class Character {
         x_left_collision_speed = 1;
       }
     };
-    /*
-    0 means collision on top
-    -1 means collision on bottom
-    1 means no collision
+    
+    /**
+     * 0 means collision on top
+     * -1 means collision on bottom
+     * 1 means no collision
     */
     void SetYCollisionSpeed(float speed) {
       if(speed == 0){
@@ -89,13 +99,22 @@ class Character {
         y_down_collision_speed = 1;
       }
     };
+
+    /**
+     * Moves character's x position by offset amount
+    */
     void SetXOffset(int offset){
       pos_x = hitBox_.x - offset;
     };
+
+    /**
+     * Moves character's y position by offset amount
+    */
     void SetYOffset(int offset){
       pos_y = hitBox_.y - offset;
     };
 
+    //Sets character speed
     void SetSpeed(int speed){speed_ = speed;};
 
   private:
