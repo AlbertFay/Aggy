@@ -3,10 +3,10 @@
 #include <iostream>
 #include <thread>
 
-void Controller::ChangeDirection()
-{
-}
-
+/**
+ * Controls character and game by taking in keyboard
+ * and mouse inputs and updating the character and game
+ */
 std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &character, bool &running, std::vector<std::unique_ptr<Renderable>> &&FiredShots)
 {
     //character.SetSpeed(character.defaultspeed);
@@ -91,26 +91,31 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &ch
     return std::move(FiredShots);
 };
 
+/**
+ * Handles keyboard and mouse inputs while in a menu
+ */
 void Controller::MenuInput(bool &running, std::vector<Renderer::MenuBoxes> &boxes){
+    //Create an event and poll event
     SDL_Event e;
     while (SDL_PollEvent(&e)){
         if(e.type == SDL_QUIT){
             running = false;
         }
+        // If left mouse button is clicked
         if(e.button.button == SDL_BUTTON_LEFT && e.button.type == SDL_MOUSEBUTTONDOWN){
             for(auto &box: boxes){
                 if(box.collision_ == true){
                     box.boxClicked_ = true;
-                    std::cout << "Box has been clicked" << std::endl;
                 }
             }
         }
+        // This section checks for keyboard inputs
         else if (e.type == SDL_KEYDOWN){
             //this is key being pressed down
             switch (e.key.keysym.sym) {
                 
+                //Currently Unused
                 case SDLK_ESCAPE:
-                std::cout << "Escape key is pressed" << "\n";
                 // running = false;
                 break;
             }
@@ -119,11 +124,13 @@ void Controller::MenuInput(bool &running, std::vector<Renderer::MenuBoxes> &boxe
     }
 };
 
+/**
+ * Determines what each menu box does for the End Menu
+ */
 std::vector<std::unique_ptr<Renderable>>&& Controller::EndMenuFunctions(std::vector<Renderer::MenuBoxes> &boxes, Character &character, std::vector<std::shared_ptr<Enemy>> &enemies, std::vector<std::unique_ptr<Renderable>> &&FiredShots, GameMap &map, bool &running){
     // Box[0] "Play Again"
     if(boxes[0].boxClicked_){
-        std::cout << "Does this run part 2" << std::endl;
-        //reset game somehow
+        //Reset Game
         character.Reset();
         enemies.clear();
         FiredShots.clear();
@@ -134,6 +141,7 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::EndMenuFunctions(std::vec
 
     // Box[1] "Quit"
     if(boxes[1].boxClicked_){
+        //Stops the game loop and closes application
         running = false;
     }
     return std::move(FiredShots); 

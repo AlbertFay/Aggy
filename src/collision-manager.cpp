@@ -1,13 +1,15 @@
 #include "collision-manager.h"
 #include <stdlib.h>
 
-//Is the collision manager an abstract class or does it have working functions?
+/**
+ * Default constructor for CollisionManager
+ */
+CollisionManager::CollisionManager() {};
 
-CollisionManager::CollisionManager()
-{
-    //Collision Manager Class has been created.
-}
-
+/**
+ * Checks for collisions for the character against all solid
+ * objects in the gamemap.
+ */
 void CollisionManager::CheckCollisions(Character &character, GameMap &map)
 {
     character.SetXCollisionSpeed(1);
@@ -81,8 +83,12 @@ void CollisionManager::CheckCollisions(Character &character, GameMap &map)
             }
         }
     }
-}
+};
 
+/**
+ * Checks for collisions for all FiredShot objects in vector against
+ * all solid objects in the gamemap
+ */
 std::vector<std::unique_ptr<Renderable>>&& CollisionManager::CheckCollisions(std::vector<std::unique_ptr<Renderable>> &&FiredShots, GameMap &map)
 {
     //For each object in renderables, check for collisions against map tiles
@@ -118,8 +124,11 @@ std::vector<std::unique_ptr<Renderable>>&& CollisionManager::CheckCollisions(std
         }
     }
     return std::move(FiredShots);
-}
+};
 
+/**
+ * Checks collisions for all enemies against the map
+ */
 void CollisionManager::CheckCollisions(std::vector<std::shared_ptr<Enemy>> &enemies, GameMap &map)
 {
     //Iterate through all the game tiles and check if they are solid (meaning they are collidable)
@@ -199,6 +208,12 @@ void CollisionManager::CheckCollisions(std::vector<std::shared_ptr<Enemy>> &enem
     }
 };
 
+/**
+ * Checks collision for any enemies in the vector
+ * against any FiredShots in the vector. If there is
+ * a collision, fireshot is destroyed, and enemy takes
+ * damaged determined by firedshot object
+ */
 std::vector<std::unique_ptr<Renderable>>&& CollisionManager::CheckCollisions(std::vector<std::shared_ptr<Enemy>> &enemies, std::vector<std::unique_ptr<Renderable>> &&FiredShots) {
     for(auto enemy: enemies){
         for(auto &object: FiredShots){
@@ -220,6 +235,12 @@ std::vector<std::unique_ptr<Renderable>>&& CollisionManager::CheckCollisions(std
     return std::move(FiredShots);
 };
 
+/**
+ * Checks collision with the character hitbox
+ * and any enemy in the vector. If there is
+ * a collision, character takes damage determined
+ * by enemy
+ */
 void CollisionManager::CheckCollisions(std::vector<std::shared_ptr<Enemy>> &enemies, Character &character){
     for(auto enemy: enemies){
         //Checking if there is a collision using AABB collision detection
@@ -236,6 +257,10 @@ void CollisionManager::CheckCollisions(std::vector<std::shared_ptr<Enemy>> &enem
     }
 };
 
+/**
+ * Checks collision to see if mouse is inside
+ * of a menu box
+ */
 void CollisionManager::CheckCollisions(std::vector<Renderer::MenuBoxes> &boxes){
     int x,y;
     SDL_GetMouseState(&x, &y);
@@ -249,6 +274,9 @@ void CollisionManager::CheckCollisions(std::vector<Renderer::MenuBoxes> &boxes){
     }
 };
 
+/**
+ * Uses SDL_Renderer to create and load textures
+ */
 void CollisionManager::LoadResources(SDL_Renderer *renderer, ResourceManager &resources){
     resources.LoadTexture(renderer, "crate", "../Resources/Images/crate.png");
     resources.LoadTexture(renderer, "stone path", "../Resources/Images/stone path.png");
