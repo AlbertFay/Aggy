@@ -27,7 +27,6 @@ class Character {
     void Update(Direction direction);
     void Update();
     void Sprint(int speed);
-    void SetTexture(SDL_Renderer* renderer);
     void Render(SDL_Renderer* renderer, ResourceManager &resources);
     void TakeDamage(int damage) {health_ -= damage;};
     void LoadResources(SDL_Renderer *renderer, ResourceManager &resources);
