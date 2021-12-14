@@ -39,11 +39,10 @@ class Game {
     std::chrono::time_point<std::chrono::high_resolution_clock> end_ = std::chrono::high_resolution_clock::now();
 
   };
-    Game(int number);
+    Game();
     void Run(Renderer &renderer, Controller &controller, float FPS, ResourceManager &resources);
 
   private:
-  int _number;
 };
 
 #endif

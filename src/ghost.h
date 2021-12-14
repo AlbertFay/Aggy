@@ -13,19 +13,19 @@ class Ghost: public Enemy{
         enum class anim_Sequence{walk};
         Ghost();
         Ghost(int x, int y);
-        ~Ghost();
-        void Update(int x, int y);
-        void Update();
-        void RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources);
-        float GetX(){return x_;};
-        float GetY(){return y_;};
-        float GetHeight(){return width_;};
-        float GetWidth(){return height_;};
-        void SetX(int x){x_ = x;};
-        void SetY(int y){y_ = y;};
-        void SetXOffset(int offset) {xOffset_ = offset;};
-        void SetYOffset(int offset) {xOffset_ = offset;};
-        void SetYCollisionSpeed(int collisionDirection) {
+        ~Ghost() override;
+        void Update(int x, int y) override;
+        void Update() override;
+        void RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources) override;
+        float GetX() override {return x_;};
+        float GetY() override {return y_;};
+        float GetHeight() override {return width_;};
+        float GetWidth() override {return height_;};
+        void SetX(int x) {x_ = x;};
+        void SetY(int y) {y_ = y;};
+        void SetXOffset(int offset) override {xOffset_ = offset;};
+        void SetYOffset(int offset) override {xOffset_ = offset;};
+        void SetYCollisionSpeed(int collisionDirection) override {
             if (collisionDirection != 1){
                 yCollisionDirection_ = collisionDirection;
                 // std::cout << "collision direction in h file" << yCollisionDirection_ << std::endl;
@@ -35,7 +35,7 @@ class Ghost: public Enemy{
                 yCollisionDirection_ = 1;
             }
         };
-        void SetXCollisionSpeed(int collisionDirection) {
+        void SetXCollisionSpeed(int collisionDirection) override {
             if (collisionDirection != 1){
                 xCollisionDirection_ = collisionDirection;
                 // std::cout << "collision direction in h file" << xCollisionDirection_ << std::endl;
@@ -45,12 +45,12 @@ class Ghost: public Enemy{
                 xCollisionDirection_ = 1;
             }
         };
-        bool Exists(); //This function checks to see if the object is still alive or not
-        void Died(){exists_ = false;};
-        void TakeDamage(int damage);
-        int GetHealth(){return health_;};
-        int GiveDamage();
-        int GivePoints();
+        bool Exists() override; //This function checks to see if the object is still alive or not
+        void Died() override {exists_ = false;};
+        void TakeDamage(int damage) override;
+        int GetHealth() override {return health_;};
+        int GiveDamage() override;
+        int GivePoints() override;
         float Animation(anim_Sequence animationSequence);
         void LoadAnimation();
 

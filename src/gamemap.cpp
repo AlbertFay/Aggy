@@ -1,8 +1,11 @@
 #include "gamemap.h"
 
-
 using namespace std;
 
+/**
+ * Constructor for Gamemap, constructs the grid as well
+ * as calling GameMap::LoadMap("map.txt");
+ */
 GameMap::GameMap(ResourceManager &resources): resources_(resources){
     GameMap::LoadMap("C:\\C++ Development\\C++ Projects\\Aggy\\maps\\map.txt");
 
@@ -16,15 +19,22 @@ GameMap::GameMap(ResourceManager &resources): resources_(resources){
     }
 }
 
+/**
+ * Loads a map, and assigns a blocktype to each gridspace
+ * as determined by file. Also sets up health for gridspace objects
+ * and if object is solid if needed.
+ */
 void GameMap::LoadMap(string fileName) {
     ifstream file;
     file.open(fileName);
     string line;
     if(file.is_open()){
+            //Parse throught each line in the file
             for(int i = 0; i < 16; i++){
                 getline(file, line);
                 stringstream stream(line);
                 while(stream.good()){
+                    // Parse through each number in the line
                     for(int j = 0; j < 16; j++){
                         string number;
                         getline(stream, number, ',');
@@ -32,12 +42,10 @@ void GameMap::LoadMap(string fileName) {
                         array[i][j].num_block = num;
                         switch(array[i][j].num_block){
                             case 0:
-                            // std::cout << "this is case 0" << endl;
                             array[i][j].blocktype_ = Grid_Space::blockType::nothing;
                             break;
 
                             case 1:
-                            // std::cout << "this is case 1" << endl;
                             array[i][j].blocktype_ = Grid_Space::blockType::stone_path;
                             break;
 
@@ -98,8 +106,11 @@ void GameMap::LoadMap(string fileName) {
     else{
         std::cout << "couldnt open file" << endl;
     }
-}
+};
 
+/**
+ * Renders the gamemap.
+ */
 void GameMap::RenderMap(SDL_Renderer* renderer) {
     SDL_Rect sprite1;
     SDL_Rect sprite2;
@@ -193,8 +204,4 @@ void GameMap::RenderMap(SDL_Renderer* renderer) {
             }
         }
     }
-}
-
-void GameMap::Update() {
-
-}
+};

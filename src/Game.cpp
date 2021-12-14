@@ -3,7 +3,10 @@
 #include "pthread.h"
 #include "collision-manager.h"
 
-Game::Game(int number):_number(number){
+/**
+ * Default Constructor for Game object
+ */
+Game::Game(){
     std::cout << "The game object has been constructed" << std::endl;
 }
 
@@ -113,7 +116,6 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
 
         // After every second, update title screen
         if(frame_end - title_timestamp >= 1000) {
-            renderer.UpdateWindowTitle();
             frame_count = 0;
             title_timestamp = frame_end;
         }

@@ -14,6 +14,10 @@
 
 class Renderer {
   public:
+    /**
+     * Struct of MenuBox that holds an SDL_Rect with other properties
+     * for further use as a button
+     */
     struct MenuBoxes{
       public:
         MenuBoxes();
@@ -27,7 +31,6 @@ class Renderer {
     ~Renderer();
 
     std::vector<std::unique_ptr<Renderable>>&& Render(Character &character, std::vector<std::unique_ptr<Renderable>> &&firedShot, std::vector<std::shared_ptr<Enemy>> &enemies, ResourceManager &resources, GameMap &gamemap);
-    void UpdateWindowTitle();
     SDL_Renderer* GetRenderer();
     void EndMenu(ResourceManager &resources, int score, std::vector<MenuBoxes> &menuBoxes);
     void LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes);

@@ -9,8 +9,14 @@
 
 class Level {
     public:
+    /**
+     * Struct to hold x,y coordinates
+     */
     struct Coordinate{
        int x_, y_;
+       /**
+        * Default constructor for struct that holds x,y coordinates
+        */
        Coordinate(int x, int y): x_(x), y_(y) {}
     };
     

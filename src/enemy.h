@@ -3,6 +3,11 @@
 #include <string>
 #include "renderable.h"
 
+/**
+ * Virtual class inheriting from Renderable
+ * Sets all the necessary classes that enemy object
+ * must have.
+ */
 class Enemy: public Renderable{
     public:
     virtual void Update() = 0;

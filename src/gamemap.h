@@ -13,13 +13,14 @@
 
 class GameMap {
   public:
-  
+    /**
+     * Structure to assign values to each gridspace on the
+     * gamemap.
+     */
     struct Grid_Space {
       public:
       enum class blockType {nothing, crate, stone_path, grass, grassToWater1, grassToWater2, water, shrub1, shrub2, flower1, flower2, flower3};
-        //TEMP
         bool collision_ = false;
-        //TEMP
         bool solidForCharacter = false; 
         bool solidForOther = false;
         float health_;
@@ -55,7 +56,7 @@ class GameMap {
     GameMap(ResourceManager &resources);
     void LoadMap(std::string fileName); //Intended for loading textures for blocks into map
     void RenderMap(SDL_Renderer* renderer);
-    void Update(); //Update to different maps 
+    void Update(); // Unused- Meant to update to different maps if implemented
 
 
     Grid_Space array[16][16];

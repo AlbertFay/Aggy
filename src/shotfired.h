@@ -13,21 +13,21 @@
 class ShotFired : public Renderable{
   public:
     ShotFired(float start_x, float start_y, float angle, double &energy);
-    ~ShotFired();
-    void RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources) ;
-    void Update();
-    bool Exists();
-    void Died();
-    float GetX(){
+    ~ShotFired() override;
+    void RenderRenderable(SDL_Renderer* renderer, ResourceManager &resources) override;
+    void Update() override;
+    bool Exists() override;
+    void Died() override;
+    float GetX() override {
       return x_pos_;
     };
-    float GetY(){
+    float GetY() override {
       return y_pos_;
     };
-    float GetWidth(){
+    float GetWidth() override {
       return width;
     };
-    float GetHeight(){
+    float GetHeight() override {
       return height;
     }
 
