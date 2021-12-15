@@ -189,20 +189,24 @@ void Renderer::EndMenu(ResourceManager &resources, int score, std::vector<MenuBo
     if (menuBoxes[0].collision_ == true)
     {
         SDL_RenderFillRect(sdl_renderer, &(menuBoxes[0].box_));
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("Play Again"), NULL, &menuBoxes[0].box_);
     }
     else
     {
         SDL_RenderDrawRect(sdl_renderer, &(menuBoxes[0].box_));
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("Play Again"), NULL, &menuBoxes[0].box_);
     }
 
     SDL_SetRenderDrawColor(sdl_renderer, 255, 15, 15, 255);
     if (menuBoxes[1].collision_ == true)
     {
         SDL_RenderFillRect(sdl_renderer, &(menuBoxes[1].box_));
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("  Quit  "), NULL, &menuBoxes[1].box_);
     }
     else
     {
         SDL_RenderDrawRect(sdl_renderer, &(menuBoxes[1].box_));
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("  Quit  "), NULL, &menuBoxes[1].box_);
     }
     //**********************************************************************************************************************************************
 
@@ -307,8 +311,16 @@ void Renderer::RenderUI(ResourceManager &resources, Character &character)
  * Sets up location of Menu Buttons on screen and puts
  * them into a vector to be used later
  */
-void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes)
+void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources, SDL_Renderer *renderer)
 {
+    SDL_Color white = {255, 255, 255};
+    TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 144);
+    if (!Sans)
+    {
+        printf("TTF_OpenFont: %s\n", TTF_GetError());
+        // handle error
+    }
+
     menuBoxes.clear();
     play_again_.x = 400;
     play_again_.y = 400;
@@ -321,4 +333,7 @@ void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes)
     quit_.w = 250;
     quit_.h = 100;
     menuBoxes.emplace_back(MenuBoxes(quit_, false));
+    
+    resources.LoadText(renderer, "Play Again", Sans, white);
+    resources.LoadText(renderer, "  Quit  ", Sans, white);
 };

@@ -30,7 +30,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     std::vector<Renderer::MenuBoxes> EndMenuBoxes_;
 
     //Load textures and necessary resources to be used later
-    renderer.LoadEndMenuBoxes(EndMenuBoxes_);
+    renderer.LoadEndMenuBoxes(EndMenuBoxes_, resources, pointToRenderer);
     std::thread t1([&renderer, &resources](){
         renderer.LoadUI(resources);
         std::cout << "T1 has finished" << std::endl;
