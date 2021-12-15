@@ -30,7 +30,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     std::vector<Renderer::MenuBoxes> EndMenuBoxes_;
 
     //Load textures and necessary resources to be used later
-    renderer.LoadEndMenuBoxes(EndMenuBoxes_, resources, pointToRenderer);
+    renderer.LoadEndMenuBoxes(EndMenuBoxes_, resources);
     std::thread t1([&renderer, &resources](){
         renderer.LoadUI(resources);
         std::cout << "T1 has finished" << std::endl;
@@ -46,10 +46,30 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     std::thread t4([&collisions, &pointToRenderer, &resources](){
         collisions.LoadResources(pointToRenderer, resources);
     });
+
+
     t1.join();
     t2.join();
     t3.join();
     t4.join();
+
+    /**
+     * Create Introduction to page and wait x seconds before
+     * player can move on.
+     */
+    bool startMenu = true;
+    bool allowControl = false;
+    std::chrono::time_point<std::chrono::high_resolution_clock> start_ = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::time_point_cast<std::chrono::seconds>(start_).time_since_epoch().count();
+    while(running == true && startMenu == true){
+        std::chrono::time_point<std::chrono::high_resolution_clock> end_ = std::chrono::high_resolution_clock::now();
+        auto end = std::chrono::time_point_cast<std::chrono::seconds>(end_).time_since_epoch().count();
+        if(end - start > 5){
+            allowControl = true;
+        }
+        controller.StartMenu(running, startMenu, allowControl);
+        renderer.StartPage();
+    }
     
     //Create and load map
     GameMap gamemap(resources);

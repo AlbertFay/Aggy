@@ -33,10 +33,11 @@ class Renderer {
     std::vector<std::unique_ptr<Renderable>>&& Render(Character &character, std::vector<std::unique_ptr<Renderable>> &&firedShot, std::vector<std::shared_ptr<Enemy>> &enemies, ResourceManager &resources, GameMap &gamemap);
     SDL_Renderer* GetRenderer();
     void EndMenu(ResourceManager &resources, int score, std::vector<MenuBoxes> &menuBoxes);
-    void LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources, SDL_Renderer *renderer);
+    void LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources);
     void LoadEndMenuResources(ResourceManager &resources);
     void LoadUI(ResourceManager &resources);
     void RenderUI(ResourceManager &resources, Character &character);
+    void StartPage();
 
 
   private:

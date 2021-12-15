@@ -311,7 +311,7 @@ void Renderer::RenderUI(ResourceManager &resources, Character &character)
  * Sets up location of Menu Buttons on screen and puts
  * them into a vector to be used later
  */
-void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources, SDL_Renderer *renderer)
+void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources)
 {
     SDL_Color white = {255, 255, 255};
     TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 144);
@@ -334,6 +334,18 @@ void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes, ResourceManag
     quit_.h = 100;
     menuBoxes.emplace_back(MenuBoxes(quit_, false));
     
-    resources.LoadText(renderer, "Play Again", Sans, white);
-    resources.LoadText(renderer, "  Quit  ", Sans, white);
+    resources.LoadText(sdl_renderer, "Play Again", Sans, white);
+    resources.LoadText(sdl_renderer, "  Quit  ", Sans, white);
+};
+
+/**
+ * Creates the introduction page to giving instructions
+ * on how to play the game.
+ */
+void Renderer::StartPage() {
+    //Set the background color
+    SDL_SetRenderDrawColor(sdl_renderer, 90, 90, 90, 255);
+    SDL_RenderClear(sdl_renderer);
+
+    SDL_RenderPresent(sdl_renderer);
 };

@@ -15,7 +15,6 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &ch
     character.mousex = x;
     character.mousey = y;
 
-    SDL_MouseButtonEvent mouseEvent;
     SDL_Event sdlEvent;
     while (SDL_PollEvent(&sdlEvent)) {
         if (sdlEvent.type == SDL_QUIT) {
@@ -145,4 +144,20 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::EndMenuFunctions(std::vec
         running = false;
     }
     return std::move(FiredShots); 
+};
+
+
+void Controller::StartMenu(bool &running, bool &startMenu, bool &allowControl){
+SDL_Event sdlEvent;
+    while (SDL_PollEvent(&sdlEvent)) {
+        if (sdlEvent.type == SDL_QUIT) {
+            running = false;
+        }
+
+        if (sdlEvent.type == SDL_KEYDOWN && allowControl){
+            startMenu = false;
+            std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        }
+    }
+
 };
