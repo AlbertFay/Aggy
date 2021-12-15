@@ -7,7 +7,7 @@ using namespace std;
  * as calling GameMap::LoadMap("map.txt");
  */
 GameMap::GameMap(ResourceManager &resources): resources_(resources){
-    GameMap::LoadMap("C:\\C++ Development\\C++ Projects\\Aggy\\maps\\map.txt");
+    GameMap::LoadMap("../maps/map.txt");
 
     //i is columns, j is rows
     for(int i = 0; i < 16; i++) {
