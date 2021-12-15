@@ -5,7 +5,7 @@ add_definitions(-std=c++17)
 set(CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
 
-project(SDL2_Aggy CXX)
+project(SDL2_Wizard_Demo CXX)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
@@ -15,7 +15,7 @@ find_package(SDL2_ttf REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS} src)
 
-add_executable(aggy src/main.cpp src/controller.cpp src/game.cpp src/renderer.cpp src/character.cpp src/shotfired.cpp src/resource-manager.cpp src/gamemap.cpp src/collision-manager.cpp src/ghost.cpp src/test.cpp src/level.cpp)
+add_executable(wizard_demo src/main.cpp src/controller.cpp src/game.cpp src/renderer.cpp src/character.cpp src/shotfired.cpp src/resource-manager.cpp src/gamemap.cpp src/collision-manager.cpp src/ghost.cpp src/level.cpp)
 string(STRIP "${SDL2_LIBRARIES}" SDL2_LIBRARIES)
-target_link_libraries(aggy ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES})
+target_link_libraries(wizard_demo ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES})
 add_definitions(-DSDL_MAIN_HANDLED)

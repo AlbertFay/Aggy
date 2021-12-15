@@ -1,4 +1,4 @@
-# Aggy
+# Wizard_demo
  Final Project for Udacity C++ Course. The wizarding demo is a minigame will be a game developed with SDL2 on Windows 10.
  The game will have a main character that will move with W,A,S,D and points and shoots with the mouse.
  Enemies will periodically follow the character and the character will have to survive as long as possible.
@@ -22,9 +22,10 @@
 * SDL2 >= 2.0
   * All installation instructions can be found [here](https://wiki.libsdl.org/Installation)
   * Note that for Linux, an `apt` or `apt-get` installation is preferred to building from source.
-* SDL2_image >= 2.0.5
+* SDL2_image >= 2.0.0
   * Installation can be found [here](https://www.libsdl.org/projects/SDL_image/)
-* SDL2_ttf >= 2.0.15
+  * For Linux: https://www.oreilly.com/library/view/rust-programming-by/9781788390637/ac509577-fdbc-4f2e-b876-3536985e113c.xhtml
+* SDL2_ttf >= 2.0.0
   * Installation can be found [here](https://www.libsdl.org/projects/SDL_ttf/)
 * gcc/g++ >= 5.4
   * Linux: gcc / g++ is installed by default on most Linux distros
@@ -36,37 +37,50 @@
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
-4. Run it: `.\aggy`.
+4. Run it: `.\wizard_demo`.
 
 ## Rubric Points covered
 
 * Loops, Functions, I/O
   1. The project demonstrates an understandings of C++ functions and control structures.
-    - The whole project?
+        - The whole project?
   2. The project reads datat from a file and processes the data, or the program writes data to a file.
-    - gamemap.cpp Gamemap::LoadMap line-19: Takes input from text file and sets background tiles for game
+        - gamemap.cpp Gamemap::LoadMap line-27: Takes input from text file and sets background tiles for game
   3. The project accepts user input and processes the input.
-    - controller.cpp: THe whole file is for taking in keyboard and mouse inputs from user and moves character in game
+        - controller.cpp: THe whole file is for taking in keyboard and mouse inputs from user and moves character in game
 * Object Oriented Programming
   1. The project uses Object Oriented Programming techniques.
-    - The whole Project?
+        - The whole Project?
   2. Classes use appropriate access specifiers for class members.
+        - All .h files
   3. Class constructors utilize member initialization lists.
+        - shotfired.cpp line: 7
+        - ghost.cpp line: 20
+        - gamemap.cpp line: 9
   4. Classes abstract implementation details from their interfaces.
+        - Pretty much all files.
   5. Classes encapsulate behavior
-  6. Classes follow an appropriate ineritance hierarchy.
+        - shotfired.h
+  6. Classes follow an appropriate inheritance hierarchy.
+        - ghost.h inherits from enemy.h
+        - enemy.h inherits from renderable.h
+        - shotfired.h inherits from renderable.h
   7. Overloaded functions allow the same function to operate on different parameters.
+        - collision-manager.cpp Lines: 16,22
   8. Derived class functions override virtual base class functions.
+        - shotfired.cpp, shotfired.h, ghost.cpp, ghost.h
 * Memory Management
   1. The project makes use of references in function declarations.
-  2. The project uses destructors appropriately.
-  3. The project follows the Rule of 5.
-    -resource-manager.cpp
-  4. The project uses smart pointers instead of raw pointers.
-    -game.cpp Game::Run() Line 17, 18
+        - shotfired.cpp line: 7
+        - game.h Game::Run() Line: 43
+        - gamemap.cpp line: 9
+  2. The project follows the Rule of 5.
+        - resource-manager.cpp
+  3. The project uses smart pointers instead of raw pointers.
+        - game.cpp Game::Run() Lines: 22, 23
 * Concurrency
   1. The project uses multithreading.
-    -game.cpp Game::run() line:29-48
+        - game.cpp Game::run() lines:34-52
   2. A mutex or lock is used in the project
-    -resource-manager.h line 16
-    -resource-manager.cpp ResourceManager::LoadTexture(), ResourceManager::LoadText(), ResourceManager::GetTexture()
+        - resource-manager.h line 16
+        - resource-manager.cpp ResourceManager::LoadTexture(), ResourceManager::LoadText(), ResourceManager::GetTexture()
