@@ -30,7 +30,7 @@ Renderer::Renderer(const std::size_t screen_height, const std::size_t screen_wid
     }
 
     // Initialize SDL Window
-    sdl_window = SDL_CreateWindow("Aggy", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screen_height, _screen_width, SDL_WINDOW_SHOWN);
+    sdl_window = SDL_CreateWindow("Wizard Demo", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screen_height, _screen_width, SDL_WINDOW_SHOWN);
     if (nullptr == sdl_window)
     {
         std::cerr << "Window could not be created.\n";

@@ -56,7 +56,7 @@ void Character::Render(SDL_Renderer* renderer, ResourceManager &resources) {
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 
     //Temp code to draw rectangle around character
-    SDL_RenderDrawRect(renderer, &hitBox_);
+    //SDL_RenderDrawRect(renderer, &hitBox_);
 
     //Automatically regain health after x time has passed
     uint32_t current_energy_timer = SDL_GetTicks();
