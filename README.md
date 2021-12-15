@@ -11,7 +11,7 @@
  Ghost.cpp is inherates from enemy.h which inherates from renderable.h
  Shotfired.cpp inherates from renderable.cpp
 
-![test](/Images/preview.PNG)
+![test](/Images/Preview.PNG)
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
