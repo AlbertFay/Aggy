@@ -235,7 +235,7 @@ void Renderer::LoadEndMenuResources(ResourceManager &resources)
 void Renderer::LoadUI(ResourceManager &resources)
 {
     SDL_Color white = {255, 255, 255};
-    TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 144);
+    TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 72);
     if (!Sans)
     {
         printf("TTF_OpenFont: %s\n", TTF_GetError());
@@ -253,6 +253,13 @@ void Renderer::LoadUI(ResourceManager &resources)
     resources.LoadText(sdl_renderer, ("8"), Sans, white);
     resources.LoadText(sdl_renderer, ("9"), Sans, white);
     resources.LoadText(sdl_renderer, ("0"), Sans, white);
+    
+    resources.LoadText(sdl_renderer, ("Wizard Demo"), Sans, white);
+    resources.LoadText(sdl_renderer, ("Survive as long as you can"), Sans, white);
+    resources.LoadText(sdl_renderer, ("Move with W, A, S, D"), Sans, white);
+    resources.LoadText(sdl_renderer, ("Aim and shoot with mouse"), Sans, white);
+    resources.LoadText(sdl_renderer, ("To continue, Press any key"), Sans, white);
+    
 };
 
 /**
@@ -342,8 +349,62 @@ void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes, ResourceManag
  * Creates the introduction page to giving instructions
  * on how to play the game.
  */
-void Renderer::StartPage() {
+void Renderer::StartPage(ResourceManager &resources, bool &allowControl) {
+    TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 72);
+    if (!Sans)
+    {
+        printf("TTF_OpenFont: %s\n", TTF_GetError());
+        // handle error
+    }
+    float percent = 1024/100;
+    int w,h;
     //Set the background color
+    SDL_SetRenderDrawColor(sdl_renderer, 90, 90, 90, 255);
+    SDL_RenderClear(sdl_renderer);
+    SDL_Rect box[5];
+
+    TTF_SizeText(Sans, "Wizard Demo", &w, &h);
+    box[0].w = w;
+    box[0].h = h;
+    box[0].x = (50*percent) - (box[0].w / 2);
+    box[0].y = (10*percent) - (box[0].h / 2);
+
+    TTF_SizeText(Sans, "Survive as long as you can", &w, &h);
+    box[1].w = w;
+    box[1].h = h;
+    box[1].x = (50*percent) - (box[1].w / 2);
+    box[1].y = (25*percent) - (box[1].h / 2);
+
+    TTF_SizeText(Sans, "Move with W, A, S, D", &w, &h);
+    box[2].w = w;
+    box[2].h = h;
+    box[2].x = (50*percent) - (box[2].w / 2);
+    box[2].y = (50*percent) - (box[2].h / 2);
+
+    TTF_SizeText(Sans, "Aim and shoot with mouse", &w, &h);
+    box[3].w = w;
+    box[3].h = h;
+    box[3].x = (50*percent) - (box[3].w / 2);
+    box[3].y = (60*percent) - (box[3].h / 2);
+
+    TTF_SizeText(Sans, "To continue, Press any key", &w, &h);
+    box[4].w = w;
+    box[4].h = h;
+    box[4].x = (50*percent) - (box[4].w / 2);
+    box[4].y = (85*percent) - (box[4].h / 2);
+
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Wizard Demo"), NULL, &box[0]);
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Survive as long as you can"), NULL, &box[1]);
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Move with W, A, S, D"), NULL, &box[2]);
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Aim and shoot with mouse"), NULL, &box[3]);
+    if(allowControl){
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("To continue, Press any key"), NULL, &box[4]); 
+    }
+
+    SDL_RenderPresent(sdl_renderer);
+};
+
+void Renderer::PauseMenu(){
     SDL_SetRenderDrawColor(sdl_renderer, 90, 90, 90, 255);
     SDL_RenderClear(sdl_renderer);
 

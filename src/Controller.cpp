@@ -7,7 +7,7 @@
  * Controls character and game by taking in keyboard
  * and mouse inputs and updating the character and game
  */
-std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &character, bool &running, std::vector<std::unique_ptr<Renderable>> &&FiredShots)
+std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &character, bool &running, std::vector<std::unique_ptr<Renderable>> &&FiredShots, bool &pause)
 {
     //character.SetSpeed(character.defaultspeed);
     int x, y;
@@ -29,6 +29,12 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &ch
         if(sdlEvent.button.type == SDL_MOUSEBUTTONUP){
             buttonRelease_ = true;
             leftMouseButton_ = false;
+        }
+        if (sdlEvent.key.keysym.sym == SDLK_ESCAPE){
+            pause = true;
+            std::cout << "Escape pressed?" << std::endl;
+            SDL_PumpEvents();
+            SDL_FlushEvent(SDLK_ESCAPE);
         }
         
     }
@@ -56,7 +62,8 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &ch
             character.Update(Character::Direction::kDown);
         }
         if (keystate[SDL_SCANCODE_ESCAPE]){
-            // running = false;
+            /* SDL_FlushEvent(SDL_SCANCODE_ESCAPE);
+            pause = true; */
         }
 
         if (keystate[SDL_SCANCODE_Q]){
@@ -134,7 +141,7 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::EndMenuFunctions(std::vec
         enemies.clear();
         FiredShots.clear();
         boxes[0].boxClicked_ = false;
-        map.LoadMap("C:\\C++ Development\\C++ Projects\\Aggy\\maps\\map.txt");
+        map.LoadMap("../maps/map.txt");
         std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
 
@@ -160,4 +167,18 @@ SDL_Event sdlEvent;
         }
     }
 
+};
+
+void Controller::PauseMenu(bool &running, bool &pause){
+    SDL_Event sdlEvent;
+    //SDL_FlushEvents(SDLK_ESCAPE, SDL_SCANCODE_ESCAPE);
+    while (SDL_PollEvent(&sdlEvent)) {
+        if (sdlEvent.type == SDL_QUIT) {
+            running = false;
+        }
+
+        if (sdlEvent.key.keysym.sym == SDLK_ESCAPE){
+            pause = false;
+        }
+    }
 };

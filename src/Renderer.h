@@ -37,7 +37,8 @@ class Renderer {
     void LoadEndMenuResources(ResourceManager &resources);
     void LoadUI(ResourceManager &resources);
     void RenderUI(ResourceManager &resources, Character &character);
-    void StartPage();
+    void StartPage(ResourceManager &resources, bool &allowControl);
+    void PauseMenu();
 
 
   private:

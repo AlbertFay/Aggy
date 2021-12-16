@@ -35,7 +35,7 @@ void ResourceManager::LoadTexture(SDL_Renderer* renderer, std::string id, std::s
  */
 void ResourceManager::LoadText(SDL_Renderer*renderer, const char *id, TTF_Font *font, SDL_Color &color){
     mutex_.lock();
-    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, id, color);
+    SDL_Surface* surfaceMessage = TTF_RenderUTF8_Blended(font, id, color);
     SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
     SDL_FreeSurface(surfaceMessage);
     std::string stringID = id;

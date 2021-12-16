@@ -64,11 +64,11 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     while(running == true && startMenu == true){
         std::chrono::time_point<std::chrono::high_resolution_clock> end_ = std::chrono::high_resolution_clock::now();
         auto end = std::chrono::time_point_cast<std::chrono::seconds>(end_).time_since_epoch().count();
-        if(end - start > 5){
+        if(end - start > 0){
             allowControl = true;
         }
         controller.StartMenu(running, startMenu, allowControl);
-        renderer.StartPage();
+        renderer.StartPage(resources, allowControl);
     }
     
     //Create and load map
@@ -78,6 +78,12 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     while (running) {
         //keep track of what time the frame starts
         frame_start = SDL_GetTicks();
+
+        while(pause){
+            controller.PauseMenu(running, pause);
+            renderer.PauseMenu();
+            //menu screen
+        }
         
         //Spawn in enemies
         level.SpawnEnemies(enemies);
@@ -107,7 +113,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         }
 
         //Input and Update Character
-        controller.HandleInput(character, running, std::move(FiredShots));
+        controller.HandleInput(character, running, std::move(FiredShots), pause);
 
         //Test for all collisions
         collisions.CheckCollisions(character, gamemap);

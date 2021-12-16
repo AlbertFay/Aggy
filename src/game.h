@@ -20,6 +20,7 @@
 
 class Game {
   public:
+    bool pause = false;
   
   //Timer using RAII to determine how long a program runs until
   //it reaches end of scope
