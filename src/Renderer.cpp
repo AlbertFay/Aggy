@@ -219,7 +219,7 @@ void Renderer::EndMenu(ResourceManager &resources, int score, std::vector<MenuBo
 void Renderer::LoadEndMenuResources(ResourceManager &resources)
 {
     SDL_Color white = {255, 255, 255};
-    TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 144);
+    TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 72);
     if (!Sans)
     {
         printf("TTF_OpenFont: %s\n", TTF_GetError());
@@ -321,7 +321,7 @@ void Renderer::RenderUI(ResourceManager &resources, Character &character)
 void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources)
 {
     SDL_Color white = {255, 255, 255};
-    TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 144);
+    TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 72);
     if (!Sans)
     {
         printf("TTF_OpenFont: %s\n", TTF_GetError());
@@ -343,6 +343,49 @@ void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes, ResourceManag
     
     resources.LoadText(sdl_renderer, "Play Again", Sans, white);
     resources.LoadText(sdl_renderer, "  Quit  ", Sans, white);
+};
+
+void Renderer::LoadPauseMenu(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources){
+    float percent = 1024/100;
+    SDL_Color white = {255, 255, 255};
+    TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 36);
+    if (!Sans)
+    {
+        printf("TTF_OpenFont: %s\n", TTF_GetError());
+        // handle error
+    }
+    int w,h;
+
+    pause_menu_boxes[0].w = 250; //Resume background box
+    pause_menu_boxes[0].h = 100;
+    pause_menu_boxes[0].x = (50*percent) - (pause_menu_boxes[0].w / 2);
+    pause_menu_boxes[0].y = (50*percent) - (pause_menu_boxes[0].h / 2);
+
+    TTF_SizeText(Sans, "Resume Game", &w, &h);
+    pause_menu_boxes[1].w = w; //Resume text
+    pause_menu_boxes[1].h = h;
+    pause_menu_boxes[1].x = (50*percent) - (pause_menu_boxes[1].w / 2);
+    pause_menu_boxes[1].y = (50*percent) - (pause_menu_boxes[1].h / 2);
+
+    pause_menu_boxes[2].w = 250; //Quit background box
+    pause_menu_boxes[2].h = 100;
+    pause_menu_boxes[2].x = (50*percent) - (pause_menu_boxes[2].w / 2);
+    pause_menu_boxes[2].y = (70*percent) - (pause_menu_boxes[2].h / 2);
+
+    TTF_SizeText(Sans, "Quit", &w, &h);
+    pause_menu_boxes[3].w = w; //Quit text
+    pause_menu_boxes[3].h = h;
+    pause_menu_boxes[3].x = (50*percent) - (pause_menu_boxes[3].w / 2);
+    pause_menu_boxes[3].y = (70*percent) - (pause_menu_boxes[3].h / 2);
+
+    menuBoxes.emplace_back(MenuBoxes(pause_menu_boxes[0], false));
+    menuBoxes.emplace_back(MenuBoxes(pause_menu_boxes[1], false));
+    menuBoxes.emplace_back(MenuBoxes(pause_menu_boxes[2], false));
+    menuBoxes.emplace_back(MenuBoxes(pause_menu_boxes[3], false));
+
+    resources.LoadText(sdl_renderer, "Resume Game", Sans, white);
+    resources.LoadText(sdl_renderer, "Quit", Sans, white);
+    
 };
 
 /**
@@ -404,9 +447,32 @@ void Renderer::StartPage(ResourceManager &resources, bool &allowControl) {
     SDL_RenderPresent(sdl_renderer);
 };
 
-void Renderer::PauseMenu(){
+void Renderer::PauseMenu(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources){
     SDL_SetRenderDrawColor(sdl_renderer, 90, 90, 90, 255);
     SDL_RenderClear(sdl_renderer);
 
+    SDL_SetRenderDrawColor(sdl_renderer, 15, 15, 255, 255);
+    if (menuBoxes[0].collision_ == true)
+    {
+        SDL_RenderFillRect(sdl_renderer, &(menuBoxes[0].box_));
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("Resume Game"), NULL, &menuBoxes[1].box_);
+    }
+    else
+    {
+        SDL_RenderDrawRect(sdl_renderer, &(menuBoxes[0].box_));
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("Resume Game"), NULL, &menuBoxes[1].box_);
+    }
+
+    SDL_SetRenderDrawColor(sdl_renderer, 255, 15, 15, 255);
+    if (menuBoxes[2].collision_ == true)
+    {
+        SDL_RenderFillRect(sdl_renderer, &(menuBoxes[2].box_));
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("Quit"), NULL, &menuBoxes[3].box_);
+    }
+    else
+    {
+        SDL_RenderDrawRect(sdl_renderer, &(menuBoxes[2].box_));
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("Quit"), NULL, &menuBoxes[3].box_);
+    }
     SDL_RenderPresent(sdl_renderer);
 };

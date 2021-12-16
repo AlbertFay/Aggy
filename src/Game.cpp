@@ -28,9 +28,12 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
     CollisionManager collisions; 
     Level level;
     std::vector<Renderer::MenuBoxes> EndMenuBoxes_;
+    std::vector<Renderer::MenuBoxes> pauseMenuBoxes_;
 
     //Load textures and necessary resources to be used later
     renderer.LoadEndMenuBoxes(EndMenuBoxes_, resources);
+    renderer.LoadPauseMenu(pauseMenuBoxes_, resources);
+    
     std::thread t1([&renderer, &resources](){
         renderer.LoadUI(resources);
         std::cout << "T1 has finished" << std::endl;
@@ -80,8 +83,10 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         frame_start = SDL_GetTicks();
 
         while(pause){
-            controller.PauseMenu(running, pause);
-            renderer.PauseMenu();
+            controller.PauseMenu(running, pause, pauseMenuBoxes_);
+            collisions.CheckCollisions(pauseMenuBoxes_);
+            controller.PauseMenuFunctions(pauseMenuBoxes_, running, pause);
+            renderer.PauseMenu(pauseMenuBoxes_, resources);
             //menu screen
         }
         

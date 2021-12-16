@@ -33,8 +33,8 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &ch
         if (sdlEvent.key.keysym.sym == SDLK_ESCAPE){
             pause = true;
             std::cout << "Escape pressed?" << std::endl;
-            SDL_PumpEvents();
-            SDL_FlushEvent(SDLK_ESCAPE);
+            /* SDL_PumpEvents();
+            SDL_FlushEvent(SDLK_ESCAPE); */
         }
         
     }
@@ -169,7 +169,7 @@ SDL_Event sdlEvent;
 
 };
 
-void Controller::PauseMenu(bool &running, bool &pause){
+void Controller::PauseMenu(bool &running, bool &pause, std::vector<Renderer::MenuBoxes> &boxes){
     SDL_Event sdlEvent;
     //SDL_FlushEvents(SDLK_ESCAPE, SDL_SCANCODE_ESCAPE);
     while (SDL_PollEvent(&sdlEvent)) {
@@ -177,8 +177,32 @@ void Controller::PauseMenu(bool &running, bool &pause){
             running = false;
         }
 
-        if (sdlEvent.key.keysym.sym == SDLK_ESCAPE){
+        if(sdlEvent.button.button == SDL_BUTTON_LEFT && sdlEvent.button.type == SDL_MOUSEBUTTONDOWN){
+            for(auto &box: boxes){
+                if(box.collision_ == true){
+                    box.boxClicked_ = true;
+                }
+            }
+        }
+
+        if (sdlEvent.key.keysym.sym == SDLK_F2){
             pause = false;
         }
+    }
+};
+
+void Controller::PauseMenuFunctions(std::vector<Renderer::MenuBoxes> &boxes, bool &running, bool &pause){
+    if(boxes[0].boxClicked_){
+        pause = false;
+        std::cout << "Box 1 clicked" << std::endl;
+        boxes[0].boxClicked_ = false;
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+    }
+    if(boxes[2].boxClicked_){
+        running = false;
+        pause = false;
+        std::cout << "Box 2 clicked" << std::endl;
+        boxes[2].boxClicked_ = false;
     }
 };

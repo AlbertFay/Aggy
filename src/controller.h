@@ -14,7 +14,8 @@ class Controller {
     void MenuInput(bool &running, std::vector<Renderer::MenuBoxes> &boxes);
     std::vector<std::unique_ptr<Renderable>>&& EndMenuFunctions(std::vector<Renderer::MenuBoxes> &boxes, Character &character, std::vector<std::shared_ptr<Enemy>> &enemies, std::vector<std::unique_ptr<Renderable>> &&FiredShots, GameMap &map, bool &running);
     void StartMenu(bool &running, bool &startMenu, bool &allowControl);
-    void PauseMenu(bool &running, bool &pause);
+    void PauseMenu(bool &running, bool &pause, std::vector<Renderer::MenuBoxes> &boxes);
+    void PauseMenuFunctions(std::vector<Renderer::MenuBoxes> &boxes, bool &running, bool &pause);
 
   private:
     bool buttonRelease_ = true;

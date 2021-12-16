@@ -38,7 +38,8 @@ class Renderer {
     void LoadUI(ResourceManager &resources);
     void RenderUI(ResourceManager &resources, Character &character);
     void StartPage(ResourceManager &resources, bool &allowControl);
-    void PauseMenu();
+    void LoadPauseMenu(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources);
+    void PauseMenu(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources);
 
 
   private:
@@ -55,6 +56,7 @@ class Renderer {
     SDL_Rect digit_rect_;
     SDL_Rect energy_bar_outline_;
     SDL_Rect play_again_, quit_;
+    SDL_Rect pause_menu_boxes[4];
     double score_num_place_x_, score_num_place_y_;
 
 
