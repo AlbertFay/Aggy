@@ -345,6 +345,9 @@ void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes, ResourceManag
     resources.LoadText(sdl_renderer, "  Quit  ", Sans, white);
 };
 
+/**
+ * Loads necessary components for the pause menu
+ */
 void Renderer::LoadPauseMenu(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources){
     float percent = 1024/100;
     SDL_Color white = {255, 255, 255};
@@ -447,6 +450,9 @@ void Renderer::StartPage(ResourceManager &resources, bool &allowControl) {
     SDL_RenderPresent(sdl_renderer);
 };
 
+/**
+ * Renderers all components of the pause menu
+ */
 void Renderer::PauseMenu(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources){
     SDL_SetRenderDrawColor(sdl_renderer, 90, 90, 90, 255);
     SDL_RenderClear(sdl_renderer);

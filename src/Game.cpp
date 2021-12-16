@@ -85,7 +85,6 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         while(pause){
             controller.PauseMenu(running, pause, pauseMenuBoxes_);
             collisions.CheckCollisions(pauseMenuBoxes_);
-            controller.PauseMenuFunctions(pauseMenuBoxes_, running, pause);
             renderer.PauseMenu(pauseMenuBoxes_, resources);
             //menu screen
         }

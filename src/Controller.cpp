@@ -153,7 +153,6 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::EndMenuFunctions(std::vec
     return std::move(FiredShots); 
 };
 
-
 void Controller::StartMenu(bool &running, bool &startMenu, bool &allowControl){
 SDL_Event sdlEvent;
     while (SDL_PollEvent(&sdlEvent)) {
@@ -169,6 +168,9 @@ SDL_Event sdlEvent;
 
 };
 
+/**
+ * Controls what happens in the pause menu
+ */
 void Controller::PauseMenu(bool &running, bool &pause, std::vector<Renderer::MenuBoxes> &boxes){
     SDL_Event sdlEvent;
     //SDL_FlushEvents(SDLK_ESCAPE, SDL_SCANCODE_ESCAPE);
@@ -189,9 +191,6 @@ void Controller::PauseMenu(bool &running, bool &pause, std::vector<Renderer::Men
             pause = false;
         }
     }
-};
-
-void Controller::PauseMenuFunctions(std::vector<Renderer::MenuBoxes> &boxes, bool &running, bool &pause){
     if(boxes[0].boxClicked_){
         pause = false;
         std::cout << "Box 1 clicked" << std::endl;
