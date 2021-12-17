@@ -257,8 +257,11 @@ void Renderer::LoadUI(ResourceManager &resources)
     resources.LoadText(sdl_renderer, ("Wizard Demo"), Sans, white);
     resources.LoadText(sdl_renderer, ("Survive as long as you can"), Sans, white);
     resources.LoadText(sdl_renderer, ("Move with W, A, S, D"), Sans, white);
+    resources.LoadText(sdl_renderer, ("Hold Left Shift to sprint"), Sans, white);
     resources.LoadText(sdl_renderer, ("Aim and shoot with mouse"), Sans, white);
+    resources.LoadText(sdl_renderer, ("Press 'escape' for menu"), Sans, white);
     resources.LoadText(sdl_renderer, ("To continue, Press any key"), Sans, white);
+    resources.LoadText(sdl_renderer, ("Controls:"), Sans, white);
     
 };
 
@@ -361,24 +364,24 @@ void Renderer::LoadPauseMenu(std::vector<MenuBoxes> &menuBoxes, ResourceManager 
 
     pause_menu_boxes[0].w = 250; //Resume background box
     pause_menu_boxes[0].h = 100;
-    pause_menu_boxes[0].x = (50*percent) - (pause_menu_boxes[0].w / 2);
-    pause_menu_boxes[0].y = (50*percent) - (pause_menu_boxes[0].h / 2);
+    pause_menu_boxes[0].x = (35*percent) - (pause_menu_boxes[0].w / 2);
+    pause_menu_boxes[0].y = (70*percent) - (pause_menu_boxes[0].h / 2);
 
     TTF_SizeText(Sans, "Resume Game", &w, &h);
     pause_menu_boxes[1].w = w; //Resume text
     pause_menu_boxes[1].h = h;
-    pause_menu_boxes[1].x = (50*percent) - (pause_menu_boxes[1].w / 2);
-    pause_menu_boxes[1].y = (50*percent) - (pause_menu_boxes[1].h / 2);
+    pause_menu_boxes[1].x = (35*percent) - (pause_menu_boxes[1].w / 2);
+    pause_menu_boxes[1].y = (70*percent) - (pause_menu_boxes[1].h / 2);
 
     pause_menu_boxes[2].w = 250; //Quit background box
     pause_menu_boxes[2].h = 100;
-    pause_menu_boxes[2].x = (50*percent) - (pause_menu_boxes[2].w / 2);
+    pause_menu_boxes[2].x = (65*percent) - (pause_menu_boxes[2].w / 2);
     pause_menu_boxes[2].y = (70*percent) - (pause_menu_boxes[2].h / 2);
 
     TTF_SizeText(Sans, "Quit", &w, &h);
     pause_menu_boxes[3].w = w; //Quit text
     pause_menu_boxes[3].h = h;
-    pause_menu_boxes[3].x = (50*percent) - (pause_menu_boxes[3].w / 2);
+    pause_menu_boxes[3].x = (65*percent) - (pause_menu_boxes[3].w / 2);
     pause_menu_boxes[3].y = (70*percent) - (pause_menu_boxes[3].h / 2);
 
     menuBoxes.emplace_back(MenuBoxes(pause_menu_boxes[0], false));
@@ -407,7 +410,7 @@ void Renderer::StartPage(ResourceManager &resources, bool &allowControl) {
     //Set the background color
     SDL_SetRenderDrawColor(sdl_renderer, 90, 90, 90, 255);
     SDL_RenderClear(sdl_renderer);
-    SDL_Rect box[5];
+    SDL_Rect box[7];
 
     TTF_SizeText(Sans, "Wizard Demo", &w, &h);
     box[0].w = w;
@@ -425,13 +428,25 @@ void Renderer::StartPage(ResourceManager &resources, bool &allowControl) {
     box[2].w = w;
     box[2].h = h;
     box[2].x = (50*percent) - (box[2].w / 2);
-    box[2].y = (50*percent) - (box[2].h / 2);
+    box[2].y = (40*percent) - (box[2].h / 2);
 
     TTF_SizeText(Sans, "Aim and shoot with mouse", &w, &h);
     box[3].w = w;
     box[3].h = h;
     box[3].x = (50*percent) - (box[3].w / 2);
-    box[3].y = (60*percent) - (box[3].h / 2);
+    box[3].y = (50*percent) - (box[3].h / 2);
+
+    TTF_SizeText(Sans, "Hold Left Shift to sprint", &w, &h);
+    box[5].w = w;
+    box[5].h = h;
+    box[5].x = (50*percent) - (box[5].w / 2);
+    box[5].y = (60*percent) - (box[5].h / 2);
+
+    TTF_SizeText(Sans, "Press 'escape' for menu", &w, &h);
+    box[6].w = w;
+    box[6].h = h;
+    box[6].x = (50*percent) - (box[6].w / 2);
+    box[6].y = (70*percent) - (box[6].h / 2);
 
     TTF_SizeText(Sans, "To continue, Press any key", &w, &h);
     box[4].w = w;
@@ -443,6 +458,8 @@ void Renderer::StartPage(ResourceManager &resources, bool &allowControl) {
     SDL_RenderCopy(sdl_renderer, resources.getTexture("Survive as long as you can"), NULL, &box[1]);
     SDL_RenderCopy(sdl_renderer, resources.getTexture("Move with W, A, S, D"), NULL, &box[2]);
     SDL_RenderCopy(sdl_renderer, resources.getTexture("Aim and shoot with mouse"), NULL, &box[3]);
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Hold Left Shift to sprint"), NULL, &box[5]);
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Press 'escape' for menu"), NULL, &box[6]);
     if(allowControl){
         SDL_RenderCopy(sdl_renderer, resources.getTexture("To continue, Press any key"), NULL, &box[4]); 
     }
@@ -456,6 +473,43 @@ void Renderer::StartPage(ResourceManager &resources, bool &allowControl) {
 void Renderer::PauseMenu(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources){
     SDL_SetRenderDrawColor(sdl_renderer, 90, 90, 90, 255);
     SDL_RenderClear(sdl_renderer);
+    float percent = 1024/100;
+    SDL_Rect box[4];
+    TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 72);
+    if (!Sans)
+    {
+        printf("TTF_OpenFont: %s\n", TTF_GetError());
+        // handle error
+    }
+    int w,h;
+    TTF_SizeText(Sans, "Controls:", &w, &h);
+    box[3].w = w;
+    box[3].h = h;
+    box[3].x = (50*percent) - (box[3].w / 2);
+    box[3].y = (10*percent) - (box[3].h / 2);
+
+    TTF_SizeText(Sans, "Move with W, A, S, D", &w, &h);
+    box[0].w = w;
+    box[0].h = h;
+    box[0].x = (50*percent) - (box[0].w / 2);
+    box[0].y = (20*percent) - (box[0].h / 2);
+
+    TTF_SizeText(Sans, "Aim and shoot with mouse", &w, &h);
+    box[1].w = w;
+    box[1].h = h;
+    box[1].x = (50*percent) - (box[1].w / 2);
+    box[1].y = (30*percent) - (box[1].h / 2);
+
+    TTF_SizeText(Sans, "Hold Left Shift to sprint", &w, &h);
+    box[2].w = w;
+    box[2].h = h;
+    box[2].x = (50*percent) - (box[2].w / 2);
+    box[2].y = (40*percent) - (box[2].h / 2);
+
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Move with W, A, S, D"), NULL, &box[0]);
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Aim and shoot with mouse"), NULL, &box[1]);
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Hold Left Shift to sprint"), NULL, &box[2]);
+    SDL_RenderCopy(sdl_renderer, resources.getTexture("Controls:"), NULL, &box[3]);
 
     SDL_SetRenderDrawColor(sdl_renderer, 15, 15, 255, 255);
     if (menuBoxes[0].collision_ == true)

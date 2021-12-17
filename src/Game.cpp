@@ -82,11 +82,11 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         //keep track of what time the frame starts
         frame_start = SDL_GetTicks();
 
+        //If pause menu screen is true
         while(pause){
             controller.PauseMenu(running, pause, pauseMenuBoxes_);
             collisions.CheckCollisions(pauseMenuBoxes_);
             renderer.PauseMenu(pauseMenuBoxes_, resources);
-            //menu screen
         }
         
         //Spawn in enemies
