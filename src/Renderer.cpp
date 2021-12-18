@@ -145,19 +145,21 @@ void Renderer::EndMenu(ResourceManager &resources, int score, std::vector<MenuBo
     }
 
     double percent = 1024 / 100;
-
+    int w,h;
+    TTF_SizeText(Sans, "Game Over", &w, &h);
     SDL_Rect game_over; //create a rect
-    game_over.x = 100;  //controls the rect's x coordinate
-    game_over.y = 100;  // controls the rect's y coordinte
-    game_over.w = 700;  // controls the width of the rect
-    game_over.h = 300;  // controls the height of the rect
+    game_over.w = w;  // controls the width of the rect
+    game_over.h = h;  // controls the height of the rect
+    game_over.x = ((50*percent) - (game_over.w / 2));  //controls the rect's x coordinate
+    game_over.y = ((30*percent) - (game_over.h/2));  // controls the rect's y coordinte
     SDL_RenderCopy(sdl_renderer, resources.getTexture("Game Over"), NULL, &game_over);
 
+    TTF_SizeText(Sans, "Your Score: ", &w, &h);
     SDL_Rect your_score; //create a rect
+    your_score.w = w;  // controls the width of the rect
+    your_score.h = h;  // controls the height of the rect
     your_score.x = 150;  //controls the rect's x coordinate
     your_score.y = 0;    // controls the rect's y coordinte
-    your_score.w = 400;  // controls the width of the rect
-    your_score.h = 100;  // controls the height of the rect
     SDL_RenderCopy(sdl_renderer, resources.getTexture("Your Score: "), NULL, &your_score);
 
     digit_rect_.w = 4 * percent;
@@ -177,7 +179,11 @@ void Renderer::EndMenu(ResourceManager &resources, int score, std::vector<MenuBo
     while (scoredigits.size() > 0)
     {
         score = scoredigits.back();
-        digit_rect_.x = ((your_score.x + (your_score.w)) + (digits * digit_rect_.w));
+        std::string word = std::to_string(score);
+        char const *pchar = word.c_str();
+        TTF_SizeText(Sans, pchar, &w, &h);
+        digit_rect_.x = ((your_score.x + (your_score.w)) + (digits * w));
+        digit_rect_.h = h;
         SDL_RenderCopy(sdl_renderer, resources.getTexture(std::to_string(score)), NULL, &digit_rect_);
         digits += 1;
         scoredigits.pop_back();
@@ -186,27 +192,27 @@ void Renderer::EndMenu(ResourceManager &resources, int score, std::vector<MenuBo
     SDL_RenderFillRect(sdl_renderer, &menuScreen);
     //**********************************************************************************************************************************************
     SDL_SetRenderDrawColor(sdl_renderer, 15, 15, 255, 255);
-    if (menuBoxes[0].collision_ == true)
-    {
-        SDL_RenderFillRect(sdl_renderer, &(menuBoxes[0].box_));
-        SDL_RenderCopy(sdl_renderer, resources.getTexture("Play Again"), NULL, &menuBoxes[0].box_);
-    }
-    else
-    {
-        SDL_RenderDrawRect(sdl_renderer, &(menuBoxes[0].box_));
-        SDL_RenderCopy(sdl_renderer, resources.getTexture("Play Again"), NULL, &menuBoxes[0].box_);
-    }
-
-    SDL_SetRenderDrawColor(sdl_renderer, 255, 15, 15, 255);
     if (menuBoxes[1].collision_ == true)
     {
         SDL_RenderFillRect(sdl_renderer, &(menuBoxes[1].box_));
-        SDL_RenderCopy(sdl_renderer, resources.getTexture("  Quit  "), NULL, &menuBoxes[1].box_);
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("Play Again"), NULL, &menuBoxes[0].box_);
     }
     else
     {
         SDL_RenderDrawRect(sdl_renderer, &(menuBoxes[1].box_));
-        SDL_RenderCopy(sdl_renderer, resources.getTexture("  Quit  "), NULL, &menuBoxes[1].box_);
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("Play Again"), NULL, &menuBoxes[0].box_);
+    }
+
+    SDL_SetRenderDrawColor(sdl_renderer, 255, 15, 15, 255);
+    if (menuBoxes[3].collision_ == true)
+    {
+        SDL_RenderFillRect(sdl_renderer, &(menuBoxes[3].box_));
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("Quit"), NULL, &menuBoxes[2].box_);
+    }
+    else
+    {
+        SDL_RenderDrawRect(sdl_renderer, &(menuBoxes[3].box_));
+        SDL_RenderCopy(sdl_renderer, resources.getTexture("Quit"), NULL, &menuBoxes[2].box_);
     }
     //**********************************************************************************************************************************************
 
@@ -324,28 +330,43 @@ void Renderer::RenderUI(ResourceManager &resources, Character &character)
 void Renderer::LoadEndMenuBoxes(std::vector<MenuBoxes> &menuBoxes, ResourceManager &resources)
 {
     SDL_Color white = {255, 255, 255};
-    TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 72);
+    TTF_Font *Sans = TTF_OpenFont("../Fonts/open-sans.ttf", 36);
     if (!Sans)
     {
         printf("TTF_OpenFont: %s\n", TTF_GetError());
         // handle error
     }
-
-    menuBoxes.clear();
-    play_again_.x = 400;
-    play_again_.y = 400;
-    play_again_.w = 250;
-    play_again_.h = 100;
+    SDL_Rect box[2];
+    int w,h;
+    float percent = 1024/100;
+    TTF_SizeText(Sans, "Play Again", &w, &h);
+    play_again_.w = w;
+    play_again_.h = h;
+    play_again_.x = ((50*percent)-(play_again_.w/2));
+    play_again_.y = ((60*percent)-(play_again_.h/2));
     menuBoxes.emplace_back(MenuBoxes(play_again_, false));
 
-    quit_.x = 400;
-    quit_.y = 600;
-    quit_.w = 250;
-    quit_.h = 100;
+    box[0].w = 250;
+    box[0].h = 100;
+    box[0].x = ((50*percent)-(box[0].w/2));
+    box[0].y = ((60*percent)-(box[0].h/2));
+    menuBoxes.emplace_back(MenuBoxes(box[0], false));
+
+    TTF_SizeText(Sans, "Quit", &w, &h);
+    quit_.w = w;
+    quit_.h = h;
+    quit_.x = ((50*percent)-(quit_.w/2));
+    quit_.y = ((80*percent)-(quit_.h/2));
     menuBoxes.emplace_back(MenuBoxes(quit_, false));
+
+    box[1].w = 250;
+    box[1].h = 100;
+    box[1].x = ((50*percent)-(box[1].w/2));
+    box[1].y = ((80*percent)-(box[1].h/2));
+    menuBoxes.emplace_back(MenuBoxes(box[1], false));
     
     resources.LoadText(sdl_renderer, "Play Again", Sans, white);
-    resources.LoadText(sdl_renderer, "  Quit  ", Sans, white);
+    resources.LoadText(sdl_renderer, "Quit", Sans, white);
 };
 
 /**

@@ -141,14 +141,16 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::EndMenuFunctions(std::vec
         enemies.clear();
         FiredShots.clear();
         boxes[0].boxClicked_ = false;
+        
         map.LoadMap("../maps/map.txt");
         std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
 
     // Box[1] "Quit"
-    if(boxes[1].boxClicked_){
+    if(boxes[2].boxClicked_){
         //Stops the game loop and closes application
         running = false;
+        boxes[2].boxClicked_= false;
     }
     return std::move(FiredShots); 
 };
