@@ -8,7 +8,7 @@
 #include "resource-manager.h"
 #include "gamemap.h"
 #include "enemy.h"
-#include "SDL2/sdl_ttf.h"
+#include "SDL2/SDL_ttf.h"
 #include <vector>
 
 

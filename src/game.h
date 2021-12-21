@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include "controller.h"
-#include "Renderer.h"
+#include "renderer.h"
 #include "SDL2/SDL.h"
 #include "character.h"
 #include "renderable.h"
