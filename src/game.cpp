@@ -93,7 +93,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         level.SpawnEnemies(enemies);
 
         //Update Enemies
-        for (int i = 0; i < enemies.size();) {
+        for (uint32_t i = 0; i < enemies.size();) {
             if (enemies[i]->Exists()){
                enemies[i]->Update(character.GetX(), character.GetY());
                i++;
@@ -106,7 +106,7 @@ void Game::Run(Renderer &renderer, Controller &controller, float FPS, ResourceMa
         }
 
         //Update renderables or firedshots... both the same thing
-        for (int i = 0; i < FiredShots.size();) {
+        for (uint32_t i = 0; i < FiredShots.size();) {
             if (FiredShots[i]->Exists()){
                FiredShots[i]->Update();
                i++;

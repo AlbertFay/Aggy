@@ -66,14 +66,6 @@ std::vector<std::unique_ptr<Renderable>>&& Controller::HandleInput(Character &ch
             pause = true; */
         }
 
-        if (keystate[SDL_SCANCODE_Q]){
-            character.Update(Character::Direction::kRotateLeft);
-        }
-
-        if (keystate[SDL_SCANCODE_E]){
-            character.Update(Character::Direction::kRotateRight);
-        }
-
         if (keystate[SDL_SCANCODE_LSHIFT]){
             character.Sprint(3);
         }

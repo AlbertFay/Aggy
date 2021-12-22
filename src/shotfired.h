@@ -36,11 +36,11 @@ class ShotFired : public Renderable{
     
     float exists_ = true;
     int velocity_ = 4;
-    float angle_;
+    float angle_ = 0;
     float x_velocity_ = 0;
     float y_velocity_ = 0;
-    float x_pos_;
-    float y_pos_;
+    float x_pos_ = 0;
+    float y_pos_ = 0;
     float width = 50, height = 50;
     // std::string filepath_;
 

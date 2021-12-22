@@ -11,7 +11,7 @@
 
 class Character {
   public:
-    enum class Direction {kUp, kDown, kLeft, kRight, kRotateRight, kRotateLeft};
+    enum class Direction {kUp, kDown, kLeft, kRight};
     std::vector<ShotFired> vecShotFired;
     int score = 0;
     int health_ = 5;

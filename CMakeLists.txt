@@ -2,8 +2,14 @@ cmake_minimum_required(VERSION 3.7)
 
 add_definitions(-std=c++17)
 
-set(CXX_FLAGS "-Wall")
-set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
+if (WIN32)
+    set(CXX_FLAGS "-Wall -Wextra")
+elseif (UNIX)
+    set(CXX_FLAGS "-Wall -pthread")
+endif()
+set(CMAKE_CXX_FLAGS "${CXX_FLAGS}")
+
+MESSAGE( STATUS "Config flags : " ${CXX_FLAGS})
 
 project(SDL2_Wizard_Demo CXX)
 
